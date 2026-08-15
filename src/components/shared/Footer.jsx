@@ -93,8 +93,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 mt-8 pt-6 border-t border-white/5 gap-4">
           <p>&copy; 2026 Wegner &amp; Schöbener Rechtsanwälte. Alle Rechte vorbehalten.</p>
           <div className="flex gap-6 mt-2 md:mt-0">
+            <Link href="/impressum" className="hover:text-gray-300 transition-colors">Impressum</Link>
             <Link href="/privacy" className="hover:text-gray-300 transition-colors">Datenschutz</Link>
-            <Link href="/terms" className="hover:text-gray-300 transition-colors">AGB</Link>
+            <Link href="/terms" className="hover:text-gray-300 transition-colors">Haftungsausschluss</Link>
           </div>
         </div>
       </div>

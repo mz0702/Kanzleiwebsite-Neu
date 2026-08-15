@@ -5,12 +5,12 @@ export default function LegalLayout({ title, updatedAt, sections, breadcrumbLabe
   return (
     <>
       <PageHero
-        label="Legal"
+        label="Rechtliches"
         title={title}
-        description={`Last updated ${updatedAt}.`}
+        description={`Zuletzt aktualisiert am ${updatedAt}.`}
         image={`${basePath}/images/photo-1532601224476-15c79f2f7a51.webp`}
         breadcrumb={[
-          { label: "Home", href: "/" },
+          { label: "Startseite", href: "/" },
           { label: breadcrumbLabel || title },
         ]}
       />
@@ -21,7 +21,7 @@ export default function LegalLayout({ title, updatedAt, sections, breadcrumbLabe
             {/* TOC */}
             <aside className="lg:sticky lg:top-28 self-start">
               <div className="text-xs uppercase tracking-wider text-brand-gray mb-3">
-                Table of contents
+                Inhaltsverzeichnis
               </div>
               <ul className="space-y-2 text-sm">
                 {sections.map((s, i) => (

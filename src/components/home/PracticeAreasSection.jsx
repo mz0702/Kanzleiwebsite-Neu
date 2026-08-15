@@ -52,7 +52,7 @@ export default function PracticeAreasSection() {
               {/* .pa-tile* classes: touch fallback for the hover reveal, see globals.css */}
               <img
                 src={area.image}
-                alt=""
+                alt={area.title}
                 className="pa-tile-img absolute inset-0 w-full h-full object-cover opacity-0 blur-none scale-105 group-hover:opacity-80 group-hover:blur-sm group-hover:scale-100 transition-all duration-500 ease-out"
               />
               <div className="pa-tile-scrim absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-light/20 transition-colors duration-500" />

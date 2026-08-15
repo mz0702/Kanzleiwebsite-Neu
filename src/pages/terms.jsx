@@ -3,45 +3,39 @@ import LegalLayout from "@/components/shared/LegalLayout";
 
 const sections = [
   {
-    title: "Acceptance of terms",
+    title: "Geltungsbereich",
     paragraphs: [
-      "By accessing or using the Greenova website and services, you agree to these Terms & Conditions. If you do not agree, please do not use the service.",
+      "Diese Hinweise gelten für die Nutzung der Website von Wegner & Schöbener Rechtsanwälte. Sie betreffen ausschließlich den Internetauftritt — nicht das Zustandekommen, den Inhalt oder die Bedingungen eines Mandatsverhältnisses. Ein Mandat kommt ausschließlich durch eine gesonderte, ausdrückliche Vereinbarung zustande.",
     ],
   },
   {
-    title: "Use of the site",
+    title: "Keine Rechtsberatung durch die Website",
     paragraphs: [
-      "You agree to use the site lawfully and respectfully. You may not copy, reproduce, or redistribute our content without prior written consent.",
+      "Die Inhalte dieser Website dienen der allgemeinen Information über die Kanzlei und ihre Tätigkeitsschwerpunkte. Sie stellen keine Rechtsberatung im Einzelfall dar und können eine individuelle anwaltliche Beratung nicht ersetzen.",
     ],
   },
   {
-    title: "Service engagements",
+    title: "Haftung für Inhalte",
     paragraphs: [
-      "Any engagement for clean-energy services is governed by a separate project agreement signed between Greenova and the client. These site Terms do not constitute such an agreement.",
+      "Wir erstellen die Inhalte dieser Website mit Sorgfalt, können jedoch keine Gewähr für Richtigkeit, Vollständigkeit und Aktualität übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich, jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen (§§ 8 bis 10 DDG).",
     ],
   },
   {
-    title: "Warranties",
+    title: "Haftung für Links",
     paragraphs: [
-      "Hardware warranties are provided by the original manufacturer; workmanship warranties are provided directly by Greenova as specified in each project agreement.",
+      "Diese Website kann Links zu externen Websites Dritter enthalten, auf deren Inhalte wir keinen Einfluss haben. Für diese Inhalte ist stets der jeweilige Anbieter verantwortlich. Verlinkte Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft; eine permanente inhaltliche Kontrolle ist ohne konkrete Anhaltspunkte nicht zumutbar.",
     ],
   },
   {
-    title: "Liability",
+    title: "Urheberrecht",
     paragraphs: [
-      "To the fullest extent permitted by law, Greenova is not liable for indirect or consequential damages arising from use of this site or its content.",
+      "Die auf dieser Website veröffentlichten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der vorherigen schriftlichen Zustimmung.",
     ],
   },
   {
-    title: "Changes",
+    title: "Änderungen",
     paragraphs: [
-      "We may update these Terms from time to time. Continued use of the site after updates constitutes acceptance of the revised Terms.",
-    ],
-  },
-  {
-    title: "Contact",
-    paragraphs: [
-      "Questions? Email info.greenova@gmail.com or write to 245 West 14th Street, New York, NY 11201.",
+      "Wir behalten uns vor, diese Hinweise bei Bedarf zu aktualisieren, etwa bei Änderungen der Website oder der Rechtslage.",
     ],
   },
 ];
@@ -50,14 +44,14 @@ export default function TermsPage() {
   return (
     <>
       <Head>
-        <title>Terms & Conditions — Greenova</title>
-        <meta name="description" content="Greenova terms and conditions." />
+        <title>Haftungsausschluss — Wegner &amp; Schöbener Rechtsanwälte</title>
+        <meta name="description" content="Haftungsausschluss und rechtliche Hinweise zur Website von Wegner & Schöbener Rechtsanwälte." />
       </Head>
       <LegalLayout
-        title="Terms & Conditions"
-        updatedAt="May 1, 2026"
+        title="Haftungsausschluss"
+        updatedAt="15. August 2026"
         sections={sections}
-        breadcrumbLabel="Terms"
+        breadcrumbLabel="Haftungsausschluss"
       />
     </>
   );

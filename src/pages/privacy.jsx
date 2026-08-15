@@ -3,48 +3,48 @@ import LegalLayout from "@/components/shared/LegalLayout";
 
 const sections = [
   {
-    title: "Introduction",
+    title: "Verantwortlicher",
     paragraphs: [
-      "Greenova (\u201Cwe,\u201D \u201Cour,\u201D or \u201Cus\u201D) respects your privacy. This policy explains what we collect, how we use it, and the choices you have.",
-      "By using our site, you agree to the practices described below. We only collect what we need to serve you well — nothing more.",
+      "Verantwortlich für die Datenverarbeitung auf dieser Website ist Wegner & Schöbener Rechtsanwälte, Marktbreiter Straße 1, 97199 Ochsenfurt, E-Mail: kanzlei@wegner-schoebener.de, Telefon: (09331) 503 96 95. Weitere Angaben finden Sie im Impressum.",
     ],
   },
   {
-    title: "Information we collect",
+    title: "Hosting",
     paragraphs: [
-      "When you contact us or fill in a form, we collect the details you provide — such as your name, email, phone number, and the message itself.",
-      "We also collect basic analytics (pages viewed, rough location by country, device type) to improve the site experience.",
+      "Diese Website wird über GitHub Pages gehostet, einen Dienst der GitHub, Inc. (respektive GitHub B.V. für Nutzer in der EU). Beim Aufruf der Seite verarbeitet GitHub als Hosting-Anbieter automatisch technische Zugriffsdaten (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, verwendeter Browser) in Server-Logfiles. Dies ist technisch notwendig, um die Website auszuliefern (Art. 6 Abs. 1 lit. f DSGVO).",
+      "Da GitHub, Inc. ein Unternehmen mit Sitz in den USA ist, kann es dabei zu einer Datenübermittlung in ein Drittland kommen. Details zu den von GitHub getroffenen Garantien finden Sie in der Datenschutzerklärung von GitHub.",
     ],
   },
   {
-    title: "How we use information",
+    title: "Keine Cookies, kein Tracking",
     paragraphs: [
-      "Your contact details are used to respond to your inquiries and, if you opt in, to send you occasional updates about our services.",
-      "Analytics are used to understand which content is helpful and where we can improve. We never sell personal data.",
+      "Diese Website setzt keine Analyse- oder Tracking-Tools ein und verwendet keine Cookies zu Marketing- oder Analysezwecken.",
+      "Solange diese Seite als passwortgeschützte Vorschau läuft, wird lediglich im sessionStorage Ihres Browsers vermerkt, dass das Vorschau-Passwort erfolgreich eingegeben wurde. Diese Information verlässt Ihr Gerät nicht, wird nicht an uns übertragen und automatisch gelöscht, sobald Sie den Browser-Tab schließen.",
     ],
   },
   {
-    title: "Cookies",
+    title: "Google Fonts",
     paragraphs: [
-      "We use strictly necessary cookies for site functionality and optional analytics cookies. You can manage preferences in your browser settings at any time.",
+      "Wir binden die Schriftart „Manrope” über Google Fonts ein, die von Servern der Google Ireland Limited (bzw. Google LLC in den USA) geladen wird. Dabei wird Ihre IP-Adresse an Google übertragen, damit die Schriftdatei ausgeliefert werden kann (Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einer einheitlichen Darstellung der Seite). Weitere Informationen: Datenschutzerklärung von Google.",
     ],
   },
   {
-    title: "Data retention",
+    title: "Kontaktaufnahme",
     paragraphs: [
-      "Contact inquiries are retained for up to 24 months unless you request earlier deletion. Analytics data is anonymized after 14 months.",
+      "Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir die von Ihnen mitgeteilten Daten (z. B. Name, Kontaktdaten, Inhalt der Anfrage) ausschließlich zur Bearbeitung Ihres Anliegens und einer möglichen Anschlusskommunikation (Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO). Diese Website enthält kein eigenes Kontaktformular; Anfragen laufen direkt über Ihr E-Mail-Programm oder Telefon.",
     ],
   },
   {
-    title: "Your rights",
+    title: "Speicherdauer",
     paragraphs: [
-      "You may request access to, correction of, or deletion of your personal data at any time by emailing info.greenova@gmail.com.",
+      "Personenbezogene Daten aus einer Mandats- oder Erstkontaktanfrage speichern wir nur so lange, wie es für die Bearbeitung erforderlich ist oder gesetzliche Aufbewahrungsfristen (insbesondere aus der Bundesrechtsanwaltsordnung und steuerrechtlichen Vorschriften) dies verlangen.",
     ],
   },
   {
-    title: "Contact",
+    title: "Ihre Rechte",
     paragraphs: [
-      "If you have questions about this policy, reach us at 245 West 14th Street, New York, NY 11201, or info.greenova@gmail.com.",
+      "Sie haben nach der DSGVO das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch gegen die Verarbeitung (Art. 21) Ihrer personenbezogenen Daten. Wenden Sie sich hierzu an die oben genannte Kontaktadresse.",
+      "Zudem steht Ihnen ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu, z. B. beim Bayerischen Landesamt für Datenschutzaufsicht (BayLDA).",
     ],
   },
 ];
@@ -53,14 +53,14 @@ export default function PrivacyPage() {
   return (
     <>
       <Head>
-        <title>Privacy Policy — Greenova</title>
-        <meta name="description" content="Greenova privacy policy." />
+        <title>Datenschutzerklärung — Wegner &amp; Schöbener Rechtsanwälte</title>
+        <meta name="description" content="Datenschutzerklärung von Wegner & Schöbener Rechtsanwälte gemäß DSGVO." />
       </Head>
       <LegalLayout
-        title="Privacy Policy"
-        updatedAt="May 1, 2026"
+        title="Datenschutzerklärung"
+        updatedAt="15. August 2026"
         sections={sections}
-        breadcrumbLabel="Privacy"
+        breadcrumbLabel="Datenschutz"
       />
     </>
   );

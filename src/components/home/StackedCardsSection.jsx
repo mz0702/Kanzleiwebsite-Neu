@@ -107,7 +107,7 @@ export default function StackedCardsSection() {
                           carries its own thumbnail. lg+ keeps the generic icon. */}
                       <img
                         src={lawyer.image}
-                        alt=""
+                        alt={lawyer.name}
                         className="lg:hidden w-11 h-11 rounded-full object-cover"
                       />
                       <span className="hidden lg:block">{personIcon}</span>
