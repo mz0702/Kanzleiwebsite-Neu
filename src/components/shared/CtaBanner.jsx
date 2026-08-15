@@ -7,11 +7,11 @@ import { basePath } from "@/lib/basePath";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CtaBanner({
-  label = "Get Started",
-  title = "Your adventure awaits\nStart eco exploring now",
-  description = "Merging ecological insights and digital design for sustainable businesses.",
-  buttonLabel = "Book An Intro Call",
-  buttonHref = "/contact",
+  label = "Wir sind für Sie da",
+  title = "Termin vereinbaren",
+  description = "Rufen Sie uns an oder schreiben Sie uns — wir melden uns innerhalb von 48 Stunden bei Ihnen.",
+  buttonLabel = "Jetzt Kontakt aufnehmen",
+  buttonHref = "mailto:kanzlei@wegner-schoebener.de",
   image = `${basePath}/images/photo-1466611653911-95081537e5b7.webp`,
 }) {
   const ref = useRef(null);

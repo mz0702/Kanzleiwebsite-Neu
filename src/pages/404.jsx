@@ -7,7 +7,7 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>Page not found — Greenova</title>
+        <title>Seite nicht gefunden — Wegner &amp; Schöbener Rechtsanwälte</title>
       </Head>
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark text-white">
@@ -32,21 +32,21 @@ export default function Custom404() {
             </h1>
 
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4">
-              We couldn&apos;t find that page
+              Diese Seite gibt es nicht
             </h2>
             <p className="text-gray-300 mb-10 max-w-lg mx-auto text-base sm:text-lg">
-              The page you&apos;re looking for has either moved, been renamed, or never existed. Let&apos;s get you back on track.
+              Die gesuchte Seite wurde verschoben, umbenannt oder existiert nicht mehr.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button href="/" variant="primary" size="lg" radius="pill">
-                Back to home
+                Zur Startseite
               </Button>
               <Link
-                href="/contact"
+                href="mailto:kanzlei@wegner-schoebener.de"
                 className="text-sm font-semibold text-white border-b border-white/30 pb-1 hover:text-brand-primary hover:border-brand-primary transition-colors"
               >
-                Or get in touch
+                Oder Kontakt aufnehmen
               </Link>
             </div>
           </div>

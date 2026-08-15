@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Button from "@/components/shared/Button";
 import { basePath } from "@/lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,14 +73,9 @@ export default function AboutSection() {
               <span className="w-2 h-2 rounded-full bg-brand-primary" />
               Über uns
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-6 sm:mb-8 leading-snug gs-reveal text-gray-200">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-10 sm:mb-14 leading-snug gs-reveal text-gray-200">
               Wir helfen Ihnen in allen juristischen Belangen weiter. Dabei stehen Vertrauen, Kompetenz und Zusammenarbeit für uns im Mittelpunkt.
             </h2>
-            <div className="mb-12 sm:mb-16 gs-reveal">
-              <Button href="/about" variant="primary" size="md" radius="pill">
-                Mehr über uns
-              </Button>
-            </div>
 
             {/* Trust Badges */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 sm:gap-y-0 gap-x-6 sm:gap-x-8 border-t border-white/10 pt-8 sm:pt-12 gs-reveal">

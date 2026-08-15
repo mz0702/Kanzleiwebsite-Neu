@@ -9,10 +9,6 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FaqSection from "@/components/home/FaqSection";
 import CtaSection from "@/components/home/CtaSection";
 
-// ServicesSection, MilestonesSection und ArticlesSection sind vorerst ausgeblendet:
-// Sie hängen an data/services.js bzw. data/blogs.js, die noch die alten
-// Solar-Inhalte führen. Sobald echte Zahlen/Artikel vorliegen, hier wieder einbinden.
-
 export default function Home() {
   return (
     <>
