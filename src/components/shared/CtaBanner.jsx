@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Button from "@/components/shared/Button";
+import { basePath } from "@/lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,7 +12,7 @@ export default function CtaBanner({
   description = "Merging ecological insights and digital design for sustainable businesses.",
   buttonLabel = "Book An Intro Call",
   buttonHref = "/contact",
-  image = "/images/photo-1466611653911-95081537e5b7.webp",
+  image = `${basePath}/images/photo-1466611653911-95081537e5b7.webp`,
 }) {
   const ref = useRef(null);
 

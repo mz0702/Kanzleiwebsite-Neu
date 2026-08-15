@@ -3,14 +3,15 @@ import Link from "next/link";
 import useReveal from "@/hooks/useReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 import { lawyers } from "@/data/lawyers";
+import { basePath } from "@/lib/basePath";
 
 const images = {
-  Erbrecht: "/images/Erbrecht.png",
-  Betreuungsrecht: "/images/Betreuungsrecht.jpg",
-  Familienrecht: "/images/Familienrecht.jpg",
-  Insolvenzrecht: "/images/insolvenzrecht.jpg",
-  Arbeitsrecht: "/images/Arbeitsrecht.jpg",
-  Verkehrsrecht: "/images/Verkehrsrecht.png",
+  Erbrecht: `${basePath}/images/Erbrecht.png`,
+  Betreuungsrecht: `${basePath}/images/Betreuungsrecht.jpg`,
+  Familienrecht: `${basePath}/images/Familienrecht.jpg`,
+  Insolvenzrecht: `${basePath}/images/insolvenzrecht.jpg`,
+  Arbeitsrecht: `${basePath}/images/Arbeitsrecht.jpg`,
+  Verkehrsrecht: `${basePath}/images/Verkehrsrecht.png`,
 };
 
 const practiceAreas = lawyers.flatMap((lawyer) =>

@@ -4,6 +4,7 @@ import PricingSection from "@/components/services/PricingSection";
 import ServicesFaqSection from "@/components/services/ServicesFaqSection";
 import BenefitsSection from "@/components/services/BenefitsSection";
 import CtaBanner from "@/components/shared/CtaBanner";
+import { basePath } from "@/lib/basePath";
 
 export default function PricingPage() {
   return (
@@ -16,7 +17,7 @@ export default function PricingPage() {
         label="Pricing"
         title="Honest plans, no surprises"
         description="Every project is unique — these plans are a starting point. Your final quote comes from a site audit, with full transparency on every line item."
-        image="/images/photo-1473341304170-971dccb5ac1e.webp"
+        image={`${basePath}/images/photo-1473341304170-971dccb5ac1e.webp`}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Pricing" }]}
       />
       <PricingSection />

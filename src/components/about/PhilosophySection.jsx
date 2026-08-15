@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import useReveal from "@/hooks/useReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
+import { basePath } from "@/lib/basePath";
 
 const pillars = [
   {
@@ -8,14 +9,14 @@ const pillars = [
     title: "Biology as a blueprint",
     description:
       "Forests are already perfect clean-energy systems. We study them, learn from them, and let that wisdom shape the way we design.",
-    image: "/images/photo-1473341304170-971dccb5ac1e.webp",
+    image: `${basePath}/images/photo-1473341304170-971dccb5ac1e.webp`,
   },
   {
     tag: "Precision tech",
     title: "Engineering that respects the earth",
     description:
       "Every kWh generated is earned through meticulous engineering, smart grid integration, and components sourced with real accountability.",
-    image: "/images/photo-1508514177221-188b1cf16e9d.webp",
+    image: `${basePath}/images/photo-1508514177221-188b1cf16e9d.webp`,
   },
 ];
 

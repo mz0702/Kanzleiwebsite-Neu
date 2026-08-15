@@ -5,6 +5,7 @@ import PageHero from "@/components/shared/PageHero";
 import useReveal from "@/hooks/useReveal";
 import CtaBanner from "@/components/shared/CtaBanner";
 import { blogs } from "@/data/blogs";
+import { basePath } from "@/lib/basePath";
 
 export default function BlogsPage() {
   const ref = useRef(null);
@@ -24,7 +25,7 @@ export default function BlogsPage() {
         label="Greenova Journal"
         title="Stories, guides, and field notes"
         description="Practical writing on clean energy, design, and the business of going green."
-        image="/images/photo-1497435334941-8c899ee9e8e9.webp"
+        image={`${basePath}/images/photo-1497435334941-8c899ee9e8e9.webp`}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Blog" }]}
       />
 

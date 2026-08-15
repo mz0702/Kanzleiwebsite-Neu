@@ -1,4 +1,5 @@
 import PageHero from "@/components/shared/PageHero";
+import { basePath } from "@/lib/basePath";
 
 export default function ServicesHero() {
   return (
@@ -6,7 +7,7 @@ export default function ServicesHero() {
       label="Our Services"
       title="Clean-energy services, end to end"
       description="From the first site visit to a live dashboard showing your savings — we design, install, and care for every part of your energy system."
-      image="/images/photo-1508514177221-188b1cf16e9d.webp"
+      image={`${basePath}/images/photo-1508514177221-188b1cf16e9d.webp`}
       breadcrumb={[
         { label: "Home", href: "/" },
         { label: "Services" },

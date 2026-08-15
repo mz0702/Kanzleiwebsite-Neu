@@ -2,12 +2,13 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { basePath } from "@/lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const cards = [
   {
-    image: "/images/Erstberatung.jpg",
+    image: `${basePath}/images/Erstberatung.jpg`,
     title: "Erstberatung",
     number: "01",
     description:
@@ -16,7 +17,7 @@ const cards = [
     cta: "Termin vereinbaren",
   },
   {
-    image: "/images/Vertretung vor Gericht.jpg",
+    image: `${basePath}/images/Vertretung vor Gericht.jpg`,
     title: "Vertretung vor Gericht",
     number: "02",
     description:
@@ -25,7 +26,7 @@ const cards = [
     cta: "Termin vereinbaren",
   },
   {
-    image: "/images/Außergerichtliche Vertretung.jpg",
+    image: `${basePath}/images/Außergerichtliche Vertretung.jpg`,
     title: "Außergerichtliche Vertretung",
     number: "03",
     description:

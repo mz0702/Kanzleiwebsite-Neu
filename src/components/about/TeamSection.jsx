@@ -1,27 +1,28 @@
 import { useRef } from "react";
 import useReveal from "@/hooks/useReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
+import { basePath } from "@/lib/basePath";
 
 const team = [
   {
     name: "Lena Hartwell",
     role: "Co-Founder & CEO",
-    image: "/images/photo-1580489944761-15a19d654956.webp",
+    image: `${basePath}/images/photo-1580489944761-15a19d654956.webp`,
   },
   {
     name: "Daniel Oyelaran",
     role: "Head of Engineering",
-    image: "/images/photo-1507003211169-0a1dd7228f2d.webp",
+    image: `${basePath}/images/photo-1507003211169-0a1dd7228f2d.webp`,
   },
   {
     name: "Ayesha Khan",
     role: "Sustainability Lead",
-    image: "/images/photo-1494790108377-be9c29b29330.webp",
+    image: `${basePath}/images/photo-1494790108377-be9c29b29330.webp`,
   },
   {
     name: "Marco Tan",
     role: "Design Director",
-    image: "/images/photo-1519085360753-af0119f7cbe7.webp",
+    image: `${basePath}/images/photo-1519085360753-af0119f7cbe7.webp`,
   },
 ];
 
