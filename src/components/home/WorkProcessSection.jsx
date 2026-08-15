@@ -55,57 +55,87 @@ export default function WorkProcessSection() {
         );
       });
 
-      // Set initial state: all steps hidden
-      gsap.set(stepRefs.current, { y: 60, opacity: 0, scale: 0.95 });
-      gsap.set(nodeRefs.current, { borderColor: "rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.6)", scale: 1 });
+      // md (768px) is where the timeline line + nodes appear (`hidden md:block`)
+      // and the cards go 3-across, so it's also the pin/no-pin boundary.
+      ScrollTrigger.matchMedia({
+        // Desktop — unchanged pinned scrub timeline.
+        "(min-width: 768px)": () => {
+          // Set initial state: all steps hidden
+          gsap.set(stepRefs.current, { y: 60, opacity: 0, scale: 0.95 });
+          gsap.set(nodeRefs.current, { borderColor: "rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.6)", scale: 1 });
 
-      // Main scroll-pin timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: pinRef.current,
-          start: "top top",
-          end: `+=${steps.length * 500}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
+          // Main scroll-pin timeline
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: pinRef.current,
+              start: "top top",
+              end: `+=${steps.length * 500}`,
+              scrub: 1,
+              pin: true,
+              anticipatePin: 1,
+            },
+          });
+
+          // Animate line fill across all steps
+          tl.to(lineRef.current, { width: "100%", ease: "none", duration: steps.length }, 0);
+
+          // Reveal each step sequentially
+          steps.forEach((_, index) => {
+            tl.to(
+              nodeRefs.current[index],
+              {
+                borderColor: "#9D2119",
+                color: "#9D2119",
+                scale: 1.15,
+                duration: 0.3,
+                ease: "back.out(2)",
+              },
+              index
+            )
+              .to(
+                stepRefs.current[index],
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.6,
+                  ease: "power3.out",
+                },
+                index
+              )
+              .to(
+                nodeRefs.current[index],
+                {
+                  scale: 1,
+                  duration: 0.3,
+                },
+                index + 0.3
+              );
+          });
         },
-      });
 
-      // Animate line fill across all steps
-      tl.to(lineRef.current, { width: "100%", ease: "none", duration: steps.length }, 0);
-
-      // Reveal each step sequentially
-      steps.forEach((_, index) => {
-        tl.to(
-          nodeRefs.current[index],
-          {
-            borderColor: "#9D2119",
-            color: "#9D2119",
-            scale: 1.15,
-            duration: 0.3,
-            ease: "back.out(2)",
-          },
-          index
-        )
-          .to(
-            stepRefs.current[index],
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: 0.6,
-              ease: "power3.out",
-            },
-            index
-          )
-          .to(
-            nodeRefs.current[index],
-            {
-              scale: 1,
-              duration: 0.3,
-            },
-            index + 0.3
-          );
+        // Phones — no pin. 1500px of pinned scrub fights momentum scrolling and
+        // gets re-measured every time the address bar collapses; the nodes/line it
+        // drives are hidden here anyway. Plain staggered reveal instead.
+        "(max-width: 767px)": () => {
+          stepRefs.current.forEach((card) => {
+            gsap.fromTo(
+              card,
+              { y: 40, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.7,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 85%",
+                  toggleActions: "play none none reverse",
+                },
+              }
+            );
+          });
+        },
       });
     }, sectionRef);
 

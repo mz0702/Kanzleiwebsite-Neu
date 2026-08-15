@@ -40,11 +40,16 @@ export default function Navbar() {
     gsap.set(itemsRef.current, { x: -60, opacity: 0 });
   }, []);
 
-  // Lock body scroll while the menu is open
+  // Lock body scroll while the menu is open. body{overflow:hidden} alone doesn't
+  // stop Lenis (it scrolls the document programmatically) and iOS Safari ignores
+  // it for touch, so stop the smooth-scroll instance too.
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    if (open) window.lenis?.stop();
+    else window.lenis?.start();
     return () => {
       document.body.style.overflow = "";
+      window.lenis?.start();
     };
   }, [open]);
 

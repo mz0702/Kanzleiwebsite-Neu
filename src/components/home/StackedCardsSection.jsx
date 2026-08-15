@@ -102,7 +102,15 @@ export default function StackedCardsSection() {
                         isActive ? "text-brand-primary" : "text-brand-dark"
                       }`}
                     >
-                      {personIcon}
+                      {/* Below lg the portrait that follows the selection sits stacked
+                          above the list and is off-screen while you tap, so each row
+                          carries its own thumbnail. lg+ keeps the generic icon. */}
+                      <img
+                        src={lawyer.image}
+                        alt=""
+                        className="lg:hidden w-11 h-11 rounded-full object-cover"
+                      />
+                      <span className="hidden lg:block">{personIcon}</span>
                     </span>
                     <span className="font-light text-lg sm:text-xl text-gray-400">
                       {String(index + 1).padStart(2, "0")}

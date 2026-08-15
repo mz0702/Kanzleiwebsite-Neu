@@ -109,12 +109,18 @@ export default function TestimonialsSection() {
       },
     });
 
+    // Pause-on-hover only where hover actually exists. On touch a tap emits a
+    // synthetic mouseenter but the matching mouseleave may never arrive, which
+    // left the marquee permanently frozen after the first tap.
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const pause = () => autoplay.pause();
     const resume = () => {
       if (!reduceMotion && !draggable.isPressed) autoplay.play();
     };
-    marqueeEl.addEventListener("mouseenter", pause);
-    marqueeEl.addEventListener("mouseleave", resume);
+    if (canHover) {
+      marqueeEl.addEventListener("mouseenter", pause);
+      marqueeEl.addEventListener("mouseleave", resume);
+    }
 
     return () => {
       autoplay.kill();
@@ -172,7 +178,7 @@ export default function TestimonialsSection() {
         <div ref={railRef} className="gs-reveal relative h-1.5 rounded-full bg-gray-300/70 max-w-md mx-auto mt-8 sm:mt-10">
           <div
             ref={thumbRef}
-            className="absolute top-1/2 -translate-y-1/2 left-0 h-3 w-16 sm:w-20 rounded-full bg-brand-primary cursor-grab active:cursor-grabbing"
+            className="testimonial-thumb absolute top-1/2 -translate-y-1/2 left-0 h-3 w-16 sm:w-20 rounded-full bg-brand-primary cursor-grab active:cursor-grabbing"
           />
         </div>
       </div>

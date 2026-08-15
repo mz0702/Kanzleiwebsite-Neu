@@ -33,15 +33,21 @@ export default function HeroSection() {
         },
       );
 
-      // Parallax
-      gsap.to(bgRef.current, {
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
+      // Parallax — desktop/tablet only. On phones the collapsing address bar
+      // re-measures the trigger mid-scroll, so the scrubbed background visibly
+      // jumps; the entrance animation above still runs everywhere.
+      ScrollTrigger.matchMedia({
+        "(min-width: 768px)": () => {
+          gsap.to(bgRef.current, {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
         },
       });
     }, sectionRef);
@@ -56,9 +62,11 @@ export default function HeroSection() {
   };
 
   return (
+    // 100svh below md: 100vh on a phone is the *large* viewport, so the hero
+    // overflows behind the address bar until it collapses. md+ keeps 100vh.
     <section
       ref={sectionRef}
-      className="relative min-h-screen pb-12 pt-28 sm:pt-32 md:pt-36 flex items-center justify-center overflow-hidden bg-brand-dark"
+      className="relative min-h-[100svh] md:min-h-screen pb-12 pt-28 sm:pt-32 md:pt-36 flex items-center justify-center overflow-hidden bg-brand-dark"
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">

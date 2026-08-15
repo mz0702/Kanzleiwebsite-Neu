@@ -39,20 +39,23 @@ export default function PracticeAreasSection() {
           />
         </div>
 
-        <div className="max-w-[70%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
+        {/* The 70% cap only makes sense once the grid is 3 columns wide (lg); below that
+            it squeezed the tiles to ~70% of an already narrow phone viewport. */}
+        <div className="lg:max-w-[70%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
           {practiceAreas.map((area, i) => (
             <Link
               key={area.title}
               href={area.href}
-              className="gs-reveal group relative block bg-brand-dark aspect-[4/3] overflow-hidden cursor-pointer"
+              className="pa-tile gs-reveal group relative block bg-brand-dark aspect-[4/3] overflow-hidden cursor-pointer"
             >
               {/* Images are 4:3 — the tile matches that ratio so the fill below shows the full illustration, uncropped */}
+              {/* .pa-tile* classes: touch fallback for the hover reveal, see globals.css */}
               <img
                 src={area.image}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover opacity-0 blur-none scale-105 group-hover:opacity-80 group-hover:blur-sm group-hover:scale-100 transition-all duration-500 ease-out"
+                className="pa-tile-img absolute inset-0 w-full h-full object-cover opacity-0 blur-none scale-105 group-hover:opacity-80 group-hover:blur-sm group-hover:scale-100 transition-all duration-500 ease-out"
               />
-              <div className="absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-light/20 transition-colors duration-500" />
+              <div className="pa-tile-scrim absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-light/20 transition-colors duration-500" />
 
               {/* Absolutely positioned (not normal flow) so text can never grow the tile past its fixed aspect ratio */}
               <div className="absolute inset-0 z-10 p-6 sm:p-8 flex flex-col">
