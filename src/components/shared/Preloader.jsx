@@ -42,7 +42,7 @@ export default function Preloader() {
       const p = { v: 0 };
 
       if (!reduced) {
-        gsap.from(stageRef.current, { autoAlpha: 0, y: 12, duration: 0.7, ease: "power2.out" });
+        gsap.from(stageRef.current, { autoAlpha: 0, y: 12, duration: 0.46, ease: "power2.out" });
       }
 
       const render = () => {
@@ -69,9 +69,9 @@ export default function Preloader() {
         if (!rootRef.current) return;
         gsap.to(rootRef.current, {
           autoAlpha: 0,
-          duration: 0.55,
+          duration: 0.36,
           ease: "power2.inOut",
-          delay: 0.2,
+          delay: 0.13,
           onComplete: () => {
             document.body.style.overflow = bodyOverflow;
             setDone(true);
@@ -80,11 +80,11 @@ export default function Preloader() {
       };
 
       const finish = () =>
-        gsap.to(p, { v: 100, duration: 0.5, ease: "power2.inOut", onUpdate: render, onComplete: exit });
+        gsap.to(p, { v: 100, duration: 0.33, ease: "power2.inOut", onUpdate: render, onComplete: exit });
 
       gsap.to(p, {
         v: 92,
-        duration: reduced ? 0.6 : 2,
+        duration: reduced ? 0.4 : 1.32,
         ease: "power2.inOut",
         onUpdate: render,
         onComplete: () => {
