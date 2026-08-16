@@ -7,6 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
+    // Defensive: a prior instance should always have destroyed itself in this
+    // effect's own cleanup, but this component can mount/unmount in quick
+    // succession (e.g. gate <-> unlocked content) — guard against ever running
+    // two Lenis instances/raf loops at once if cleanup and mount ever race.
+    window.lenis?.destroy();
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

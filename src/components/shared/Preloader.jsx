@@ -46,10 +46,16 @@ export default function Preloader() {
       }
 
       const render = () => {
+        // Guard against a GSAP onUpdate/onComplete callback firing after a fast
+        // unmount (e.g. navigating away mid-animation) — ctx.revert() kills the
+        // tweens, but a callback already mid-flight this frame can still land
+        // once more with refs already detached, throwing "Cannot read
+        // properties of null" as an uncaught client-side exception.
+        if (!barRef.current || !pctRef.current) return;
         const f = p.v / 100;
         barRef.current.style.transform = `scaleX(${f})`;
         pctRef.current.textContent = `${Math.round(p.v)}%`;
-        if (!reduced) {
+        if (!reduced && beamRef.current) {
           // Damped swing, guaranteed to be exactly 0 when f === 1.
           gsap.set(beamRef.current, {
             svgOrigin: "256 160", // the crossbar's own pivot, in artwork units
@@ -59,7 +65,8 @@ export default function Preloader() {
       };
       render();
 
-      const exit = () =>
+      const exit = () => {
+        if (!rootRef.current) return;
         gsap.to(rootRef.current, {
           autoAlpha: 0,
           duration: 0.55,
@@ -70,6 +77,7 @@ export default function Preloader() {
             setDone(true);
           },
         });
+      };
 
       const finish = () =>
         gsap.to(p, { v: 100, duration: 0.5, ease: "power2.inOut", onUpdate: render, onComplete: exit });
