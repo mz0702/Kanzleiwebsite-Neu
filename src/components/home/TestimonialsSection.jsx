@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import useReveal from "@/hooks/useReveal";
 
+// Echte Google-Rezensionen, wörtliche Zitate (bei langen Originalen ein zusammenhängender,
+// unveränderter Ausschnitt statt Kürzung mit Auslassungen). Nicht übernommen: eine Rezension
+// mit Emojis/Tippfehlern, die auf einer Kanzlei-Seite nicht professionell wirkt.
 const testimonials = [
   {
     quote: "Hervorragende Rechtsvertretung und außergewöhnliches Ergebnis!",
@@ -9,7 +12,8 @@ const testimonials = [
     role: "Google Rezension",
   },
   {
-    quote: "Hervorragende rechtliche Beratung – absolut empfehlenswert!",
+    quote:
+      "Hervorragende rechtliche Beratung – Absolut empfehlenswert! Seit vielen Jahren vertraue ich auf die kompetente Unterstützung dieses Anwalts und seines Teams – und das aus gutem Grund. In sämtlichen Fällen wurde ich stets objektiv, souverän und ehrlich beraten.",
     initials: "HE",
     name: "Hartmut Erbel",
     role: "Google Rezension",
@@ -18,6 +22,53 @@ const testimonials = [
     quote: "Sehr nett und hilfsbereit.",
     initials: "MU",
     name: "Marina Ulsamer",
+    role: "Google Rezension",
+  },
+  {
+    quote:
+      "Sehr kompetent! Nicht nur dass Herr Wegner schnell arbeitet, sondern auch bei der Interessenvertretung seiner Mandanten macht er großartige Arbeit. Ich fühle mich immer wieder gut aufgehoben!",
+    initials: "JW",
+    name: "Janni Wittmann",
+    role: "Google Rezension",
+  },
+  {
+    quote: "Sehr zuverlässige Anwältin. Die Mitarbeiter sind nett und hilfsbereit. Fühlen uns seit Jahren sehr gut aufgehoben!",
+    initials: "DO",
+    name: "Darina Odinzow",
+    role: "Google Rezension",
+  },
+  {
+    quote: "Ich kenne die Frau Wegner schon sehr lange und bin vollkommen zufrieden mit dem ganzen Team, kann es nur weiterempfehlen.",
+    initials: "JK",
+    name: "Jürgen Krones",
+    role: "Google Rezension",
+  },
+  {
+    quote:
+      "Vielen Dank für die schnelle und unkomplizierte Schadensregulierung. Mir ist bewusst, dass eine fiktive Abrechnung nicht selbstverständlich ist. Umso mehr schätze ich Ihre Unterstützung und die professionelle Abwicklung.",
+    initials: "RI",
+    name: "ringoz1969",
+    role: "Google Rezension",
+  },
+  {
+    quote:
+      "Schnell, kompetent und absolut zuverlässig. Die Rechtsanwälte haben die komplette Abwicklung meines Schadensfalls übernommen. Die Kommunikation war top und ich musste mich um fast nichts kümmern.",
+    initials: "MS",
+    name: "Max Spitzer",
+    role: "Google Rezension",
+  },
+  {
+    quote:
+      "Ich bin mit der Kanzlei Wegner & Schöbener, insbesondere mit Herrn Wegner, rundum zufrieden. Mein Haftpflichtschaden wurde von Anfang an professionell, zuverlässig und kompetent betreut.",
+    initials: "PF",
+    name: "Paavo Frank",
+    role: "Google Rezension",
+  },
+  {
+    quote:
+      "Ich kann die Kanzlei Wegner und Schöbener in Ochsenfurt uneingeschränkt weiterempfehlen. Dank der kompetenten Unterstützung konnte mein Schaden erfolgreich reguliert werden. Von Anfang bis Ende fühlte ich mich bestens betreut und jederzeit gut informiert.",
+    initials: "VV",
+    name: "Veronika Vetter",
     role: "Google Rezension",
   },
 ];
