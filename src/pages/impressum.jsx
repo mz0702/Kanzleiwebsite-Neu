@@ -2,54 +2,24 @@ import Head from "next/head";
 import LegalLayout from "@/components/shared/LegalLayout";
 import { absoluteUrl } from "@/lib/basePath";
 
+// TEMPORÄR — Agentur-Impressum während der Vorschau-Phase.
+// Diese Seite wird der Kanzlei erst vorgestellt, verantwortlich für den Betrieb
+// dieser Vorschau ist bis zur Übergabe Michael Zandler / ZIVION, nicht die Kanzlei.
+//
+// Bei Übergabe an die Kanzlei: `sections` unten durch das vorbereitete
+// Kanzlei-Impressum ersetzen (identisch zu Commit b80b37b, mit EINER Änderung:
+// die Zeile "vormals Kanzlei von Rechtsanwältin Elke Hambrecht..." im Abschnitt
+// "Kanzlei Würzburg" entfällt — auf Wunsch der Kanzlei entfernt). Titel/Description
+// im <Head> unten ebenfalls zurück auf die Kanzlei-Version stellen.
 const sections = [
   {
     title: "Angaben gemäß § 5 DDG",
     paragraphs: [
-      "Wegner & Schöbener Rechtsanwälte",
-      "Inhaberinnen der Domain sowie Verantwortliche im Sinne des § 5 DDG: Susanne Schöbener, Beate Wegner",
-      "E-Mail: kanzlei@wegner-schoebener.de",
+      "Michael Zandler – ZIVION",
+      "Bodan-Werft 6, 88079 Kressbronn",
+      "Telefon: +49 176 34114728",
+      "E-Mail: info@zivion.de",
     ],
-  },
-  {
-    title: "Kanzlei Ochsenfurt",
-    paragraphs: [
-      "Marktbreiter Str. 1, 97199 Ochsenfurt",
-      "Telefon: 09331 - 981 99 - 0",
-      "Fax: 09331 - 981 99 - 28",
-    ],
-  },
-  {
-    title: "Kanzlei Würzburg",
-    paragraphs: [
-      "vormals Kanzlei von Rechtsanwältin Elke Hambrecht, Fachanwältin für Arbeitsrecht und Fachanwältin für Familienrecht.",
-      "Marktgasse 9 (an der Marienkapelle), 97070 Würzburg",
-      "Telefon: 0931 - 166 33",
-      "Fax: 0931 - 571 4 56",
-    ],
-  },
-  {
-    title: "Berufsbezeichnung und berufsrechtliche Regelungen",
-    paragraphs: [
-      "Berufsbezeichnung: Rechtsanwältin / Rechtsanwalt. Die Zulassung zur Rechtsanwaltschaft wurde jeweils in der Bundesrepublik Deutschland verliehen.",
-      "Zuständige Aufsichtsbehörde: Rechtsanwaltskammer Bamberg, Friedrichstraße 7, 96047 Bamberg, Telefon: 0951 / 98620.",
-      "Die Rechtsanwälte Stephan Wegner, Susanne Schöbener und Beate Wegner sind Mitglieder der Rechtsanwaltskammer Bamberg.",
-      "Berufsrechtliche Grundlagen unserer Tätigkeit sind insbesondere: Bundesrechtsanwaltsordnung (BRAO), Berufsordnung der Rechtsanwälte (BORA), Fachanwaltsordnung (FAO), Bundesgebührenordnung für Rechtsanwälte (BRAGO) sowie das Rechtsanwaltsvergütungsgesetz (RVG). Die Berufs- und Gebührenordnungen sind einsehbar unter www.brak.de bzw. www.dav.de.",
-    ],
-  },
-  {
-    title: "Berufshaftpflichtversicherung",
-    paragraphs: [
-      "[Platzhalter: Name und Anschrift des Berufshaftpflichtversicherers sowie räumlicher Geltungsbereich der Versicherung — bitte ergänzen. Diese Angabe ist gemäß § 5 DDG i. V. m. der Berufsordnung verpflichtend.]",
-    ],
-  },
-  {
-    title: "Steuernummer",
-    paragraphs: ["Steuer-ID: 257 / 181 / 50208"],
-  },
-  {
-    title: "Redaktionell verantwortlich",
-    paragraphs: ["Susanne Schöbener, Beate Wegner (Anschrift: Kanzlei Ochsenfurt, siehe oben)."],
   },
   {
     title: "EU-Streitschlichtung",
@@ -64,9 +34,10 @@ export default function ImpressumPage() {
   return (
     <>
       <Head>
-        <title>Impressum — Wegner &amp; Schöbener Rechtsanwälte</title>
-        <meta name="description" content="Impressum und rechtliche Angaben von Wegner & Schöbener Rechtsanwälte, Standorte Ochsenfurt und Würzburg." />
+        <title>Impressum — ZIVION</title>
+        <meta name="description" content="Impressum dieser Vorschau-Website (ZIVION, Michael Zandler)." />
         <link rel="canonical" href={absoluteUrl("/impressum/")} />
+        <meta name="robots" content="noindex" />
       </Head>
       <LegalLayout
         title="Impressum"

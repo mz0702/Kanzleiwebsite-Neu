@@ -25,12 +25,17 @@ export default function App({ Component, pageProps }) {
   }, [router.events]);
 
   const getLayout = Component.getLayout || ((page) => <MainLayout>{page}</MainLayout>);
-  return (
-    <PasswordGate>
+  const content = (
+    <>
       <Preloader />
       <SmoothScroll>
         {getLayout(<Component {...pageProps} />)}
       </SmoothScroll>
-    </PasswordGate>
+    </>
   );
+
+  // Das Impressum muss laut § 5 DDG von jeder Seite aus erreichbar sein — auch
+  // von einer passwortgeschützten Vorschau. Einzige Ausnahme von der Sperre.
+  const isImpressum = router.pathname === "/impressum";
+  return isImpressum ? content : <PasswordGate>{content}</PasswordGate>;
 }

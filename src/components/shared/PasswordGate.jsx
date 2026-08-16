@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { basePath } from "@/lib/basePath";
 
 const PASSWORD = "Kanzlei1";
@@ -54,6 +55,12 @@ export default function PasswordGate({ children }) {
         >
           Zugang
         </button>
+        <Link
+          href="/impressum"
+          className="inline-block mt-6 text-xs text-white/40 hover:text-white/70 transition-colors"
+        >
+          Impressum
+        </Link>
       </form>
     </div>
   );
