@@ -62,7 +62,7 @@ export default function PasswordGate({ children, bypass = false }) {
           Zugang
         </button>
         <Link
-          href="/impressum"
+          href="/agentur-impressum"
           className="inline-block mt-6 text-xs text-white/40 hover:text-white/70 transition-colors"
         >
           Impressum
