@@ -119,7 +119,17 @@ export default function Footer() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 mt-8 pt-6 border-t border-white/5 gap-4">
-          <p>&copy; 2026 Wegner &amp; Schöbener Rechtsanwälte. Alle Rechte vorbehalten.</p>
+          <p>
+            &copy; 2026 Wegner &amp; Schöbener Rechtsanwälte. Alle Rechte vorbehalten. — Made by{" "}
+            <a
+              href="https://www.zivion.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gray-300 transition-colors"
+            >
+              ZIVION
+            </a>
+          </p>
           <div className="flex gap-6 mt-2 md:mt-0">
             <Link href="/impressum" className="hover:text-gray-300 transition-colors">Impressum</Link>
             <Link href="/privacy" className="hover:text-gray-300 transition-colors">Datenschutz</Link>
