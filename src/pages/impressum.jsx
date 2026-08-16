@@ -44,6 +44,7 @@ export default function ImpressumPage() {
         updatedAt="16. August 2026"
         sections={sections}
         breadcrumbLabel="Impressum"
+        image={null}
       />
     </>
   );

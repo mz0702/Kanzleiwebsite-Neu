@@ -1,14 +1,20 @@
 import PageHero from "@/components/shared/PageHero";
 import { basePath } from "@/lib/basePath";
 
-export default function LegalLayout({ title, updatedAt, sections, breadcrumbLabel }) {
+export default function LegalLayout({
+  title,
+  updatedAt,
+  sections,
+  breadcrumbLabel,
+  image = `${basePath}/images/photo-1532601224476-15c79f2f7a51.webp`,
+}) {
   return (
     <>
       <PageHero
         label="Rechtliches"
         title={title}
         description={`Zuletzt aktualisiert am ${updatedAt}.`}
-        image={`${basePath}/images/photo-1532601224476-15c79f2f7a51.webp`}
+        image={image}
         breadcrumb={[
           { label: "Startseite", href: "/" },
           { label: breadcrumbLabel || title },

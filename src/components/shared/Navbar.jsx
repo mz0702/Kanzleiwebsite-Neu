@@ -225,6 +225,19 @@ export default function Navbar() {
               </ul>
             </div>
 
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10">
+              <Link
+                href="/impressum"
+                onClick={closeMenu}
+                className={`nav-link inline-block text-sm font-medium transition-colors duration-300 ${
+                  isActive("/impressum") ? "text-brand-primary" : "text-white/40 hover:text-white/70"
+                }`}
+                ref={addItemRef}
+              >
+                Impressum
+              </Link>
+            </div>
+
             <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10 sm:hidden">
               <Button href="mailto:kanzlei@wegner-schoebener.de" variant="primary" size="md" radius="rounded" fullWidth>
                 Kontakt

@@ -14,11 +14,13 @@ export default function PageHero({
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        bgRef.current,
-        { scale: 1.2, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1.6, ease: "power3.out" }
-      );
+      if (bgRef.current) {
+        gsap.fromTo(
+          bgRef.current,
+          { scale: 1.2, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.6, ease: "power3.out" }
+        );
+      }
       gsap.fromTo(
         heroRef.current.querySelectorAll(".hero-reveal"),
         { y: 40, opacity: 0 },
@@ -42,16 +44,18 @@ export default function PageHero({
       ref={heroRef}
       className="relative min-h-[70vh] sm:min-h-[75vh] pt-32 pb-20 flex items-end overflow-hidden bg-brand-dark text-white"
     >
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img
-          ref={bgRef}
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-brand-dark/40" />
-      </div>
+      {/* Background — omit entirely when no image is given, section keeps its own bg-brand-dark */}
+      {image && (
+        <div className="absolute inset-0">
+          <img
+            ref={bgRef}
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover opacity-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-brand-dark/40" />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className={`max-w-4xl flex flex-col gap-4 sm:gap-6 ${alignClass}`}>
