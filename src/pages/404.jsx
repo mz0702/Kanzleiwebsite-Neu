@@ -13,7 +13,7 @@ export default function Custom404() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark text-white">
         <div className="absolute inset-0">
           <img
-            src={`${basePath}/images/photo-1466611653911-95081537e5b7.webp`}
+            src={`${basePath}/images/Hero Background.jpg`}
             alt=""
             className="w-full h-full object-cover opacity-30"
           />
