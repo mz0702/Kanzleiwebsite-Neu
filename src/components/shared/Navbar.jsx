@@ -7,13 +7,16 @@ import { lawyers } from "@/data/lawyers";
 import { practiceAreas } from "@/data/practiceAreas";
 import { basePath } from "@/lib/basePath";
 
-// Two groups so the menu keeps a real hierarchy instead of flattening 10 links
-// to the same weight: Kanzlei (who) first, Rechtsgebiete (what) second, styled
-// smaller since it's the secondary tier. Legal pages (Impressum/Datenschutz/
-// Haftungsausschluss) stay footer-only — standard placement, not "subpages" in
-// the sense of site content.
+// Two groups so the menu keeps a real hierarchy instead of flattening every
+// link to the same weight: Kanzlei (who) first, Rechtsgebiete (what) second,
+// styled smaller since it's the secondary tier. Impressum sits directly in the
+// top-tier list (not in the smaller secondary group below) so it's visible the
+// instant the menu opens, no scrolling required — it kept getting missed when
+// it was a smaller link further down. Datenschutz/Haftungsausschluss stay
+// footer-only — standard placement, not "subpages" in the sense of site content.
 const mainLinks = [
   { label: "Home", href: "/" },
+  { label: "Impressum", href: "/impressum" },
   ...lawyers.map((lawyer) => ({ label: lawyer.name, href: `/anwaelte/${lawyer.slug}` })),
 ];
 
@@ -223,19 +226,6 @@ export default function Navbar() {
                   );
                 })}
               </ul>
-            </div>
-
-            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10">
-              <Link
-                href="/impressum"
-                onClick={closeMenu}
-                className={`nav-link inline-block py-1.5 sm:py-2 text-xl sm:text-2xl md:text-3xl font-medium tracking-tight transition-colors duration-300 ${
-                  isActive("/impressum") ? "text-brand-primary" : "text-white/50 hover:text-white"
-                }`}
-                ref={addItemRef}
-              >
-                Impressum
-              </Link>
             </div>
 
             <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10 sm:hidden">
