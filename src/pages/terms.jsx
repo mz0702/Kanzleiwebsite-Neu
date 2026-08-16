@@ -4,39 +4,24 @@ import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
-    title: "Geltungsbereich",
+    title: "Haftungsausschluss (Disclaimer)",
     paragraphs: [
-      "Diese Hinweise gelten für die Nutzung der Website von Wegner & Schöbener Rechtsanwälte. Sie betreffen ausschließlich den Internetauftritt — nicht das Zustandekommen, den Inhalt oder die Bedingungen eines Mandatsverhältnisses. Ein Mandat kommt ausschließlich durch eine gesonderte, ausdrückliche Vereinbarung zustande.",
+      "Sie finden auf diesen Internetseiten Informationen ausschließlich allgemeiner Art. Diese sind nicht dazu geeignet und auch nicht dafür vorgesehen, eine individuelle Beratung zu ersetzen. Dies kann nur durch unsere fachkundigen Anwälte unter Berücksichtigung der konkreten Umstände des Einzelfalles geschehen. Die Zusammenstellung der Informationen erfolgt mit größtmöglicher Sorgfalt. Eine Haftung, aus welchem Rechtsgrund auch immer, können wir weder für die Vollständigkeit noch für die Richtigkeit und Aktualität der Informationen übernehmen.",
+      "Eine Haftung für Schäden, die aus der Nutzung und der Nichtnutzung der auf dieser Website angebotenen Informationen entstehen, ist — soweit gesetzlich zulässig — ausgeschlossen. Ebenso wird für etwaige Schäden, die beim Aufrufen oder Herunterladen von Daten durch Computerviren oder bei der Installation oder Nutzung von Software verursacht werden, nur im Rahmen der gesetzlichen Bestimmungen gehaftet.",
     ],
   },
   {
-    title: "Keine Rechtsberatung durch die Website",
+    title: "Internetseiten Dritter / Links",
     paragraphs: [
-      "Die Inhalte dieser Website dienen der allgemeinen Information über die Kanzlei und ihre Tätigkeitsschwerpunkte. Sie stellen keine Rechtsberatung im Einzelfall dar und können eine individuelle anwaltliche Beratung nicht ersetzen.",
-    ],
-  },
-  {
-    title: "Haftung für Inhalte",
-    paragraphs: [
-      "Wir erstellen die Inhalte dieser Website mit Sorgfalt, können jedoch keine Gewähr für Richtigkeit, Vollständigkeit und Aktualität übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich, jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen (§§ 8 bis 10 DDG).",
-    ],
-  },
-  {
-    title: "Haftung für Links",
-    paragraphs: [
-      "Diese Website kann Links zu externen Websites Dritter enthalten, auf deren Inhalte wir keinen Einfluss haben. Für diese Inhalte ist stets der jeweilige Anbieter verantwortlich. Verlinkte Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft; eine permanente inhaltliche Kontrolle ist ohne konkrete Anhaltspunkte nicht zumutbar.",
+      "Unsere Internetseiten enthalten auch entsprechend gekennzeichnete Links oder Verweise auf Internetseiten Dritter. Der Link vermittelt lediglich den Zugang zur Nutzung dieser Inhalte. Eine Zustimmung zu den Inhalten der verlinkten Seiten Dritter ist damit nicht verbunden. Eine Verantwortung für die Verfügbarkeit oder den Inhalt solcher Internetseiten wird nicht übernommen. Es erfolgt auch keine Haftung für Schäden, die aus der Nutzung — gleich welcher Art — solcher Inhalte entstehen. Hierfür haftet allein der Anbieter der jeweiligen Seite.",
+      "Bei der erstmaligen Verknüpfung mit einem anderen Internetangebot haben wir dessen Inhalt daraufhin geprüft, ob durch ihn eine mögliche zivilrechtliche oder strafrechtliche Verantwortlichkeit ausgelöst wird. Nachträglich dort eingebundene Inhalte können jedoch nicht überprüft werden. Sobald wir feststellen oder von anderen darauf hingewiesen werden, dass ein Internetangebot, zu dem ein Link bereitgestellt wurde, eine zivil- oder strafrechtliche Verantwortlichkeit auslöst, wird der Verweis auf dieses Angebot unverzüglich aufgehoben.",
     ],
   },
   {
     title: "Urheberrecht",
     paragraphs: [
-      "Die auf dieser Website veröffentlichten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der vorherigen schriftlichen Zustimmung.",
-    ],
-  },
-  {
-    title: "Änderungen",
-    paragraphs: [
-      "Wir behalten uns vor, diese Hinweise bei Bedarf zu aktualisieren, etwa bei Änderungen der Website oder der Rechtslage.",
+      "Die Gestaltung dieser Website sowie die inhaltlichen Beiträge sind urheberrechtlich geschützt. Dies gilt insbesondere für Texte, Bilder, Grafiken oder Animationsdateien einschließlich deren Anordnung auf den Internetseiten. Veränderungen hieran dürfen nicht vorgenommen werden.",
+      "Zum Download angebotene Informationen können zum persönlichen Gebrauch gespeichert und ausgedruckt werden. Im Übrigen darf die Veröffentlichung, Verarbeitung oder gewerbliche Nutzung aller Inhalte oder auch nur Teile davon nur nach vorheriger Genehmigung durch uns erfolgen.",
     ],
   },
 ];
@@ -51,7 +36,7 @@ export default function TermsPage() {
       </Head>
       <LegalLayout
         title="Haftungsausschluss"
-        updatedAt="15. August 2026"
+        updatedAt="16. August 2026"
         sections={sections}
         breadcrumbLabel="Haftungsausschluss"
       />

@@ -7,24 +7,34 @@ const sections = [
     title: "Angaben gemäß § 5 DDG",
     paragraphs: [
       "Wegner & Schöbener Rechtsanwälte",
-      "Marktbreiter Straße 1, 97199 Ochsenfurt",
-      "[Platzhalter: Rechtsform der Kanzlei, z. B. Gesellschaft bürgerlichen Rechts — bitte ergänzen]",
-      "Vertretungsberechtigte Rechtsanwältinnen und Rechtsanwälte: Beate Wegner, Susanne Schöbener, Stephan Wegner",
+      "Inhaberinnen der Domain sowie Verantwortliche im Sinne des § 5 DDG: Susanne Schöbener, Beate Wegner",
+      "E-Mail: kanzlei@wegner-schoebener.de",
     ],
   },
   {
-    title: "Kontakt",
+    title: "Kanzlei Ochsenfurt",
     paragraphs: [
-      "Telefon: (09331) 503 96 95",
-      "E-Mail: kanzlei@wegner-schoebener.de",
+      "Marktbreiter Str. 1, 97199 Ochsenfurt",
+      "Telefon: 09331 - 981 99 - 0",
+      "Fax: 09331 - 981 99 - 28",
+    ],
+  },
+  {
+    title: "Kanzlei Würzburg",
+    paragraphs: [
+      "vormals Kanzlei von Rechtsanwältin Elke Hambrecht, Fachanwältin für Arbeitsrecht und Fachanwältin für Familienrecht.",
+      "Marktgasse 9 (an der Marienkapelle), 97070 Würzburg",
+      "Telefon: 0931 - 166 33",
+      "Fax: 0931 - 571 4 56",
     ],
   },
   {
     title: "Berufsbezeichnung und berufsrechtliche Regelungen",
     paragraphs: [
-      "Berufsbezeichnung: Rechtsanwältin / Rechtsanwalt, verliehen in der Bundesrepublik Deutschland.",
-      "Zuständige Rechtsanwaltskammer: [Platzhalter — bitte die zuständige Kammer mit Anschrift und Website ergänzen].",
-      "Es gelten insbesondere folgende berufsrechtliche Regelungen: Bundesrechtsanwaltsordnung (BRAO), Berufsordnung für Rechtsanwälte (BORA), Rechtsanwaltsvergütungsgesetz (RVG), Fachanwaltsordnung (FAO). Die Regelungen sind einsehbar unter www.brak.de.",
+      "Berufsbezeichnung: Rechtsanwältin / Rechtsanwalt. Die Zulassung zur Rechtsanwaltschaft wurde jeweils in der Bundesrepublik Deutschland verliehen.",
+      "Zuständige Aufsichtsbehörde: Rechtsanwaltskammer Bamberg, Friedrichstraße 7, 96047 Bamberg, Telefon: 0951 / 98620.",
+      "Die Rechtsanwälte Stephan Wegner, Susanne Schöbener und Beate Wegner sind Mitglieder der Rechtsanwaltskammer Bamberg.",
+      "Berufsrechtliche Grundlagen unserer Tätigkeit sind insbesondere: Bundesrechtsanwaltsordnung (BRAO), Berufsordnung der Rechtsanwälte (BORA), Fachanwaltsordnung (FAO), Bundesgebührenordnung für Rechtsanwälte (BRAGO) sowie das Rechtsanwaltsvergütungsgesetz (RVG). Die Berufs- und Gebührenordnungen sind einsehbar unter www.brak.de bzw. www.dav.de.",
     ],
   },
   {
@@ -34,41 +44,18 @@ const sections = [
     ],
   },
   {
-    title: "Umsatzsteuer-Identifikationsnummer",
-    paragraphs: [
-      "[Platzhalter: Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG, sofern vorhanden — bitte ergänzen.]",
-    ],
+    title: "Steuernummer",
+    paragraphs: ["Steuer-ID: 257 / 181 / 50208"],
   },
   {
     title: "Redaktionell verantwortlich",
-    paragraphs: [
-      "Beate Wegner, Susanne Schöbener, Stephan Wegner (Anschrift wie oben).",
-    ],
+    paragraphs: ["Susanne Schöbener, Beate Wegner (Anschrift: Kanzlei Ochsenfurt, siehe oben)."],
   },
   {
     title: "EU-Streitschlichtung",
     paragraphs: [
-      "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben unter „Kontakt”.",
-      "Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. [Falls die Kanzlei teilnehmen möchte, bitte anpassen.]",
-    ],
-  },
-  {
-    title: "Haftung für Inhalte",
-    paragraphs: [
-      "Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen.",
-      "Die Inhalte dieser Website dienen der allgemeinen Information und stellen keine Rechtsberatung im Einzelfall dar. Für eine verbindliche rechtliche Einschätzung wenden Sie sich bitte direkt an uns.",
-    ],
-  },
-  {
-    title: "Haftung für Links",
-    paragraphs: [
-      "Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.",
-    ],
-  },
-  {
-    title: "Urheberrecht",
-    paragraphs: [
-      "Die durch die Kanzlei erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung.",
+      "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben unter „Angaben gemäß § 5 DDG”.",
+      "Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
     ],
   },
 ];
@@ -78,12 +65,12 @@ export default function ImpressumPage() {
     <>
       <Head>
         <title>Impressum — Wegner &amp; Schöbener Rechtsanwälte</title>
-        <meta name="description" content="Impressum und rechtliche Angaben von Wegner & Schöbener Rechtsanwälte, Ochsenfurt." />
+        <meta name="description" content="Impressum und rechtliche Angaben von Wegner & Schöbener Rechtsanwälte, Standorte Ochsenfurt und Würzburg." />
         <link rel="canonical" href={absoluteUrl("/impressum/")} />
       </Head>
       <LegalLayout
         title="Impressum"
-        updatedAt="15. August 2026"
+        updatedAt="16. August 2026"
         sections={sections}
         breadcrumbLabel="Impressum"
       />

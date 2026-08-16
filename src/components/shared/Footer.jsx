@@ -60,12 +60,23 @@ export default function Footer() {
           {/* Col 3 */}
           <div>
             <h4 className="font-semibold text-lg mb-6">Kontakt</h4>
-            <div className="space-y-1 text-gray-400 mb-6">
-              <p>Marktbreiter Straße 1</p>
-              <p>97199 Ochsenfurt</p>
-              <a href="tel:+499331503695" className="block hover:text-brand-primary transition-colors mt-2">
-                (09331) 503 96 95
-              </a>
+            <div className="space-y-4 text-gray-400 mb-6">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Ochsenfurt</p>
+                <p>Marktbreiter Str. 1</p>
+                <p>97199 Ochsenfurt</p>
+                <a href="tel:+499331981990" className="block hover:text-brand-primary transition-colors mt-1">
+                  09331 - 981 99 - 0
+                </a>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Würzburg</p>
+                <p>Marktgasse 9</p>
+                <p>97070 Würzburg</p>
+                <a href="tel:+4993116633" className="block hover:text-brand-primary transition-colors mt-1">
+                  0931 - 166 33
+                </a>
+              </div>
             </div>
             <a
               href="mailto:kanzlei@wegner-schoebener.de"

@@ -6,7 +6,7 @@ const sections = [
   {
     title: "Verantwortlicher",
     paragraphs: [
-      "Verantwortlich für die Datenverarbeitung auf dieser Website ist Wegner & Schöbener Rechtsanwälte, Marktbreiter Straße 1, 97199 Ochsenfurt, E-Mail: kanzlei@wegner-schoebener.de, Telefon: (09331) 503 96 95. Weitere Angaben finden Sie im Impressum.",
+      "Verantwortlich für die Datenverarbeitung auf dieser Website ist Wegner & Schöbener Rechtsanwälte, Marktbreiter Str. 1, 97199 Ochsenfurt, E-Mail: kanzlei@wegner-schoebener.de, Telefon: 09331 - 981 99 - 0. Weitere Angaben finden Sie im Impressum.",
     ],
   },
   {
