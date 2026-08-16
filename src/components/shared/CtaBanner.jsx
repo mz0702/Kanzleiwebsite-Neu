@@ -12,7 +12,7 @@ export default function CtaBanner({
   description = "Rufen Sie uns an oder schreiben Sie uns — wir melden uns innerhalb von 48 Stunden bei Ihnen.",
   buttonLabel = "Jetzt Kontakt aufnehmen",
   buttonHref = "mailto:kanzlei@wegner-schoebener.de",
-  image = `${basePath}/images/photo-1466611653911-95081537e5b7.webp`,
+  image = `${basePath}/images/Hero Background.jpg`,
 }) {
   const ref = useRef(null);
 
