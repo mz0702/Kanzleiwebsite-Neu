@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import FaqAccordion from "@/components/shared/FaqAccordion";
 import { basePath } from "@/lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -34,7 +35,6 @@ const faqs = [
 ];
 
 export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState(-1);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -62,10 +62,6 @@ export default function FaqSection() {
     return () => ctx.revert();
   }, []);
 
-  const toggleFaq = (index) => {
-    setOpenIndex(openIndex === index ? -1 : index);
-  };
-
   return (
     <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 bg-white border-t border-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,37 +77,8 @@ export default function FaqSection() {
             />
           </div>
 
-          <div className="flex flex-col gap-0 gs-reveal">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="border-b border-gray-200 py-5 sm:py-6 cursor-pointer"
-                onClick={() => toggleFaq(index)}
-              >
-                <div className="flex justify-between items-center group gap-4">
-                  <h3 className="text-base sm:text-lg md:text-xl font-medium text-brand-dark group-hover:text-brand-primary transition-colors">
-                    {faq.question}
-                  </h3>
-                  <svg
-                    className={`w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 shrink-0 ${
-                      openIndex === index ? "rotate-45" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                </div>
-                <div
-                  className={`overflow-hidden transition-all duration-300 text-brand-gray ${
-                    openIndex === index ? "max-h-60" : "max-h-0"
-                  }`}
-                >
-                  <p className="pt-4 text-sm sm:text-base">{faq.answer}</p>
-                </div>
-              </div>
-            ))}
+          <div className="gs-reveal">
+            <FaqAccordion faqs={faqs} />
           </div>
         </div>
       </div>

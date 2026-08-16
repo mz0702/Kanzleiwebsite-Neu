@@ -1,5 +1,6 @@
 import Head from "next/head";
 import LegalLayout from "@/components/shared/LegalLayout";
+import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
@@ -55,6 +56,7 @@ export default function PrivacyPage() {
       <Head>
         <title>Datenschutzerklärung — Wegner &amp; Schöbener Rechtsanwälte</title>
         <meta name="description" content="Datenschutzerklärung von Wegner & Schöbener Rechtsanwälte gemäß DSGVO." />
+        <link rel="canonical" href={absoluteUrl("/privacy/")} />
       </Head>
       <LegalLayout
         title="Datenschutzerklärung"

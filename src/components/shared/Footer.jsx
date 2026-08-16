@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { lawyers } from "@/data/lawyers";
+import { practiceAreas } from "@/data/practiceAreas";
 
 const mainLinks = [
   { label: "Home", href: "/" },
@@ -36,6 +37,20 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-brand-primary transition-colors">
                     {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="font-semibold text-lg mb-4 mt-8">Rechtsgebiete</h4>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-3 text-gray-400">
+              {practiceAreas.map((area) => (
+                <li key={area.slug}>
+                  <Link
+                    href={`/rechtsgebiete/${area.slug}`}
+                    className="hover:text-brand-primary transition-colors"
+                  >
+                    {area.title}
                   </Link>
                 </li>
               ))}

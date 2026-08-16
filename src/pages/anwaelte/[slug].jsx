@@ -2,8 +2,10 @@ import { useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { lawyers } from "@/data/lawyers";
+import { practiceAreas } from "@/data/practiceAreas";
 import CtaBanner from "@/components/shared/CtaBanner";
 import useReveal from "@/hooks/useReveal";
+import { absoluteUrl } from "@/lib/basePath";
 
 export function getStaticPaths() {
   return {
@@ -22,12 +24,22 @@ export default function LawyerDetailPage({ lawyer }) {
   useReveal(timelineRef);
 
   const others = lawyers.filter((l) => l.slug !== lawyer.slug);
+  const url = absoluteUrl(`/anwaelte/${lawyer.slug}/`);
+  // Erster Satz von intro statt des vollen Absatzes — sonst schneidet Google die
+  // Meta-Description (~160 Zeichen) mitten im Satz ab.
+  const metaDescription = lawyer.intro.split(". ")[0] + ".";
 
   return (
     <>
       <Head>
-        <title>{lawyer.name} — Wegner &amp; Schöbener Rechtsanwälte</title>
-        <meta name="description" content={lawyer.tagline} />
+        <title>{`${lawyer.name} — Wegner & Schöbener Rechtsanwälte`}</title>
+        <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={url} />
+        <meta property="og:title" content={`${lawyer.name} — ${lawyer.role} in Ochsenfurt`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content={url} />
+        <meta property="og:image" content={absoluteUrl(lawyer.image)} />
       </Head>
 
       {/* Hero */}
@@ -77,12 +89,28 @@ export default function LawyerDetailPage({ lawyer }) {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-            {lawyer.specialties.map((spec, i) => (
-              <div key={i} className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200">
-                <h3 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-3">{spec.title}</h3>
-                <p className="text-brand-gray text-sm sm:text-base leading-relaxed">{spec.description}</p>
-              </div>
-            ))}
+            {lawyer.specialties.map((spec, i) => {
+              // Jedes Fachgebiet hat eine eigene Themenseite (practiceAreas.js).
+              const area = practiceAreas.find((a) => a.title === spec.title);
+              return (
+                <Link
+                  key={i}
+                  href={`/rechtsgebiete/${area.slug}`}
+                  className="group bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 hover:shadow-xl transition-shadow"
+                >
+                  <h3 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-3 group-hover:text-brand-primary transition-colors">
+                    {spec.title}
+                  </h3>
+                  <p className="text-brand-gray text-sm sm:text-base leading-relaxed">{spec.description}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-brand-primary font-semibold text-sm">
+                    Mehr zum {spec.title}
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
+              );
+            })}
           </div>
 
           <a

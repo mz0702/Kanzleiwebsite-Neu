@@ -1,5 +1,6 @@
 import Head from "next/head";
 import LegalLayout from "@/components/shared/LegalLayout";
+import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
@@ -78,6 +79,7 @@ export default function ImpressumPage() {
       <Head>
         <title>Impressum — Wegner &amp; Schöbener Rechtsanwälte</title>
         <meta name="description" content="Impressum und rechtliche Angaben von Wegner & Schöbener Rechtsanwälte, Ochsenfurt." />
+        <link rel="canonical" href={absoluteUrl("/impressum/")} />
       </Head>
       <LegalLayout
         title="Impressum"

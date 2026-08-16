@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { lawyers } from "@/data/lawyers";
-
-const SITE_URL = "https://mz0702.github.io/Kanzleiwebsite";
+import { siteUrl as SITE_URL } from "@/lib/basePath";
 
 export default function OrganizationSchema() {
   const schema = {

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import LegalLayout from "@/components/shared/LegalLayout";
+import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
@@ -46,6 +47,7 @@ export default function TermsPage() {
       <Head>
         <title>Haftungsausschluss — Wegner &amp; Schöbener Rechtsanwälte</title>
         <meta name="description" content="Haftungsausschluss und rechtliche Hinweise zur Website von Wegner & Schöbener Rechtsanwälte." />
+        <link rel="canonical" href={absoluteUrl("/terms/")} />
       </Head>
       <LegalLayout
         title="Haftungsausschluss"

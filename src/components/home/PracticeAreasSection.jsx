@@ -2,39 +2,21 @@ import { useRef } from "react";
 import Link from "next/link";
 import useReveal from "@/hooks/useReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
-import { lawyers } from "@/data/lawyers";
+import { practiceAreas } from "@/data/practiceAreas";
 import { basePath } from "@/lib/basePath";
-
-const images = {
-  Erbrecht: `${basePath}/images/Erbrecht.png`,
-  Betreuungsrecht: `${basePath}/images/Betreuungsrecht.jpg`,
-  Familienrecht: `${basePath}/images/Familienrecht.jpg`,
-  Insolvenzrecht: `${basePath}/images/insolvenzrecht.jpg`,
-  Arbeitsrecht: `${basePath}/images/Arbeitsrecht.jpg`,
-  Verkehrsrecht: `${basePath}/images/Verkehrsrecht.png`,
-};
-
-const practiceAreas = lawyers.flatMap((lawyer) =>
-  lawyer.specialties.map((spec) => ({
-    title: spec.title,
-    description: spec.description,
-    image: images[spec.title],
-    href: `/anwaelte/${lawyer.slug}`,
-  }))
-);
 
 export default function PracticeAreasSection() {
   const ref = useRef(null);
   useReveal(ref);
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 lg:py-24 bg-brand-dark text-white">
+    <section id="rechtsgebiete" ref={ref} className="py-16 sm:py-20 lg:py-24 bg-brand-dark text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="gs-reveal max-w-3xl mb-12 sm:mb-16">
           <SectionHeading
             label="Rechtsgebiete"
             title="Unsere Fachgebiete auf einen Blick"
-            description="Klicken Sie auf ein Rechtsgebiet, um mehr über den zuständigen Anwalt zu erfahren."
+            description="Klicken Sie auf ein Rechtsgebiet, um mehr über unsere Arbeit und den zuständigen Anwalt zu erfahren."
             variant="light"
           />
         </div>
@@ -44,14 +26,14 @@ export default function PracticeAreasSection() {
         <div className="lg:max-w-[70%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
           {practiceAreas.map((area, i) => (
             <Link
-              key={area.title}
-              href={area.href}
+              key={area.slug}
+              href={`/rechtsgebiete/${area.slug}`}
               className="pa-tile gs-reveal group relative block bg-brand-dark aspect-[4/3] overflow-hidden cursor-pointer"
             >
               {/* Images are 4:3 — the tile matches that ratio so the fill below shows the full illustration, uncropped */}
               {/* .pa-tile* classes: touch fallback for the hover reveal, see globals.css */}
               <img
-                src={area.image}
+                src={`${basePath}${area.image}`}
                 alt={area.title}
                 className="pa-tile-img absolute inset-0 w-full h-full object-cover opacity-0 blur-none scale-105 group-hover:opacity-80 group-hover:blur-sm group-hover:scale-100 transition-all duration-500 ease-out"
               />

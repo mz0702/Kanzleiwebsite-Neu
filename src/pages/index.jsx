@@ -9,6 +9,7 @@ import WorkProcessSection from "@/components/home/WorkProcessSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FaqSection from "@/components/home/FaqSection";
 import CtaSection from "@/components/home/CtaSection";
+import { absoluteUrl } from "@/lib/basePath";
 
 export default function Home() {
   return (
@@ -19,12 +20,15 @@ export default function Home() {
           name="description"
           content="Kanzlei für Erbrecht, Familienrecht, Arbeitsrecht, Verkehrsrecht, Betreuungs- und Insolvenzrecht in Ochsenfurt. Persönliche Beratung, Termin innerhalb von 48 Stunden."
         />
-        <meta property="og:title" content="Wegner &amp; Schöbener Rechtsanwälte" />
+        <link rel="canonical" href={absoluteUrl("/")} />
+        <meta property="og:title" content="Wegner &amp; Schöbener Rechtsanwälte — Kanzlei in Ochsenfurt" />
         <meta
           property="og:description"
           content="Kanzlei für Erbrecht, Familienrecht, Arbeitsrecht, Verkehrsrecht, Betreuungs- und Insolvenzrecht in Ochsenfurt."
         />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={absoluteUrl("/")} />
+        <meta property="og:image" content={absoluteUrl("/images/Hero Background.jpg")} />
       </Head>
       <HeroSection />
       <PracticeAreasSection />
