@@ -85,40 +85,6 @@ body {
   }
 }
 
-/* Testimonials marquee — motion is GSAP-driven (autoplay + slider drag), see TestimonialsSection.jsx */
-.testimonial-marquee {
-  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-}
-.testimonial-track {
-  will-change: transform;
-}
-/* The drag handle is 12px tall — fine for a mouse, well under the 44px touch
-   minimum. On touch only, a transparent pseudo-element enlarges the grab area
-   (pseudo-elements hit-test as their host, so Draggable still gets the press).
-   Visuals are unchanged everywhere. */
-@media (hover: none), (pointer: coarse) {
-  .testimonial-thumb::before {
-    content: "";
-    position: absolute;
-    inset: -16px -8px;
-  }
-}
-
-/* Slick Carousel overrides */
-.slick-track {
-  display: flex !important;
-}
-.slick-slide {
-  height: inherit !important;
-}
-.slick-slide > div {
-  height: 100%;
-}
-.slick-list {
-  overflow: visible !important;
-}
-
 /* Lenis Smooth Scroll */
 html.lenis,
 html.lenis body {
