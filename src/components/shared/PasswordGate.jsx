@@ -8,7 +8,12 @@ const STORAGE_KEY = "kanzlei-preview-unlocked";
 // Client-side only gate for the preview deployment (static export, no server
 // to check credentials against). Keeps casual visitors and search crawlers
 // out — not real security, since the app bundle is still downloadable.
-export default function PasswordGate({ children }) {
+//
+// `bypass` (e.g. the Impressum route, required to stay reachable unlocked)
+// must stay a prop on this same, always-mounted component rather than the
+// caller conditionally omitting PasswordGate from the tree — see the comment
+// in _app.jsx for why that alternative causes spurious remounts.
+export default function PasswordGate({ children, bypass = false }) {
   const [checked, setChecked] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
   const [input, setInput] = useState("");
@@ -29,6 +34,7 @@ export default function PasswordGate({ children }) {
     }
   };
 
+  if (bypass) return children;
   if (!checked) return null;
   if (unlocked) return children;
 

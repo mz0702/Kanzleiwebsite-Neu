@@ -25,17 +25,23 @@ export default function App({ Component, pageProps }) {
   }, [router.events]);
 
   const getLayout = Component.getLayout || ((page) => <MainLayout>{page}</MainLayout>);
-  const content = (
-    <>
+
+  // Das Impressum muss laut § 5 DDG von jeder Seite aus erreichbar sein — auch
+  // von einer passwortgeschützten Vorschau. Einzige Ausnahme von der Sperre.
+  //
+  // PasswordGate bleibt hier immer im Baum (gleiche Position, gleicher Typ) und
+  // entscheidet selbst per `bypass`-Prop, ob es sperrt. Würde man stattdessen je
+  // nach Route bedingt MIT/OHNE PasswordGate rendern, wechselt der Elementtyp an
+  // dieser Stelle des Baums bei jeder Navigation zwischen Impressum und dem Rest
+  // der Seite — React unmountet dann Preloader/SmoothScroll/Navbar/Footer
+  // komplett und mountet sie neu, was Lenis/GSAP in einen Race-Condition-Zustand
+  // bringen kann (beobachtet als "Application error: a client-side exception").
+  return (
+    <PasswordGate bypass={router.pathname === "/impressum"}>
       <Preloader />
       <SmoothScroll>
         {getLayout(<Component {...pageProps} />)}
       </SmoothScroll>
-    </>
+    </PasswordGate>
   );
-
-  // Das Impressum muss laut § 5 DDG von jeder Seite aus erreichbar sein — auch
-  // von einer passwortgeschützten Vorschau. Einzige Ausnahme von der Sperre.
-  const isImpressum = router.pathname === "/impressum";
-  return isImpressum ? content : <PasswordGate>{content}</PasswordGate>;
 }
