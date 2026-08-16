@@ -229,8 +229,8 @@ export default function Navbar() {
               <Link
                 href="/impressum"
                 onClick={closeMenu}
-                className={`nav-link inline-block text-sm font-medium transition-colors duration-300 ${
-                  isActive("/impressum") ? "text-brand-primary" : "text-white/40 hover:text-white/70"
+                className={`nav-link inline-block py-1.5 sm:py-2 text-xl sm:text-2xl md:text-3xl font-medium tracking-tight transition-colors duration-300 ${
+                  isActive("/impressum") ? "text-brand-primary" : "text-white/50 hover:text-white"
                 }`}
                 ref={addItemRef}
               >
