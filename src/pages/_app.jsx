@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 import MainLayout from "@/layouts/MainLayout";
 import SmoothScroll from "@/components/shared/SmoothScroll";
 import Preloader from "@/components/shared/Preloader";
-import PasswordGate from "@/components/shared/PasswordGate";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -26,11 +25,11 @@ export default function App({ Component, pageProps }) {
 
   const getLayout = Component.getLayout || ((page) => <MainLayout>{page}</MainLayout>);
   return (
-    <PasswordGate>
+    <>
       <Preloader />
       <SmoothScroll>
         {getLayout(<Component {...pageProps} />)}
       </SmoothScroll>
-    </PasswordGate>
+    </>
   );
 }

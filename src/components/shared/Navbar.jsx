@@ -4,15 +4,23 @@ import Link from "next/link";
 import gsap from "gsap";
 import Button from "@/components/shared/Button";
 import { lawyers } from "@/data/lawyers";
+import { practiceAreas } from "@/data/practiceAreas";
 import { basePath } from "@/lib/basePath";
 
-// Only pages that are actually part of the rebuilt Kanzlei site — /about,
-// /services, /projects, /blogs, /pricing, /contact etc. still hold unconverted
-// Greenova template content and are deliberately left out of the menu.
+// Two groups so the menu keeps a real hierarchy instead of flattening 10 links
+// to the same weight: Kanzlei (who) first, Rechtsgebiete (what) second, styled
+// smaller since it's the secondary tier. Legal pages (Impressum/Datenschutz/
+// Haftungsausschluss) stay footer-only — standard placement, not "subpages" in
+// the sense of site content.
 const mainLinks = [
   { label: "Home", href: "/" },
   ...lawyers.map((lawyer) => ({ label: lawyer.name, href: `/anwaelte/${lawyer.slug}` })),
 ];
+
+const areaLinks = practiceAreas.map((area) => ({
+  label: area.title,
+  href: `/rechtsgebiete/${area.slug}`,
+}));
 
 export default function Navbar() {
   const router = useRouter();
@@ -24,9 +32,11 @@ export default function Navbar() {
   const closeIconRef = useRef(null);
   const itemsRef = useRef([]);
 
+  // router.pathname is the file-based route pattern (e.g. "/anwaelte/[slug]") for
+  // dynamic routes, never the real URL — asPath is the actual resolved path.
   const isActive = (href) => {
-    if (href === "/") return router.pathname === "/";
-    return router.pathname === href || router.pathname.startsWith(href + "/");
+    if (href === "/") return router.asPath === "/";
+    return router.asPath === href || router.asPath.startsWith(href + "/");
   };
 
   const addItemRef = (el) => {
@@ -189,6 +199,31 @@ export default function Navbar() {
                 );
               })}
             </ul>
+
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10">
+              <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold mb-2 text-gray-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                Rechtsgebiete
+              </div>
+              <ul className="flex flex-col">
+                {areaLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <li key={link.label} ref={addItemRef}>
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        className={`nav-link inline-block py-1.5 sm:py-2 text-xl sm:text-2xl md:text-3xl font-medium tracking-tight transition-colors duration-300 ${
+                          active ? "text-brand-primary" : "text-white/50 hover:text-white"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
 
             <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10 sm:hidden">
               <Button href="mailto:kanzlei@wegner-schoebener.de" variant="primary" size="md" radius="rounded" fullWidth>
