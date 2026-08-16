@@ -179,10 +179,11 @@ export default function Navbar() {
       <nav
         ref={navRef}
         aria-hidden={!open}
-        className="fixed inset-0 z-[90] bg-brand-dark text-white overflow-y-auto"
+        data-lenis-prevent
+        className="fixed inset-0 z-[90] bg-brand-dark text-white overflow-y-auto overscroll-contain"
         style={{ clipPath: "circle(0px at 0px 0px)" }}
       >
-        <div className="min-h-full flex items-center justify-center px-6 sm:px-10 py-32">
+        <div className="min-h-full flex items-center justify-center px-6 sm:px-10 py-20 sm:py-24">
           <div className="w-full max-w-4xl">
             <ul className="flex flex-col">
               {mainLinks.map((link) => {
@@ -192,7 +193,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={closeMenu}
-                      className={`nav-link inline-block py-2 sm:py-3 text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight transition-colors duration-300 ${
+                      className={`nav-link inline-block py-2 sm:py-3 text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight transition-colors duration-300 ${
                         active ? "text-brand-primary" : "text-white/50 hover:text-white"
                       }`}
                     >
@@ -216,7 +217,7 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={closeMenu}
-                        className={`nav-link inline-block py-1.5 sm:py-2 text-xl sm:text-2xl md:text-3xl font-medium tracking-tight transition-colors duration-300 ${
+                        className={`nav-link inline-block py-1.5 sm:py-2 text-base sm:text-xl md:text-2xl font-medium tracking-tight transition-colors duration-300 ${
                           active ? "text-brand-primary" : "text-white/50 hover:text-white"
                         }`}
                       >
