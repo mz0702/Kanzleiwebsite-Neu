@@ -5,7 +5,8 @@ export default function Document() {
   return (
     <Html lang="de" className="scroll-smooth">
       <Head>
-        <link rel="icon" href={`${basePath}/favicon.ico`} />
+        <link rel="icon" type="image/png" href={`${basePath}/images/Favicon.png`} />
+        <link rel="apple-touch-icon" href={`${basePath}/images/Favicon.png`} />
         {/* Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

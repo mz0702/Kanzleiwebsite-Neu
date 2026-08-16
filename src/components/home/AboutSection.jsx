@@ -53,7 +53,7 @@ export default function AboutSection() {
 
             {/* Floating Glass Card */}
             <div className="absolute bottom-6 sm:bottom-8 left-6 right-6 sm:left-8 sm:right-8 md:right-auto md:w-80 dark-glass p-5 sm:p-6 rounded-2xl">
-              <h4 className="font-semibold text-base sm:text-lg mb-4">Warum Wegner &amp; Schöbener</h4>
+              <h3 className="font-semibold text-base sm:text-lg mb-4">Warum Wegner &amp; Schöbener</h3>
               <ul className="space-y-3">
                 {badges.map((badge, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-sm">

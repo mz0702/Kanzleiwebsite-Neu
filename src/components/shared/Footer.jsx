@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
           {/* Col 1 */}
           <div>
-            <h4 className="font-semibold text-lg mb-6">Wegner &amp; Schöbener Rechtsanwälte</h4>
+            <h3 className="font-semibold text-lg mb-6">Wegner &amp; Schöbener Rechtsanwälte</h3>
             <p className="text-gray-400 text-sm max-w-xs">
               Wir helfen Ihnen in allen juristischen Belangen weiter. Vertrauen, Kompetenz und
               Zusammenarbeit stehen für uns im Mittelpunkt.
@@ -31,7 +31,7 @@ export default function Footer() {
 
           {/* Col 2 */}
           <div>
-            <h4 className="font-semibold text-lg mb-6">Navigation</h4>
+            <h3 className="font-semibold text-lg mb-6">Navigation</h3>
             <ul className="flex flex-col gap-3 text-gray-400">
               {mainLinks.map((link) => (
                 <li key={link.href}>
@@ -42,7 +42,7 @@ export default function Footer() {
               ))}
             </ul>
 
-            <h4 className="font-semibold text-lg mb-4 mt-8">Rechtsgebiete</h4>
+            <h3 className="font-semibold text-lg mb-4 mt-8">Rechtsgebiete</h3>
             <ul className="grid grid-cols-2 gap-x-6 gap-y-3 text-gray-400">
               {practiceAreas.map((area) => (
                 <li key={area.slug}>
@@ -59,7 +59,7 @@ export default function Footer() {
 
           {/* Col 3 */}
           <div>
-            <h4 className="font-semibold text-lg mb-6">Kontakt</h4>
+            <h3 className="font-semibold text-lg mb-6">Kontakt</h3>
             <div className="space-y-4 text-gray-400 mb-6">
               <div>
                 <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Ochsenfurt</p>
@@ -107,9 +107,11 @@ export default function Footer() {
 
       {/* WEGNER & SCHÖBENER full-width */}
       <div className="w-full flex flex-col items-center overflow-hidden leading-none mt-4 px-4">
-        <h2 className="text-brand-primary font-bold tracking-tight whitespace-nowrap leading-[0.85] pt-[0.15em] text-[clamp(1.75rem,8vw,8rem)]">
+        {/* Purely decorative brand display, not a heading — every page already has
+            its own h1/h2 structure above; this shouldn't add another node to it. */}
+        <p aria-hidden="true" className="text-brand-primary font-bold tracking-tight whitespace-nowrap leading-[0.85] pt-[0.15em] text-[clamp(1.75rem,8vw,8rem)]">
           WEGNER &amp; SCHÖBENER
-        </h2>
+        </p>
         <p className="text-gray-400 tracking-[0.3em] uppercase text-xs sm:text-sm mt-3">
           Rechtsanwälte
         </p>

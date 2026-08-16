@@ -8,6 +8,8 @@ export default function Custom404() {
     <>
       <Head>
         <title>Seite nicht gefunden — Wegner &amp; Schöbener Rechtsanwälte</title>
+        <meta name="description" content="Die gesuchte Seite wurde verschoben, umbenannt oder existiert nicht mehr." />
+        <meta name="robots" content="noindex" />
       </Head>
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark text-white">
@@ -27,13 +29,13 @@ export default function Custom404() {
               Error 404
             </div>
 
-            <h1 className="text-[30vw] sm:text-[22vw] md:text-[18vw] lg:text-[220px] font-bold leading-none text-brand-primary tracking-tighter mb-4">
+            <p aria-hidden="true" className="text-[30vw] sm:text-[22vw] md:text-[18vw] lg:text-[220px] font-bold leading-none text-brand-primary tracking-tighter mb-4">
               404
-            </h1>
+            </p>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4">
               Diese Seite gibt es nicht
-            </h2>
+            </h1>
             <p className="text-gray-300 mb-10 max-w-lg mx-auto text-base sm:text-lg">
               Die gesuchte Seite wurde verschoben, umbenannt oder existiert nicht mehr.
             </p>

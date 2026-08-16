@@ -164,7 +164,7 @@ export default function TestimonialsSection() {
                   {item.initials}
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-brand-dark">{item.name}</h4>
+                  <h3 className="font-bold text-sm text-brand-dark">{item.name}</h3>
                   <p className="text-xs text-brand-gray">{item.role}</p>
                 </div>
               </div>
