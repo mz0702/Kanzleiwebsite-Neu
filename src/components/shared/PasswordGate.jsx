@@ -39,9 +39,9 @@ export default function PasswordGate({ children, bypass = false }) {
   if (unlocked) return children;
 
   return (
-    <div className="fixed inset-0 z-[300] bg-brand-dark flex items-center justify-center px-4">
+    <div data-theme="dark" className="fixed inset-0 z-[300] flex items-center justify-center bg-night px-4">
       <form onSubmit={handleSubmit} className="w-full max-w-sm text-center">
-        <img src={`${basePath}/logo-light.svg`} alt="Logo" className="h-10 mx-auto mb-8" />
+        <img src={`${basePath}/logo-light.svg`} alt="Wegner & Schöbener Rechtsanwälte" className="mx-auto mb-10 h-14" />
         <p className="text-white/60 text-sm mb-6">Diese Vorschau ist passwortgeschützt.</p>
         <input
           type="password"
@@ -52,12 +52,12 @@ export default function PasswordGate({ children, bypass = false }) {
           }}
           placeholder="Passwort"
           autoFocus
-          className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-center placeholder-white/30 focus:outline-none focus:border-brand-primary mb-3 transition-colors"
+          className="w-full bg-white/5 border border-white/15 rounded-full px-4 py-3 text-white text-center placeholder-white/30 focus:outline-none focus:border-accent-bright mb-3 transition-colors"
         />
-        {error && <p className="text-brand-primary text-sm mb-3">Falsches Passwort.</p>}
+        {error && <p className="text-accent-bright text-sm mb-3">Falsches Passwort.</p>}
         <button
           type="submit"
-          className="w-full bg-brand-primary text-white font-semibold py-3 rounded-xl hover:bg-white hover:text-brand-dark transition-colors"
+          className="w-full rounded-full bg-accent py-3 text-sm font-medium uppercase tracking-[0.05em] text-white transition-colors hover:bg-accent-deep"
         >
           Zugang
         </button>

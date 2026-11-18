@@ -1,3 +1,4 @@
+# Suchmaschinen und KI-Suchdienste sind ausdrücklich willkommen.
 User-agent: *
 Allow: /
 
@@ -7,10 +8,19 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://mz0702.github.io/Kanzleiwebsite/sitemap.xml
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://mz0702.github.io/Kanzleiwebsite-Neu/sitemap.xml

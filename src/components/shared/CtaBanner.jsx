@@ -1,67 +1,49 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Button from "@/components/shared/Button";
+import Icon from "@/components/shared/Icon";
+import { site } from "@/data/site";
 import { basePath } from "@/lib/basePath";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function CtaBanner({
-  label = "Wir sind für Sie da",
-  title = "Termin vereinbaren",
-  description = "Rufen Sie uns an oder schreiben Sie uns — wir melden uns innerhalb von 48 Stunden bei Ihnen.",
-  buttonLabel = "Jetzt Kontakt aufnehmen",
-  buttonHref = "mailto:kanzlei@wegner-schoebener.de",
-  image = `${basePath}/images/Hero Background.jpg`,
+  label = "Termin vereinbaren",
+  title = "Lassen Sie uns über Ihr Anliegen sprechen",
+  text = "Rufen Sie uns an – wir vereinbaren einen persönlichen Termin innerhalb von 48 Stunden.",
 }) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ref.current.querySelectorAll(".cta-reveal"),
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 80%",
-          },
-        }
-      );
-    }, ref);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section
-      ref={ref}
-      className="py-20 sm:py-24 lg:py-32 relative overflow-hidden text-center text-white"
-    >
-      <div className="absolute inset-0 z-0">
-        <img src={image} alt="CTA Background" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-brand-dark/60" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-b from-transparent to-brand-dark" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="cta-reveal inline-flex items-center gap-2 text-sm font-semibold mb-5 sm:mb-6 justify-center text-gray-300">
-          <span className="w-2 h-2 rounded-full bg-brand-primary" />
-          {label}
-        </div>
-        <h2 className="cta-reveal text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium mb-5 sm:mb-6 leading-tight whitespace-pre-line">
-          {title}
-        </h2>
-        <p className="cta-reveal text-gray-300 mb-8 sm:mb-10 max-w-xl mx-auto text-base sm:text-lg">
-          {description}
-        </p>
-        <div className="cta-reveal">
-          <Button href={buttonHref} variant="primary" size="xl" radius="pill">
-            {buttonLabel}
-          </Button>
+    <section data-theme="dark" aria-labelledby="cta-title" className="relative overflow-hidden bg-night text-white">
+      <img src={`${basePath}/images/archiv.webp`} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-night via-night/85 to-night/50" />
+      <div className="frame relative">
+        <div className="pad grid gap-14 py-24 md:py-32 lg:grid-cols-12 lg:items-end">
+          <div className="gs-reveal lg:col-span-7">
+            <p className="eyebrow text-white/70">{label}</p>
+            <h2 id="cta-title" className="display h-lg mt-6 max-w-[16ch]">
+              {title}
+            </h2>
+            <p className="lead mt-6 max-w-xl text-white/75">{text}</p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Button href="/kontakt">Termin vereinbaren</Button>
+              <Button href={`mailto:${site.email}`} variant="ghost" icon="mail" arrow={false}>
+                E-Mail schreiben
+              </Button>
+            </div>
+          </div>
+          <div className="gs-reveal lg:col-span-4 lg:col-start-9">
+            {site.locations.map((loc) => (
+              <a key={loc.city} href={loc.phoneHref} className="group flex items-center justify-between gap-4 border-t border-line py-5 last:border-b">
+                <span>
+                  <span className="block text-xs uppercase tracking-[0.09em] text-white/50">Kanzlei {loc.city}</span>
+                  <span className="mt-1 block text-2xl tracking-tight">{loc.phone}</span>
+                </span>
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-accent transition-transform duration-300 group-hover:scale-110">
+                  <Icon name="phone" className="h-4 w-4" />
+                </span>
+              </a>
+            ))}
+            <p className="mt-6 text-sm leading-relaxed text-white/55">
+              Läuft bereits eine Frist – etwa nach einer Kündigung oder einem Bußgeldbescheid? Dann rufen Sie uns bitte
+              direkt an.
+            </p>
+          </div>
         </div>
       </div>
     </section>

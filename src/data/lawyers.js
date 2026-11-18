@@ -4,7 +4,7 @@ export const lawyers = [
     slug: "beate-wegner",
     name: "Beate Wegner",
     role: "Rechtsanwältin",
-    image: `${basePath}/images/Beate Wegner.webp`,
+    image: `${basePath}/images/beate-wegner.webp`,
     tagline: "Erbrecht & Betreuungsrecht",
     intro:
       "Beate Wegner ist seit 1996 als Rechtsanwältin tätig und auf Erbrecht sowie Betreuungsrecht spezialisiert. Sie ist unter anderem als gerichtlich bestellte Betreuerin tätig und bildet sich regelmäßig im Erbrecht fort.",
@@ -38,7 +38,7 @@ export const lawyers = [
     slug: "susanne-schoebener",
     name: "Susanne Schöbener",
     role: "Rechtsanwältin",
-    image: `${basePath}/images/Susanne Schöbener.webp`,
+    image: `${basePath}/images/susanne-schoebener.webp`,
     tagline: "Familienrecht & Insolvenzrecht",
     intro:
       "Susanne Schöbener berät und vertritt Sie in allen Fragen des Familienrechts sowie im Insolvenzrecht — kompetent, diskret und mit einem klaren Blick für pragmatische Lösungen.",
@@ -75,7 +75,7 @@ export const lawyers = [
     slug: "stephan-wegner",
     name: "Stephan Wegner",
     role: "Rechtsanwalt",
-    image: `${basePath}/images/Stephan Wegner.webp`,
+    image: `${basePath}/images/stephan-wegner.webp`,
     tagline: "Arbeitsrecht & Verkehrsanwalt",
     intro:
       "Stephan Wegner vertritt Sie als Fachmann im Arbeitsrecht sowie als Verkehrsanwalt bei Unfällen, Bußgeldverfahren und im Verkehrsstrafrecht.",

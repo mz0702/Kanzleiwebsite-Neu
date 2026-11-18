@@ -1,0 +1,34 @@
+# Wegner & Schöbener Rechtsanwälte
+
+> Rechtsanwaltskanzlei mit Standorten in Ochsenfurt und Würzburg (Bayern, Landkreis Würzburg). Drei Anwälte beraten und vertreten in sechs Rechtsgebieten: Erbrecht, Betreuungsrecht, Familienrecht, Insolvenzrecht, Arbeitsrecht und Verkehrsrecht. Termin in der Regel innerhalb von 48 Stunden; Kanzleierfahrung seit über 20 Jahren.
+
+## Kontakt
+
+- Kanzlei Ochsenfurt: Marktbreiter Str. 1, 97199 Ochsenfurt · Telefon 09331 981 99-0 · Fax 09331 981 99-28
+- Kanzlei Würzburg: Marktgasse 9 (an der Marienkapelle), 97070 Würzburg · Telefon 0931 166 33 · Fax 0931 571 456
+- E-Mail: kanzlei@wegner-schoebener.de
+- [Kontakt & Terminvereinbarung](https://mz0702.github.io/Kanzleiwebsite-Neu/kontakt/)
+
+## Anwälte
+
+- [Beate Wegner](https://mz0702.github.io/Kanzleiwebsite-Neu/anwaelte/beate-wegner/): Rechtsanwältin seit 1996, Erbrecht und Betreuungsrecht; auch als gerichtlich bestellte Betreuerin tätig.
+- [Susanne Schöbener](https://mz0702.github.io/Kanzleiwebsite-Neu/anwaelte/susanne-schoebener/): Rechtsanwältin, Familienrecht und Insolvenzrecht.
+- [Stephan Wegner](https://mz0702.github.io/Kanzleiwebsite-Neu/anwaelte/stephan-wegner/): Rechtsanwalt in Ochsenfurt seit 1995, Fachanwalt für Verkehrsrecht und für Arbeitsrecht.
+
+## Rechtsgebiete
+
+- [Erbrecht](https://mz0702.github.io/Kanzleiwebsite-Neu/rechtsgebiete/erbrecht/): Testament, gesetzliche Erbfolge, Erbschein, Pflichtteil, Erbengemeinschaft. Ausschlagungsfrist: in der Regel 6 Wochen. Ansprechpartnerin: Beate Wegner.
+- [Betreuungsrecht](https://mz0702.github.io/Kanzleiwebsite-Neu/rechtsgebiete/betreuungsrecht/): Vorsorgevollmacht, Patientenverfügung, Betreuungsverfahren (§§ 1814 ff. BGB, reformiert zum 1. Januar 2023). Ansprechpartnerin: Beate Wegner.
+- [Familienrecht](https://mz0702.github.io/Kanzleiwebsite-Neu/rechtsgebiete/familienrecht/): Scheidung, Trennungsjahr, Unterhalt, Sorge- und Umgangsrecht, Zugewinnausgleich. Ansprechpartnerin: Susanne Schöbener.
+- [Insolvenzrecht](https://mz0702.github.io/Kanzleiwebsite-Neu/rechtsgebiete/insolvenzrecht/): Verbraucherinsolvenz, Restschuldbefreiung (in der Regel nach 3 Jahren), Regelinsolvenz, Gläubigervertretung. Ansprechpartnerin: Susanne Schöbener.
+- [Arbeitsrecht](https://mz0702.github.io/Kanzleiwebsite-Neu/rechtsgebiete/arbeitsrecht/): Kündigungsschutzklage (Frist: 3 Wochen ab Zugang), Abfindung, Aufhebungsvertrag, Abmahnung, Arbeitszeugnis. Ansprechpartner: Stephan Wegner.
+- [Verkehrsrecht](https://mz0702.github.io/Kanzleiwebsite-Neu/rechtsgebiete/verkehrsrecht/): Unfallregulierung, Bußgeldbescheid (Einspruchsfrist: 2 Wochen), Fahrverbot, Verkehrsstrafrecht. Ansprechpartner: Stephan Wegner.
+
+## Hinweis
+
+Die Inhalte dieser Website sind allgemeine Informationen zur Rechtslage und ersetzen keine Rechtsberatung im Einzelfall.
+
+## Rechtliches
+
+- [Impressum](https://mz0702.github.io/Kanzleiwebsite-Neu/impressum/)
+- [Datenschutzerklärung](https://mz0702.github.io/Kanzleiwebsite-Neu/datenschutz/)

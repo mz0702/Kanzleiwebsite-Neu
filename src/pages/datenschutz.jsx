@@ -1,6 +1,5 @@
-import Head from "next/head";
+import Seo from "@/components/shared/Seo";
 import LegalLayout from "@/components/shared/LegalLayout";
-import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
@@ -24,9 +23,15 @@ const sections = [
     ],
   },
   {
-    title: "Google Fonts",
+    title: "Schriftarten",
     paragraphs: [
-      "Wir binden die Schriftart „Manrope” über Google Fonts ein, die von Servern der Google Ireland Limited (bzw. Google LLC in den USA) geladen wird. Dabei wird Ihre IP-Adresse an Google übertragen, damit die Schriftdatei ausgeliefert werden kann (Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einer einheitlichen Darstellung der Seite). Weitere Informationen: Datenschutzerklärung von Google.",
+      "Die auf dieser Website verwendete Schriftart wird direkt von unserem Webserver ausgeliefert. Beim Seitenaufruf wird keine Verbindung zu Servern von Google oder anderen Schriftanbietern hergestellt.",
+    ],
+  },
+  {
+    title: "Links zu Kartendiensten",
+    paragraphs: [
+      "Auf unserer Kontaktseite verlinken wir zur Routenplanung auf Google Maps. Es ist keine Karte eingebunden; Daten werden erst an Google (Google Ireland Limited) übertragen, wenn Sie den Link anklicken und die Seite von Google Maps aufrufen. Dafür gilt die Datenschutzerklärung von Google.",
     ],
   },
   {
@@ -53,16 +58,17 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
-      <Head>
-        <title>Datenschutzerklärung — Wegner &amp; Schöbener Rechtsanwälte</title>
-        <meta name="description" content="Datenschutzerklärung von Wegner & Schöbener Rechtsanwälte gemäß DSGVO." />
-        <link rel="canonical" href={absoluteUrl("/privacy/")} />
-      </Head>
+      <Seo
+        title="Datenschutzerklärung — Wegner & Schöbener Rechtsanwälte"
+        description="Datenschutzerklärung von Wegner & Schöbener Rechtsanwälte gemäß DSGVO: Hosting, Schriftarten, Kontaktaufnahme und Ihre Rechte."
+        path="/datenschutz/"
+      />
       <LegalLayout
         title="Datenschutzerklärung"
-        updatedAt="15. August 2026"
+        updatedAt="18. November 2026"
         sections={sections}
         breadcrumbLabel="Datenschutz"
+        path="/datenschutz/"
       />
     </>
   );

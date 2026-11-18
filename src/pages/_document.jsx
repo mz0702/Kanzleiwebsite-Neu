@@ -3,19 +3,16 @@ import { basePath } from "@/lib/basePath";
 
 export default function Document() {
   return (
-    <Html lang="de" className="scroll-smooth">
+    <Html lang="de">
       <Head>
-        <link rel="icon" type="image/png" href={`${basePath}/images/Favicon.png`} />
-        <link rel="apple-touch-icon" href={`${basePath}/images/Favicon.png`} />
-        {/* Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="icon" type="image/png" href={`${basePath}/icon.png`} />
+        <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
+        <meta name="theme-color" content="#0F0E0D" />
+        {/* Markiert "JS läuft", bevor gemalt wird — nur dann werden Zeichnungen
+            zum Nachzeichnen vorab versteckt. Ohne JS bleibt alles sichtbar. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </Head>
-      <body className="antialiased selection:bg-brand-primary selection:text-brand-dark">
+      <body>
         <Main />
         <NextScript />
       </body>

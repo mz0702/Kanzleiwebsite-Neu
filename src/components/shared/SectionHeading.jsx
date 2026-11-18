@@ -1,37 +1,14 @@
-export default function SectionHeading({
-  label,
-  title,
-  description,
-  align = "left",
-  variant = "dark",
-  maxWidth = "max-w-3xl",
-}) {
-  const alignClass = align === "center" ? "text-center mx-auto items-center" : "text-left";
-  const labelColor = variant === "light" ? "text-gray-400" : "text-brand-gray";
-  const dotColor = variant === "light" ? "bg-brand-primary" : "bg-brand-dark";
-  const titleColor = variant === "light" ? "text-white" : "text-brand-dark";
-  const descColor = variant === "light" ? "text-gray-400" : "text-brand-gray";
-
+// Referenz-Muster: Label + große Headline links, Erläuterung/CTA rechts unten.
+export default function SectionHeading({ label, title, children, as: H = "h2", id }) {
   return (
-    <div className={`${maxWidth} ${alignClass} flex flex-col`}>
-      <div
-        className={`inline-flex items-center gap-2 text-sm font-semibold mb-4 ${labelColor} ${
-          align === "center" ? "justify-center" : ""
-        }`}
-      >
-        <span className={`w-2 h-2 rounded-full ${dotColor}`} />
-        {label}
+    <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div className="gs-reveal lg:col-span-7">
+        <p className="eyebrow">{label}</p>
+        <H id={id} className="display h-lg mt-6">
+          {title}
+        </H>
       </div>
-      <h2
-        className={`text-3xl sm:text-4xl md:text-5xl font-medium leading-tight ${titleColor}`}
-      >
-        {title}
-      </h2>
-      {description && (
-        <p className={`mt-4 sm:mt-5 text-base sm:text-lg ${descColor} max-w-2xl`}>
-          {description}
-        </p>
-      )}
+      {children && <div className="gs-reveal lg:col-span-5 lg:col-start-8 lg:pb-2">{children}</div>}
     </div>
   );
 }

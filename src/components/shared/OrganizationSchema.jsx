@@ -1,60 +1,77 @@
 import Head from "next/head";
 import { lawyers } from "@/data/lawyers";
-import { siteUrl as SITE_URL } from "@/lib/basePath";
+import { practiceAreas } from "@/data/practiceAreas";
+import { site } from "@/data/site";
+import { siteUrl } from "@/lib/basePath";
+import { jsonLd } from "@/components/shared/Seo";
+
+export const ORG_ID = `${siteUrl}/#kanzlei`;
+
+const address = (loc) => ({
+  "@type": "PostalAddress",
+  streetAddress: loc.street,
+  postalCode: loc.zip,
+  addressLocality: loc.city,
+  addressRegion: "Bayern",
+  addressCountry: "DE",
+});
+
+const [ochsenfurt, wuerzburg] = site.locations;
+
+// Kanzlei als LegalService mit zweitem Standort als eigener `department`, damit
+// beide Adressen einzeln maschinenlesbar sind (Google, Bing, KI-Suchen).
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LegalService",
+      "@id": ORG_ID,
+      name: site.name,
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/icon.png`,
+      image: `${siteUrl}/og.jpg`,
+      description:
+        "Rechtsanwaltskanzlei in Ochsenfurt und Würzburg für Erbrecht, Betreuungsrecht, Familienrecht, Insolvenzrecht, Arbeitsrecht und Verkehrsrecht.",
+      email: site.email,
+      telephone: ochsenfurt.phoneIntl,
+      faxNumber: ochsenfurt.faxIntl,
+      address: address(ochsenfurt),
+      areaServed: [
+        { "@type": "City", name: "Ochsenfurt" },
+        { "@type": "City", name: "Würzburg" },
+        { "@type": "AdministrativeArea", name: "Landkreis Würzburg" },
+      ],
+      knowsAbout: practiceAreas.map((a) => a.title),
+      knowsLanguage: "de",
+      employee: lawyers.map((l) => ({
+        "@type": "Person",
+        name: l.name,
+        jobTitle: l.role,
+        knowsAbout: l.specialties.map((s) => s.title),
+        url: `${siteUrl}/anwaelte/${l.slug}/`,
+      })),
+      department: [
+        {
+          "@type": "LegalService",
+          name: `${site.name} — Kanzlei Würzburg`,
+          address: address(wuerzburg),
+          telephone: wuerzburg.phoneIntl,
+          faxNumber: wuerzburg.faxIntl,
+          email: site.email,
+        },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: site.name,
+      inLanguage: "de-DE",
+      publisher: { "@id": ORG_ID },
+    },
+  ],
+};
 
 export default function OrganizationSchema() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "LegalService",
-    name: "Wegner & Schöbener Rechtsanwälte",
-    url: `${SITE_URL}/`,
-    image: `${SITE_URL}/images/logo-light.svg`,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Marktbreiter Str. 1",
-      postalCode: "97199",
-      addressLocality: "Ochsenfurt",
-      addressCountry: "DE",
-    },
-    telephone: "+499331981990",
-    faxNumber: "+4993319819928",
-    email: "kanzlei@wegner-schoebener.de",
-    areaServed: ["Ochsenfurt und Umgebung", "Würzburg und Umgebung"],
-    employee: lawyers.map((lawyer) => ({
-      "@type": "Person",
-      name: lawyer.name,
-      jobTitle: `${lawyer.role}, ${lawyer.specialties.map((s) => `Fachanwalt/-anwältin für ${s.title}`).join(" und ")}`,
-      url: `${SITE_URL}/anwaelte/${lawyer.slug}/`,
-    })),
-    // Zweiter Standort Würzburg — eigener Eintrag statt zweitem `address`-Feld,
-    // damit beide Adressen sauber strukturiert und einzeln maschinenlesbar bleiben.
-    department: [
-      {
-        "@type": "LegalService",
-        name: "Wegner & Schöbener Rechtsanwälte — Kanzlei Würzburg",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Marktgasse 9",
-          postalCode: "97070",
-          addressLocality: "Würzburg",
-          addressCountry: "DE",
-        },
-        telephone: "+4993116633",
-        faxNumber: "+49931571456",
-        email: "kanzlei@wegner-schoebener.de",
-      },
-    ],
-  };
-
-  return (
-    <Head>
-      <script
-        type="application/ld+json"
-        // Static, developer-authored data only (lawyers.js + hardcoded firm info) — no user
-        // input ever reaches this. The <\/script> escape guards against JSON-LD script-tag
-        // breakout, the one real risk with this pattern (Next.js's own recommended approach).
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
-      />
-    </Head>
-  );
+  return <Head>{jsonLd(schema, "org")}</Head>;
 }

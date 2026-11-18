@@ -1,6 +1,5 @@
-import Head from "next/head";
+import Seo from "@/components/shared/Seo";
 import LegalLayout from "@/components/shared/LegalLayout";
-import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
@@ -26,19 +25,20 @@ const sections = [
   },
 ];
 
-export default function TermsPage() {
+export default function HaftungsausschlussPage() {
   return (
     <>
-      <Head>
-        <title>Haftungsausschluss — Wegner &amp; Schöbener Rechtsanwälte</title>
-        <meta name="description" content="Haftungsausschluss und rechtliche Hinweise zur Website von Wegner & Schöbener Rechtsanwälte." />
-        <link rel="canonical" href={absoluteUrl("/terms/")} />
-      </Head>
+      <Seo
+        title="Haftungsausschluss — Wegner & Schöbener Rechtsanwälte"
+        description="Haftungsausschluss und rechtliche Hinweise zur Website von Wegner & Schöbener Rechtsanwälte."
+        path="/haftungsausschluss/"
+      />
       <LegalLayout
         title="Haftungsausschluss"
         updatedAt="16. August 2026"
         sections={sections}
         breadcrumbLabel="Haftungsausschluss"
+        path="/haftungsausschluss/"
       />
     </>
   );

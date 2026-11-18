@@ -1,6 +1,5 @@
-import Head from "next/head";
+import Seo from "@/components/shared/Seo";
 import LegalLayout from "@/components/shared/LegalLayout";
-import { absoluteUrl } from "@/lib/basePath";
 
 // Impressum für die Vorschau-Sperre selbst (verlinkt vom Passwort-Bildschirm,
 // siehe PasswordGate.jsx) — verantwortlich für den Betrieb dieser Vorschau ist
@@ -29,18 +28,18 @@ const sections = [
 export default function AgenturImpressumPage() {
   return (
     <>
-      <Head>
-        <title>Impressum — ZIVION</title>
-        <meta name="description" content="Impressum dieser Vorschau-Website (ZIVION, Michael Zandler)." />
-        <link rel="canonical" href={absoluteUrl("/agentur-impressum/")} />
-        <meta name="robots" content="noindex" />
-      </Head>
+      <Seo
+        title="Impressum — ZIVION"
+        description="Impressum dieser Vorschau-Website (ZIVION, Michael Zandler)."
+        path="/agentur-impressum/"
+        noindex
+      />
       <LegalLayout
         title="Impressum"
         updatedAt="16. August 2026"
         sections={sections}
         breadcrumbLabel="Impressum"
-        image={null}
+        path="/agentur-impressum/"
       />
     </>
   );

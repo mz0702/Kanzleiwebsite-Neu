@@ -1,233 +1,190 @@
-import { useRef } from "react";
-import Head from "next/head";
 import Link from "next/link";
+import Seo from "@/components/shared/Seo";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import Button from "@/components/shared/Button";
+import CtaBanner from "@/components/shared/CtaBanner";
+import Icon from "@/components/shared/Icon";
+import { ORG_ID } from "@/components/shared/OrganizationSchema";
 import { lawyers } from "@/data/lawyers";
 import { practiceAreas } from "@/data/practiceAreas";
-import CtaBanner from "@/components/shared/CtaBanner";
-import useReveal from "@/hooks/useReveal";
-import { absoluteUrl } from "@/lib/basePath";
+import { mainPhone } from "@/data/site";
+import { basePath, absoluteUrl } from "@/lib/basePath";
 
 export function getStaticPaths() {
-  return {
-    paths: lawyers.map((l) => ({ params: { slug: l.slug } })),
-    fallback: false,
-  };
+  return { paths: lawyers.map((l) => ({ params: { slug: l.slug } })), fallback: false };
 }
 
 export function getStaticProps({ params }) {
-  const lawyer = lawyers.find((l) => l.slug === params.slug);
-  return { props: { lawyer } };
+  return { props: { lawyer: lawyers.find((l) => l.slug === params.slug) } };
 }
 
-export default function LawyerDetailPage({ lawyer }) {
-  const timelineRef = useRef(null);
-  useReveal(timelineRef);
-
+export default function LawyerPage({ lawyer }) {
+  const path = `/anwaelte/${lawyer.slug}/`;
   const others = lawyers.filter((l) => l.slug !== lawyer.slug);
-  const url = absoluteUrl(`/anwaelte/${lawyer.slug}/`);
-  // Erster Satz von intro statt des vollen Absatzes — sonst schneidet Google die
-  // Meta-Description (~160 Zeichen) mitten im Satz ab.
-  const metaDescription = lawyer.intro.split(". ")[0] + ".";
+  const areas = lawyer.specialties.map((s) => ({ ...s, area: practiceAreas.find((a) => a.title === s.title) }));
+  // Erster Satz statt ganzem Absatz — sonst schneidet Google die Description mitten im Satz ab.
+  const description = `${lawyer.intro.split(". ")[0]}.`;
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: lawyer.name,
+    jobTitle: lawyer.role,
+    description: lawyer.intro,
+    image: absoluteUrl(lawyer.image),
+    url: absoluteUrl(path),
+    knowsAbout: lawyer.specialties.map((s) => s.title),
+    worksFor: { "@id": ORG_ID },
+    workLocation: { "@type": "Place", name: "Ochsenfurt" },
+  };
 
   return (
     <>
-      <Head>
-        <title>{`${lawyer.name} — Wegner & Schöbener Rechtsanwälte`}</title>
-        <meta name="description" content={metaDescription} />
-        <link rel="canonical" href={url} />
-        <meta property="og:title" content={`${lawyer.name} — ${lawyer.role} in Ochsenfurt`} />
-        <meta property="og:description" content={metaDescription} />
-        <meta property="og:type" content="profile" />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content={absoluteUrl(lawyer.image)} />
-      </Head>
+      <Seo
+        title={`${lawyer.name} – ${lawyer.tagline} in Ochsenfurt`}
+        description={description}
+        path={path}
+        type="profile"
+        schema={personSchema}
+      />
 
       {/* Hero */}
-      <section className="bg-brand-dark text-white pt-32 pb-16 sm:pb-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm text-white/70 font-medium mb-8 sm:mb-10">
-            <Link href="/" className="hover:text-brand-primary transition-colors">Home</Link>
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="text-brand-primary">{lawyer.name}</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,340px)_1fr] gap-10 md:gap-16 items-center">
-            <div className="aspect-[3/4] max-w-xs rounded-3xl overflow-hidden bg-white/5 mx-auto md:mx-0">
-              <img
-                src={lawyer.image}
-                alt={lawyer.name}
-                className="w-full h-full object-cover"
+      <section className="bg-paper">
+        <div className="frame">
+          <div className="pad grid gap-12 pb-16 pt-28 md:pb-20 md:pt-36 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
+              <Breadcrumbs
+                path={path}
+                items={[
+                  { label: "Startseite", href: "/" },
+                  { label: "Anwälte", href: "/#anwaelte" },
+                  { label: lawyer.name },
+                ]}
               />
-            </div>
-            <div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 mb-4">
-                <span className="w-2 h-2 rounded-full bg-brand-primary" />
-                {lawyer.role}
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight mb-5 sm:mb-6">
+              <p className="eyebrow hero-in mt-10" style={{ "--d": "0.05s" }}>
+                {lawyer.role} · {lawyer.tagline}
+              </p>
+              <h1 className="display h-xl hero-in mt-6" style={{ "--d": "0.15s" }}>
                 {lawyer.name}
               </h1>
-              <p className="text-base sm:text-lg text-gray-200 max-w-xl leading-relaxed">
+              <p className="lead hero-in mt-8 max-w-2xl text-ink-soft" style={{ "--d": "0.3s" }}>
                 {lawyer.intro}
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Specialties */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-brand-light">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="inline-flex items-center gap-2 text-sm font-semibold mb-4 text-brand-gray">
-            <span className="w-2 h-2 rounded-full bg-brand-dark" />
-            Fachgebiete
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-medium text-brand-dark mb-10 sm:mb-12">
-            Rechtsgebiete von {lawyer.name}
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-            {lawyer.specialties.map((spec, i) => {
-              // Jedes Fachgebiet hat eine eigene Themenseite (practiceAreas.js).
-              const area = practiceAreas.find((a) => a.title === spec.title);
-              return (
-                <Link
-                  key={i}
-                  href={`/rechtsgebiete/${area.slug}`}
-                  className="group bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 hover:shadow-xl transition-shadow"
-                >
-                  <h3 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-3 group-hover:text-brand-primary transition-colors">
-                    {spec.title}
-                  </h3>
-                  <p className="text-brand-gray text-sm sm:text-base leading-relaxed">{spec.description}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-brand-primary font-semibold text-sm">
-                    Mehr zum {spec.title}
-                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-
-          <a
-            href="mailto:kanzlei@wegner-schoebener.de"
-            className="mt-10 inline-flex items-center gap-2 bg-brand-primary text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-dark transition-colors"
-          >
-            Termin vereinbaren
-          </a>
-        </div>
-      </section>
-
-      {/* Über mich */}
-      {lawyer.timeline?.length > 0 && (
-        <section ref={timelineRef} className="py-16 sm:py-20 lg:py-24 bg-white border-t border-gray-100">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="gs-reveal max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-              <div className="inline-flex items-center gap-2 text-sm font-semibold mb-4 justify-center text-brand-gray">
-                <span className="w-2 h-2 rounded-full bg-brand-dark" />
-                Über mich
+              <div className="hero-in mt-10 flex flex-wrap gap-3" style={{ "--d": "0.45s" }}>
+                <Button href="/kontakt">Termin vereinbaren</Button>
+                <Button href={mainPhone.phoneHref} variant="ghost" icon="phone" arrow={false}>
+                  {mainPhone.phone}
+                </Button>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-brand-dark">
-                Werdegang von {lawyer.name}
-              </h2>
             </div>
+            <div className="hero-in lg:col-span-3 lg:col-start-10" style={{ "--d": "0.25s" }}>
+              <div className="marks relative w-fit border border-line bg-paper-2 p-3">
+                <img src={lawyer.image} alt={`Porträt von ${lawyer.name}`} width="200" height="250" className="h-[250px] w-[200px] object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="relative max-w-4xl mx-auto">
-              {/* Center vertical line (desktop) */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-gray-200 hidden md:block" />
-
-              <div className="space-y-10 md:space-y-16">
-                {lawyer.timeline.map((item, i) => (
-                  <div
-                    key={i}
-                    className={`gs-reveal relative grid md:grid-cols-2 gap-6 md:gap-16 items-center ${
-                      i % 2 === 1 ? "md:[direction:rtl]" : ""
-                    }`}
-                  >
-                    <div className={`md:[direction:ltr] ${i % 2 === 1 ? "md:text-left" : "md:text-right"}`}>
-                      <div className="inline-block px-4 py-1 rounded-full bg-brand-primary text-white text-sm font-semibold mb-3">
-                        {item.year}
-                      </div>
-                      <h3 className="text-lg sm:text-xl font-medium text-brand-dark">{item.title}</h3>
-                      {item.description && (
-                        <p className="text-brand-gray text-sm mt-1">{item.description}</p>
-                      )}
-                    </div>
-
-                    {/* Dot on center line */}
-                    <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center">
-                      <div className="w-5 h-5 rounded-full bg-brand-primary border-4 border-white" />
-                    </div>
-
-                    <div className="md:[direction:ltr]" />
+      {/* Fachgebiete */}
+      <section aria-labelledby="fachgebiete" className="bg-paper">
+        <div className="frame border-t border-line">
+          <div className="pad py-14 md:py-16">
+            <p className="eyebrow">Fachgebiete</p>
+            <h2 id="fachgebiete" className="display h-md mt-5">
+              Rechtsgebiete von {lawyer.name}
+            </h2>
+          </div>
+          <ul className="cells border-t border-line md:grid-cols-2">
+            {areas.map(({ title, description: text, area }) => (
+              <li key={title} className="gs-reveal bg-paper">
+                <Link href={`/rechtsgebiete/${area.slug}`} className="group grid h-full items-center gap-6 p-6 transition-colors hover:bg-white sm:grid-cols-[1fr_12rem] md:p-10">
+                  <div>
+                    <h3 className="text-[1.75rem] tracking-tight">{title}</h3>
+                    <p className="mt-3 leading-relaxed text-ink-soft">{text}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em] text-accent">
+                      Mehr zum {title}
+                      <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <img src={`${basePath}${area.image}`} alt="" width="1000" height="750" loading="lazy" className="w-full max-w-[14rem] transition-transform duration-700 group-hover:scale-105" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-            {lawyer.memberships?.length > 0 && (
-              <div className="gs-reveal max-w-4xl mx-auto mt-16 sm:mt-20 pt-10 sm:pt-12 border-t border-gray-100">
-                <h3 className="text-xl sm:text-2xl font-semibold text-brand-dark mb-6">
-                  Mitgliedschaften &amp; Ämter
-                </h3>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
-                  {lawyer.memberships.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-brand-gray text-sm sm:text-base">
-                      <svg className="w-4 h-4 text-brand-primary shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+      {/* Werdegang */}
+      {lawyer.timeline?.length > 0 && (
+        <section aria-labelledby="werdegang" className="bg-paper">
+          <div className="frame border-t border-line">
+            <div className="pad grid gap-12 py-20 md:py-28 lg:grid-cols-12">
+              <div className="gs-reveal lg:col-span-4">
+                <p className="eyebrow">Über mich</p>
+                <h2 id="werdegang" className="display h-lg mt-6">
+                  Werdegang
+                </h2>
               </div>
-            )}
+              <ol className="lg:col-span-8">
+                {lawyer.timeline.map((item, i) => (
+                  <li key={i} className="gs-reveal grid grid-cols-[7.5rem_1fr] gap-6 border-t border-line py-6 last:border-b md:grid-cols-[10rem_1fr]">
+                    <span className="text-lg tracking-tight text-accent tabular-nums">{item.year}</span>
+                    <span>
+                      <span className="block text-lg tracking-tight">{item.title}</span>
+                      {item.description && <span className="mt-1 block text-sm text-muted">{item.description}</span>}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+
+              {lawyer.memberships?.length > 0 && (
+                <>
+                  <div className="gs-reveal lg:col-span-4">
+                    <h2 className="display h-md">Mitgliedschaften &amp; Ämter</h2>
+                  </div>
+                  <ul className="gs-reveal lg:col-span-8">
+                    {lawyer.memberships.map((m) => (
+                      <li key={m} className="flex gap-4 border-t border-line py-5 leading-relaxed last:border-b">
+                        <span className="mt-2.5 h-[7px] w-[7px] shrink-0 bg-accent" />
+                        {m}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
           </div>
         </section>
       )}
 
-      {/* Other lawyers */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-brand-dark mb-10 sm:mb-12">
-            Weitere Anwälte
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-            {others.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/anwaelte/${item.slug}`}
-                className="group bg-brand-light rounded-3xl p-4 flex items-center gap-5 hover:shadow-xl transition-shadow"
-              >
-                <div className="w-24 h-24 rounded-2xl overflow-hidden shrink-0">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-1 text-brand-dark">{item.name}</h3>
-                  <p className="text-brand-gray text-sm">{item.tagline}</p>
-                </div>
-              </Link>
-            ))}
+      {/* Weitere Anwälte */}
+      <section aria-labelledby="team" className="bg-paper">
+        <div className="frame border-t border-line">
+          <div className="pad py-14 md:py-16">
+            <h2 id="team" className="display h-md">
+              Weitere Anwälte der Kanzlei
+            </h2>
           </div>
+          <ul className="cells border-t border-line md:grid-cols-2">
+            {others.map((item) => (
+              <li key={item.slug} className="bg-paper">
+                <Link href={`/anwaelte/${item.slug}`} className="group flex items-center gap-6 p-6 transition-colors hover:bg-white md:p-8">
+                  <img src={item.image} alt="" width="200" height="250" loading="lazy" className="h-[100px] w-[80px] object-cover grayscale-[30%] transition group-hover:grayscale-0" />
+                  <span className="flex-1">
+                    <span className="block text-2xl tracking-tight">{item.name}</span>
+                    <span className="mt-1 block text-sm text-muted">{item.tagline}</span>
+                  </span>
+                  <Icon name="arrowUpRight" className="h-5 w-5 text-muted transition-colors group-hover:text-accent" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="h-16" />
         </div>
       </section>
 
-      <CtaBanner
-        label="Wir sind für Sie da"
-        title={`Termin bei ${lawyer.name}\nvereinbaren`}
-        description="Rufen Sie uns an oder schreiben Sie uns — wir melden uns innerhalb von 48 Stunden bei Ihnen."
-        buttonLabel="Jetzt Kontakt aufnehmen"
-        buttonHref="mailto:kanzlei@wegner-schoebener.de"
-      />
+      <CtaBanner title={`Termin bei ${lawyer.name} vereinbaren`} />
     </>
   );
 }

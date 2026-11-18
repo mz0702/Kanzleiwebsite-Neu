@@ -1,69 +1,59 @@
-import { useRef } from "react";
 import Link from "next/link";
-import useReveal from "@/hooks/useReveal";
+import Button from "@/components/shared/Button";
 import SectionHeading from "@/components/shared/SectionHeading";
+import Icon from "@/components/shared/Icon";
 import { practiceAreas } from "@/data/practiceAreas";
+import { lawyers } from "@/data/lawyers";
 import { basePath } from "@/lib/basePath";
 
+const lawyerOf = (slug) => lawyers.find((l) => l.slug === slug);
+const lawyerName = (slug) => lawyerOf(slug).name;
+const contactLabel = (slug) => (lawyerOf(slug).role === "Rechtsanwältin" ? "Ansprechpartnerin" : "Ansprechpartner");
+
 export default function PracticeAreasSection() {
-  const ref = useRef(null);
-  useReveal(ref);
-
   return (
-    <section id="rechtsgebiete" ref={ref} className="py-16 sm:py-20 lg:py-24 bg-brand-dark text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="gs-reveal max-w-3xl mb-12 sm:mb-16">
-          <SectionHeading
-            label="Rechtsgebiete"
-            title="Unsere Fachgebiete auf einen Blick"
-            description="Klicken Sie auf ein Rechtsgebiet, um mehr über unsere Arbeit und den zuständigen Anwalt zu erfahren."
-            variant="light"
-          />
+    <section id="rechtsgebiete" aria-labelledby="rechtsgebiete-title" className="bg-paper">
+      <div className="frame border-t border-line">
+        <div className="pad py-20 md:py-28">
+          <SectionHeading id="rechtsgebiete-title" label="Rechtsgebiete" title="Unsere Fachgebiete auf einen Blick">
+            <p className="lead text-ink-soft">
+              Wählen Sie Ihr Rechtsgebiet: Sie erfahren, wobei wir helfen, welche Fristen gelten und wer Sie bei uns
+              berät.
+            </p>
+            <Button href="/kontakt" variant="dark" className="mt-8">
+              Termin vereinbaren
+            </Button>
+          </SectionHeading>
         </div>
 
-        {/* The 70% cap only makes sense once the grid is 3 columns wide (lg); below that
-            it squeezed the tiles to ~70% of an already narrow phone viewport. */}
-        <div className="lg:max-w-[70%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden">
+        <ul className="cells border-t border-line sm:grid-cols-2 lg:grid-cols-3">
           {practiceAreas.map((area, i) => (
-            <Link
-              key={area.slug}
-              href={`/rechtsgebiete/${area.slug}`}
-              className="pa-tile gs-reveal group relative block bg-brand-dark aspect-[4/3] overflow-hidden cursor-pointer"
-            >
-              {/* Images are 4:3 — the tile matches that ratio so the fill below shows the full illustration, uncropped */}
-              {/* .pa-tile* classes: touch fallback for the hover reveal, see globals.css */}
-              <img
-                src={`${basePath}${area.image}`}
-                alt={area.title}
-                className="pa-tile-img absolute inset-0 w-full h-full object-cover opacity-0 blur-none scale-105 group-hover:opacity-80 group-hover:blur-sm group-hover:scale-100 transition-all duration-500 ease-out"
-              />
-              <div className="pa-tile-scrim absolute inset-0 bg-brand-dark/0 group-hover:bg-brand-light/20 transition-colors duration-500" />
-
-              {/* Absolutely positioned (not normal flow) so text can never grow the tile past its fixed aspect ratio */}
-              <div className="absolute inset-0 z-10 p-6 sm:p-8 flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="text-xs font-semibold text-gray-500 group-hover:text-brand-dark/50 transition-colors duration-500">
-                    0{i + 1}
+            <li key={area.slug} className="gs-reveal bg-paper">
+              <Link href={`/rechtsgebiete/${area.slug}`} className="group flex h-full flex-col p-6 transition-colors duration-300 hover:bg-white md:p-8">
+                <div className="flex items-center justify-between text-sm text-muted">
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                  <span className="grid h-10 w-10 place-items-center rounded-full ring-1 ring-inset ring-[color:var(--line-strong)] transition-colors duration-300 group-hover:bg-accent group-hover:text-white group-hover:ring-accent">
+                    <Icon name="arrowUpRight" className="h-4 w-4" />
                   </span>
-                  <svg
-                    className="w-5 h-5 text-gray-500 group-hover:text-brand-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4-4m0 0h-8m8 0v8M7 16l-4 4m0 0v-8m0 8h8" />
-                  </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-dark transition-colors duration-500">
-                  {area.title}
-                </h3>
-                <p className="text-sm text-gray-400 line-clamp-3 group-hover:text-brand-dark/70 transition-colors duration-500">
-                  {area.description}
+                <img
+                  src={`${basePath}${area.image}`}
+                  alt=""
+                  width="1000"
+                  height="750"
+                  loading="lazy"
+                  decoding="async"
+                  className="mx-auto my-2 w-full max-w-[17rem] transition-transform sm:max-w-[23rem] duration-700 ease-out group-hover:scale-[1.04]"
+                />
+                <h3 className="text-2xl tracking-tight md:text-[1.75rem]">{area.title}</h3>
+                <p className="mb-7 mt-3 text-ink-soft">{area.description}</p>
+                <p className="mt-auto border-t border-line pt-5 text-sm text-muted">
+                  {contactLabel(area.lawyerSlug)}: <span className="text-ink">{lawyerName(area.lawyerSlug)}</span>
                 </p>
-              </div>
-            </Link>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

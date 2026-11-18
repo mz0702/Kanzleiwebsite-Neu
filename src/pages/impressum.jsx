@@ -1,6 +1,5 @@
-import Head from "next/head";
+import Seo from "@/components/shared/Seo";
 import LegalLayout from "@/components/shared/LegalLayout";
-import { absoluteUrl } from "@/lib/basePath";
 
 const sections = [
   {
@@ -62,17 +61,17 @@ const sections = [
 export default function ImpressumPage() {
   return (
     <>
-      <Head>
-        <title>Impressum — Wegner &amp; Schöbener Rechtsanwälte</title>
-        <meta name="description" content="Impressum und rechtliche Angaben von Wegner & Schöbener Rechtsanwälte, Standorte Ochsenfurt und Würzburg." />
-        <link rel="canonical" href={absoluteUrl("/impressum/")} />
-      </Head>
+      <Seo
+        title="Impressum — Wegner & Schöbener Rechtsanwälte"
+        description="Impressum und berufsrechtliche Angaben von Wegner & Schöbener Rechtsanwälte, Standorte Ochsenfurt und Würzburg."
+        path="/impressum/"
+      />
       <LegalLayout
         title="Impressum"
         updatedAt="16. August 2026"
         sections={sections}
         breadcrumbLabel="Impressum"
-        image={null}
+        path="/impressum/"
       />
     </>
   );

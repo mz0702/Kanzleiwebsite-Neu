@@ -8,16 +8,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Manrope', 'sans-serif'],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       colors: {
-        brand: {
-          dark: '#1c1c1c',
-          light: '#f5f5f4',
-          primary: '#9D2119',
-          secondary: '#2e2e2e',
-          gray: '#6e6e6e',
-        },
+        paper: "#F7F6F2",
+        "paper-2": "#EEECE6",
+        ink: "#161514",
+        "ink-soft": "#57534E",
+        muted: "#7A756E",
+        night: "#0F0E0D",
+        accent: "#9D2119",
+        "accent-deep": "#7E1912",
+        "accent-bright": "#E0614F",
+        // Haarlinien folgen dem Sektions-Thema (siehe [data-theme] in globals.css).
+        line: "var(--line)",
       },
     },
   },

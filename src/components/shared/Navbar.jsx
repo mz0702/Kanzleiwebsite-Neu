@@ -1,242 +1,211 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import gsap from "gsap";
 import Button from "@/components/shared/Button";
+import Icon from "@/components/shared/Icon";
 import { lawyers } from "@/data/lawyers";
 import { practiceAreas } from "@/data/practiceAreas";
+import { mainPhone, site } from "@/data/site";
 import { basePath } from "@/lib/basePath";
 
-// Two groups so the menu keeps a real hierarchy instead of flattening every
-// link to the same weight: Kanzlei (who) first, Rechtsgebiete (what) second,
-// styled smaller since it's the secondary tier. Impressum sits directly in the
-// top-tier list (not in the smaller secondary group below) so it's visible the
-// instant the menu opens, no scrolling required — it kept getting missed when
-// it was a smaller link further down. Datenschutz/Haftungsausschluss stay
-// footer-only — standard placement, not "subpages" in the sense of site content.
-const mainLinks = [
-  { label: "Home", href: "/" },
-  { label: "Impressum", href: "/impressum" },
-  ...lawyers.map((lawyer) => ({ label: lawyer.name, href: `/anwaelte/${lawyer.slug}` })),
-];
+const lawyerName = (slug) => lawyers.find((l) => l.slug === slug).name;
 
-const areaLinks = practiceAreas.map((area) => ({
-  label: area.title,
-  href: `/rechtsgebiete/${area.slug}`,
-}));
+const menus = [
+  {
+    label: "Rechtsgebiete",
+    href: "/#rechtsgebiete",
+    items: practiceAreas.map((a) => ({ label: a.title, meta: lawyerName(a.lawyerSlug), href: `/rechtsgebiete/${a.slug}` })),
+  },
+  {
+    label: "Anwälte",
+    href: "/#anwaelte",
+    items: lawyers.map((l) => ({ label: l.name, meta: l.tagline, href: `/anwaelte/${l.slug}` })),
+  },
+  { label: "Ablauf", href: "/#ablauf" },
+  { label: "Kontakt", href: "/kontakt" },
+];
 
 export default function Navbar() {
   const router = useRouter();
+  const headerRef = useRef(null);
+  const [onDark, setOnDark] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const openRef = useRef(false);
-  const btnRef = useRef(null);
-  const navRef = useRef(null);
-  const lineIconRef = useRef(null);
-  const closeIconRef = useRef(null);
-  const itemsRef = useRef([]);
 
-  // router.pathname is the file-based route pattern (e.g. "/anwaelte/[slug]") for
-  // dynamic routes, never the real URL — asPath is the actual resolved path.
-  const isActive = (href) => {
-    if (href === "/") return router.asPath === "/";
-    return router.asPath === href || router.asPath.startsWith(href + "/");
-  };
-
-  const addItemRef = (el) => {
-    if (el && !itemsRef.current.includes(el)) itemsRef.current.push(el);
-  };
-
-  // Establish the hidden entrance state once, purely via GSAP (matches the
-  // rest of the site's reveal pattern) — the clip-path already keeps this
-  // invisible on first paint, so there's nothing to flash.
+  // Welche Sektion liegt gerade unter der Kopfzeile? Deren data-theme bestimmt,
+  // ob Logo und Links hell oder dunkel sind (wie in der Referenz).
   useEffect(() => {
-    gsap.set(itemsRef.current, { x: -60, opacity: 0 });
-  }, []);
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const header = headerRef.current;
+      if (!header) return;
+      const under = document
+        .elementsFromPoint(window.innerWidth / 2, header.offsetHeight / 2)
+        .find((el) => !header.contains(el));
+      setOnDark(under?.closest("[data-theme]")?.dataset.theme === "dark");
+      setScrolled(window.scrollY > 24);
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    const afterRoute = () => setTimeout(update, 60);
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    router.events.on("routeChangeComplete", afterRoute);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      router.events.off("routeChangeComplete", afterRoute);
+    };
+  }, [router.events]);
 
-  // Lock body scroll while the menu is open. body{overflow:hidden} alone doesn't
-  // stop Lenis (it scrolls the document programmatically) and iOS Safari ignores
-  // it for touch, so stop the smooth-scroll instance too.
+  // Menü schließen + Fokus lösen (sonst bleibt ein Hover-Dropdown via :focus-within offen).
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    if (open) window.lenis?.stop();
-    else window.lenis?.start();
+    const close = () => {
+      setOpen(false);
+      document.activeElement?.blur?.();
+    };
+    router.events.on("routeChangeStart", close);
+    return () => router.events.off("routeChangeStart", close);
+  }, [router.events]);
+
+  // Scroll-Sperre fürs mobile Menü: overflow allein stoppt Lenis und iOS nicht.
+  useEffect(() => {
+    if (!open) return undefined;
+    document.body.style.overflow = "hidden";
+    window.lenis?.stop();
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
       window.lenis?.start();
+      window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
-  const getBtnCenter = () => {
-    const btnRect = btnRef.current.getBoundingClientRect();
-    return { cx: btnRect.left + btnRect.width / 2, cy: btnRect.top + btnRect.height / 2 };
-  };
-
-  const openMenu = () => {
-    if (openRef.current) return;
-    const { cx, cy } = getBtnCenter();
-    const radius = Math.hypot(window.innerWidth, window.innerHeight);
-
-    gsap.set(btnRef.current, { pointerEvents: "none" });
-    gsap
-      .timeline({ onComplete: () => gsap.set(btnRef.current, { pointerEvents: "all" }) })
-      .fromTo(
-        navRef.current,
-        { clipPath: `circle(0px at ${cx}px ${cy}px)` },
-        { clipPath: `circle(${radius}px at ${cx}px ${cy}px)`, duration: 1.2, ease: "power4.out" },
-        0
-      )
-      .fromTo(
-        itemsRef.current,
-        { x: -60, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1, stagger: 0.08, ease: "elastic.out(1.1, 0.85)" },
-        0.15
-      )
-      .to(closeIconRef.current, { opacity: 1, yPercent: -125, duration: 0.7, ease: "power4.out" }, 0)
-      .to(lineIconRef.current, { opacity: 0, yPercent: -125, duration: 0.7, ease: "power4.out" }, 0);
-
-    openRef.current = true;
-    setOpen(true);
-  };
-
-  const closeMenu = () => {
-    if (!openRef.current) return;
-    const { cx, cy } = getBtnCenter();
-
-    gsap.set(btnRef.current, { pointerEvents: "none" });
-    gsap
-      .timeline({ onComplete: () => gsap.set(btnRef.current, { pointerEvents: "all" }) })
-      .to(itemsRef.current, { x: -60, opacity: 0, duration: 0.5, stagger: 0.04, ease: "power4.out" }, 0)
-      .to(navRef.current, { clipPath: `circle(0px at ${cx}px ${cy}px)`, duration: 0.9, ease: "power4.out" }, "-=0.6")
-      .to(closeIconRef.current, { opacity: 0, yPercent: 125, duration: 0.6, ease: "power4.out" }, 0)
-      .to(lineIconRef.current, { opacity: 1, yPercent: 0, duration: 0.6, ease: "power4.out" }, 0);
-
-    openRef.current = false;
-    setOpen(false);
-  };
-
-  const toggleMenu = () => (openRef.current ? closeMenu() : openMenu());
-
-  // Close (with the same animation) on route change
-  useEffect(() => {
-    router.events.on("routeChangeStart", closeMenu);
-    return () => router.events.off("routeChangeStart", closeMenu);
-  }, [router.events]);
+  const dark = onDark || open;
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-[100]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-3 sm:mt-4">
-          <div className="relative dark-glass rounded-full flex items-center justify-between h-16 sm:h-20 pl-3 pr-3 sm:pl-4 sm:pr-4">
-            {/* Trigger button */}
+      <header
+        ref={headerRef}
+        data-theme={dark ? "dark" : "light"}
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${dark ? "text-white" : "text-ink"}`}
+      >
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 -z-10 border-b border-line backdrop-blur-md transition-opacity duration-300 ${
+            scrolled && !open ? "opacity-100" : "opacity-0"
+          } ${dark ? "bg-night/75" : "bg-paper/85"}`}
+        />
+        <div className="frame-bare pad flex h-16 items-center justify-between gap-4 md:h-[4.75rem]">
+          <Link href="/" aria-label={`${site.name} – Startseite`} className="relative block h-10 shrink-0 md:h-[3.25rem]" style={{ aspectRatio: "306 / 97" }}>
+            {/* ponytail: zwei fertige SVGs überblenden statt Inline-SVG mit currentColor (25 KB je Seite). */}
+            <img src={`${basePath}/logo-dark.svg`} alt="" width="306" height="97" className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${dark ? "opacity-0" : ""}`} />
+            <img src={`${basePath}/logo-light.svg`} alt="" width="306" height="97" className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${dark ? "" : "opacity-0"}`} />
+          </Link>
+
+          <nav aria-label="Hauptnavigation" className={`hidden items-center rounded-full p-1 backdrop-blur lg:flex ${dark ? "bg-white/10" : "bg-ink/[0.06]"}`}>
+            {menus.map((menu) => (
+              <div key={menu.label} className="group relative">
+                <Link
+                  href={menu.href}
+                  className={`flex items-center gap-1.5 rounded-full px-4 py-2.5 text-[0.8125rem] font-medium uppercase tracking-[0.05em] transition-colors ${
+                    dark ? "hover:bg-white/10" : "hover:bg-white"
+                  }`}
+                >
+                  {menu.label}
+                  {menu.items && <Icon name="chevronDown" className="h-3.5 w-3.5 opacity-60 transition-transform group-hover:rotate-180" />}
+                </Link>
+                {menu.items && (
+                  <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                    <ul className="w-80 rounded-2xl bg-white p-2 text-ink shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] ring-1 ring-black/5">
+                      {menu.items.map((item) => (
+                        <li key={item.href}>
+                          <Link href={item.href} className="group/item flex items-center justify-between gap-4 rounded-xl px-4 py-3 transition-colors hover:bg-paper">
+                            <span>
+                              <span className="block text-[0.95rem] tracking-tight">{item.label}</span>
+                              <span className="block text-xs text-muted">{item.meta}</span>
+                            </span>
+                            <Icon name="arrowRight" className="h-4 w-4 -translate-x-1 text-accent opacity-0 transition-all group-hover/item:translate-x-0 group-hover/item:opacity-100" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <a href={mainPhone.phoneHref} className="hidden items-center gap-2 px-3 text-sm font-medium xl:inline-flex">
+              <Icon name="phone" className="h-4 w-4" />
+              {mainPhone.phone}
+            </a>
+            <Button href="/kontakt" className="hidden sm:inline-flex">
+              Termin vereinbaren
+            </Button>
             <button
-              ref={btnRef}
-              onClick={toggleMenu}
-              aria-label={open ? "Menü schließen" : "Menü öffnen"}
+              type="button"
+              onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
-              className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-brand-primary flex items-center justify-center shrink-0 overflow-hidden hover:bg-white transition-colors duration-300 group"
+              aria-controls="mobile-menu"
+              aria-label={open ? "Menü schließen" : "Menü öffnen"}
+              className={`grid h-11 w-11 place-items-center rounded-full lg:hidden ${dark ? "bg-white/10" : "bg-ink/[0.06]"}`}
             >
-              <svg
-                ref={lineIconRef}
-                className="absolute w-4 h-4 sm:w-[18px] sm:h-[18px] text-white group-hover:text-brand-primary transition-colors"
-                viewBox="0 0 448 512"
-                fill="currentColor"
-              >
-                <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
-              </svg>
-              <svg
-                ref={closeIconRef}
-                className="absolute w-4 h-4 sm:w-[18px] sm:h-[18px] text-white group-hover:text-brand-primary transition-colors opacity-0"
-                style={{ transform: "translateY(125%)" }}
-                viewBox="0 0 320 512"
-                fill="currentColor"
-              >
-                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
-              </svg>
+              <Icon name={open ? "close" : "menu"} className="h-5 w-5" />
             </button>
-
-            {/* Logo — centered */}
-            <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center">
-              <img src={`${basePath}/logo-light.svg`} alt="Logo" className="h-11 sm:h-14 w-auto" />
-            </Link>
-
-            {/* CTA */}
-            <div className="shrink-0">
-              <Button
-                href="mailto:kanzlei@wegner-schoebener.de"
-                variant="primary"
-                size="md"
-                radius="rounded"
-                className="hidden sm:inline-flex"
-              >
-                Kontakt
-              </Button>
-            </div>
           </div>
         </div>
       </header>
 
-      {/* Full-screen circular-reveal menu */}
-      <nav
-        ref={navRef}
-        aria-hidden={!open}
+      {/* Mobiles Menü */}
+      <div
+        id="mobile-menu"
+        data-theme="dark"
         data-lenis-prevent
-        className="fixed inset-0 z-[90] bg-brand-dark text-white overflow-y-auto overscroll-contain"
-        style={{ clipPath: "circle(0px at 0px 0px)" }}
+        className={`fixed inset-0 z-40 overflow-y-auto bg-night text-white transition-[opacity,visibility] duration-300 lg:hidden ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        }`}
       >
-        <div className="min-h-full flex items-center justify-center px-6 sm:px-10 py-20 sm:py-24">
-          <div className="w-full max-w-4xl">
-            <ul className="flex flex-col">
-              {mainLinks.map((link) => {
-                const active = isActive(link.href);
-                return (
-                  <li key={link.label} ref={addItemRef}>
-                    <Link
-                      href={link.href}
-                      onClick={closeMenu}
-                      className={`nav-link inline-block py-2 sm:py-3 text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight transition-colors duration-300 ${
-                        active ? "text-brand-primary" : "text-white/50 hover:text-white"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-white/10">
-              <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold mb-2 text-gray-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
-                Rechtsgebiete
-              </div>
-              <ul className="flex flex-col">
-                {areaLinks.map((link) => {
-                  const active = isActive(link.href);
-                  return (
-                    <li key={link.label} ref={addItemRef}>
-                      <Link
-                        href={link.href}
-                        onClick={closeMenu}
-                        className={`nav-link inline-block py-1.5 sm:py-2 text-base sm:text-xl md:text-2xl font-medium tracking-tight transition-colors duration-300 ${
-                          active ? "text-brand-primary" : "text-white/50 hover:text-white"
-                        }`}
-                      >
-                        {link.label}
+        <nav aria-label="Mobile Navigation" className="frame min-h-full px-5 pb-10 pt-24">
+          {menus.map((menu) => (
+            <div key={menu.label} className="border-b border-line py-5">
+              <Link href={menu.href} className="display text-4xl" onClick={() => setOpen(false)}>
+                {menu.label}
+              </Link>
+              {menu.items && (
+                <ul className="mt-4 grid gap-1">
+                  {menu.items.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href} className="flex items-baseline justify-between gap-4 py-1.5 text-white/75" onClick={() => setOpen(false)}>
+                        <span className="text-lg">{item.label}</span>
+                        <span className="text-xs text-white/40">{item.meta}</span>
                       </Link>
                     </li>
-                  );
-                })}
-              </ul>
+                  ))}
+                </ul>
+              )}
             </div>
-
-            <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10 sm:hidden">
-              <Button href="mailto:kanzlei@wegner-schoebener.de" variant="primary" size="md" radius="rounded" fullWidth>
-                Kontakt
-              </Button>
-            </div>
+          ))}
+          <div className="mt-8 grid gap-3">
+            <Button href="/kontakt">Termin vereinbaren</Button>
+            {site.locations.map((loc) => (
+              <a key={loc.city} href={loc.phoneHref} className="flex items-center justify-between border-b border-line py-3 text-white/80">
+                <span className="text-sm uppercase tracking-[0.08em] text-white/50">{loc.city}</span>
+                <span className="flex items-center gap-2 text-lg">
+                  <Icon name="phone" className="h-4 w-4 text-accent-bright" />
+                  {loc.phone}
+                </span>
+              </a>
+            ))}
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </>
   );
 }

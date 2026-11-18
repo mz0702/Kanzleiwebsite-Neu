@@ -11,13 +11,15 @@ import { lawyers } from "@/data/lawyers";
 const areas = [
   {
     slug: "erbrecht",
+    // Kernfrist aus dem Einleitungstext/FAQ unten — Grundlage der Zeitstrahl-Grafik.
+    keyFact: { value: "6", unit: "Wochen", text: "Frist für die Ausschlagung einer Erbschaft – ab Kenntnis vom Erbfall und vom Grund der Berufung.", from: "Kenntnis vom Erbfall", to: "Ausschlagungsfrist endet", ticks: 42, major: 7, tickUnit: "Tag" },
     title: "Erbrecht",
     lawyerSlug: "beate-wegner",
-    image: "/images/Erbrecht.png",
+    image: "/images/erbrecht.svg",
     metaDescription:
       "Anwältin für Erbrecht in Ochsenfurt: Testament, gesetzliche Erbfolge, Erbschein, Pflichtteil und Erbengemeinschaft. Beate Wegner berät Erblasser und Erben.",
     intro:
-      "Ein Anwalt für Erbrecht befasst sich mit allen rechtlichen Fragen, die vor und nach einem Todesfall entstehen: mit der Gestaltung von Testamenten und Erbverträgen, mit der Feststellung, wer gesetzlicher Erbe ist, mit der Beantragung eines Erbscheins, mit der Berechnung und Durchsetzung von Pflichtteilsansprüchen sowie mit der Auseinandersetzung von Erbengemeinschaften. Rechtliche Grundlage ist das fünfte Buch des Bürgerlichen Gesetzbuchs (§§ 1922 ff. BGB). Liegt keine letztwillige Verfügung vor, greift die gesetzliche Erbfolge, die Verwandte in Ordnungen einteilt und den Ehegatten je nach Güterstand beteiligt. Streit entsteht in der Praxis vor allem dort, wo mehrere Erben gemeinsam über einen Nachlass verfügen müssen, wo Immobilien oder Betriebe aufzuteilen sind oder wo übergangene Angehörige ihren Pflichtteil verlangen. Auch Fristen spielen eine große Rolle, etwa die sechswöchige Frist für die Ausschlagung einer Erbschaft. In Ochsenfurt und im Landkreis Würzburg begleitet Rechtsanwältin Beate Wegner sowohl Erblasser bei der Nachlassplanung als auch Erben bei der Abwicklung eines Nachlasses.",
+      "Ein Anwalt für Erbrecht befasst sich mit allen rechtlichen Fragen, die vor und nach einem Todesfall entstehen: mit der Gestaltung von Testamenten und Erbverträgen, mit der Feststellung, wer gesetzlicher Erbe ist, mit der Beantragung eines Erbscheins, mit der Berechnung und Durchsetzung von Pflichtteilsansprüchen sowie mit der Auseinandersetzung von Erbengemeinschaften. Rechtliche Grundlage ist das fünfte Buch des Bürgerlichen Gesetzbuchs (§§ 1922 ff. BGB).\n\nLiegt keine letztwillige Verfügung vor, greift die gesetzliche Erbfolge, die Verwandte in Ordnungen einteilt und den Ehegatten je nach Güterstand beteiligt. Streit entsteht in der Praxis vor allem dort, wo mehrere Erben gemeinsam über einen Nachlass verfügen müssen, wo Immobilien oder Betriebe aufzuteilen sind oder wo übergangene Angehörige ihren Pflichtteil verlangen. Auch Fristen spielen eine große Rolle, etwa die sechswöchige Frist für die Ausschlagung einer Erbschaft.\n\nIn Ochsenfurt und im Landkreis Würzburg begleitet Rechtsanwältin Beate Wegner sowohl Erblasser bei der Nachlassplanung als auch Erben bei der Abwicklung eines Nachlasses.",
     anliegen: [
       "Ein Testament soll errichtet, geändert oder auf seine Wirksamkeit geprüft werden.",
       "Nach einem Todesfall ist unklar, wer nach der gesetzlichen Erbfolge erbt und ob ein Erbschein benötigt wird.",
@@ -50,13 +52,15 @@ const areas = [
   },
   {
     slug: "betreuungsrecht",
+    // Kernfrist aus dem Einleitungstext/FAQ unten — Grundlage der Zeitstrahl-Grafik.
+    keyFact: { value: "2023", unit: "", text: "Zum 1. Januar 2023 wurde das Betreuungsrecht grundlegend reformiert. Maßgeblich sind seitdem die §§ 1814 ff. BGB.", from: "bis 31.12.2022: altes Recht", to: "seit 01.01.2023: §§ 1814 ff. BGB", ticks: 0, major: 0, tickUnit: "" },
     title: "Betreuungsrecht",
     lawyerSlug: "beate-wegner",
-    image: "/images/Betreuungsrecht.jpg",
+    image: "/images/betreuungsrecht.svg",
     metaDescription:
       "Anwältin für Betreuungsrecht in Ochsenfurt: Vorsorgevollmacht, Patientenverfügung und Betreuungsverfahren. Beate Wegner berät Betroffene und Angehörige.",
     intro:
-      "Ein Anwalt für Betreuungsrecht begleitet Menschen, die ihre Angelegenheiten krankheits- oder altersbedingt nicht mehr selbst regeln können, sowie deren Angehörige. Das Betreuungsrecht ist in den §§ 1814 ff. BGB geregelt und wurde zum 1. Januar 2023 grundlegend reformiert. Es geht dabei um die Bestellung eines rechtlichen Betreuers durch das Betreuungsgericht, um den Zuschnitt der Aufgabenbereiche wie Gesundheitssorge, Vermögenssorge oder Behördenangelegenheiten und um die Frage, ob eine Betreuung überhaupt erforderlich ist. Vorrang hat immer die eigene Vorsorge: Wer eine Vorsorgevollmacht, eine Betreuungsverfügung oder eine Patientenverfügung errichtet hat, kann eine gerichtlich angeordnete Betreuung in vielen Fällen vermeiden. Anwaltliche Unterstützung wird typischerweise bei der Gestaltung solcher Vollmachten benötigt, im gerichtlichen Betreuungsverfahren, bei der Kontrolle oder dem Wechsel eines Betreuers sowie bei Maßnahmen, die einer gerichtlichen Genehmigung bedürfen. Rechtsanwältin Beate Wegner ist in Ochsenfurt auch als gerichtlich bestellte Betreuerin tätig und kennt das Verfahren daher aus beiden Perspektiven.",
+      "Ein Anwalt für Betreuungsrecht begleitet Menschen, die ihre Angelegenheiten krankheits- oder altersbedingt nicht mehr selbst regeln können, sowie deren Angehörige. Das Betreuungsrecht ist in den §§ 1814 ff. BGB geregelt und wurde zum 1. Januar 2023 grundlegend reformiert. Es geht dabei um die Bestellung eines rechtlichen Betreuers durch das Betreuungsgericht, um den Zuschnitt der Aufgabenbereiche wie Gesundheitssorge, Vermögenssorge oder Behördenangelegenheiten und um die Frage, ob eine Betreuung überhaupt erforderlich ist.\n\nVorrang hat immer die eigene Vorsorge: Wer eine Vorsorgevollmacht, eine Betreuungsverfügung oder eine Patientenverfügung errichtet hat, kann eine gerichtlich angeordnete Betreuung in vielen Fällen vermeiden.\n\nAnwaltliche Unterstützung wird typischerweise bei der Gestaltung solcher Vollmachten benötigt, im gerichtlichen Betreuungsverfahren, bei der Kontrolle oder dem Wechsel eines Betreuers sowie bei Maßnahmen, die einer gerichtlichen Genehmigung bedürfen.\n\nRechtsanwältin Beate Wegner ist in Ochsenfurt auch als gerichtlich bestellte Betreuerin tätig und kennt das Verfahren daher aus beiden Perspektiven.",
     anliegen: [
       "Eine Vorsorgevollmacht, Betreuungsverfügung oder Patientenverfügung soll errichtet werden, solange dies noch selbst möglich ist.",
       "Ein Angehöriger kann seine Angelegenheiten nicht mehr regeln und es stellt sich die Frage, ob eine Betreuung nötig ist.",
@@ -89,13 +93,15 @@ const areas = [
   },
   {
     slug: "familienrecht",
+    // Kernfrist aus dem Einleitungstext/FAQ unten — Grundlage der Zeitstrahl-Grafik.
+    keyFact: { value: "1", unit: "Jahr", text: "Trennungsjahr – in aller Regel Voraussetzung, bevor die Ehe geschieden werden kann.", from: "Trennung", to: "Scheidungsantrag", ticks: 12, major: 6, tickUnit: "Monat" },
     title: "Familienrecht",
     lawyerSlug: "susanne-schoebener",
-    image: "/images/Familienrecht.jpg",
+    image: "/images/familienrecht.svg",
     metaDescription:
       "Anwältin für Familienrecht in Ochsenfurt: Scheidung, Trennungsjahr, Unterhalt, Sorge- und Umgangsrecht sowie Zugewinnausgleich. Susanne Schöbener vertritt Sie.",
     intro:
-      "Ein Anwalt für Familienrecht regelt die rechtlichen Folgen von Trennung, Scheidung und Elternschaft. Dazu gehören das Scheidungsverfahren selbst, der Versorgungsausgleich, Ehegatten- und Kindesunterhalt, das Sorge- und Umgangsrecht, die Aufteilung des gemeinsamen Vermögens im Zugewinnausgleich sowie Ehe- und Scheidungsfolgenvereinbarungen. In Deutschland gilt das Zerrüttungsprinzip: Eine Ehe wird geschieden, wenn sie gescheitert ist, wofür in aller Regel das Trennungsjahr vorausgesetzt wird. Zuständig ist ausschließlich das Familiengericht, und mindestens ein Ehegatte muss anwaltlich vertreten sein. Der Unterhalt wird nach gesetzlichen Vorgaben und den in der Praxis gebräuchlichen Leitlinien berechnet, beim Kindesunterhalt insbesondere nach der Düsseldorfer Tabelle. Beim gesetzlichen Güterstand der Zugewinngemeinschaft wird nicht das gesamte Vermögen geteilt, sondern nur der Zuwachs ausgeglichen, den die Eheleute während der Ehe erzielt haben. Im Sorge- und Umgangsrecht steht das Kindeswohl im Mittelpunkt; die gemeinsame elterliche Sorge besteht nach einer Trennung grundsätzlich fort. Rechtsanwältin Susanne Schöbener vertritt Mandantinnen und Mandanten aus Ochsenfurt und dem Landkreis Würzburg in Trennungs- und Scheidungsverfahren.",
+      "Ein Anwalt für Familienrecht regelt die rechtlichen Folgen von Trennung, Scheidung und Elternschaft. Dazu gehören das Scheidungsverfahren selbst, der Versorgungsausgleich, Ehegatten- und Kindesunterhalt, das Sorge- und Umgangsrecht, die Aufteilung des gemeinsamen Vermögens im Zugewinnausgleich sowie Ehe- und Scheidungsfolgenvereinbarungen.\n\nIn Deutschland gilt das Zerrüttungsprinzip: Eine Ehe wird geschieden, wenn sie gescheitert ist, wofür in aller Regel das Trennungsjahr vorausgesetzt wird. Zuständig ist ausschließlich das Familiengericht, und mindestens ein Ehegatte muss anwaltlich vertreten sein.\n\nDer Unterhalt wird nach gesetzlichen Vorgaben und den in der Praxis gebräuchlichen Leitlinien berechnet, beim Kindesunterhalt insbesondere nach der Düsseldorfer Tabelle. Beim gesetzlichen Güterstand der Zugewinngemeinschaft wird nicht das gesamte Vermögen geteilt, sondern nur der Zuwachs ausgeglichen, den die Eheleute während der Ehe erzielt haben. Im Sorge- und Umgangsrecht steht das Kindeswohl im Mittelpunkt; die gemeinsame elterliche Sorge besteht nach einer Trennung grundsätzlich fort.\n\nRechtsanwältin Susanne Schöbener vertritt Mandantinnen und Mandanten aus Ochsenfurt und dem Landkreis Würzburg in Trennungs- und Scheidungsverfahren.",
     anliegen: [
       "Nach einer Trennung ist offen, wie das Trennungsjahr läuft und wann der Scheidungsantrag gestellt werden kann.",
       "Kindes- oder Ehegattenunterhalt soll berechnet, angepasst oder durchgesetzt werden.",
@@ -128,13 +134,15 @@ const areas = [
   },
   {
     slug: "insolvenzrecht",
+    // Kernfrist aus dem Einleitungstext/FAQ unten — Grundlage der Zeitstrahl-Grafik.
+    keyFact: { value: "3", unit: "Jahre", text: "bis zur Restschuldbefreiung – der Regelfall für Verfahren seit der Reform von 2020.", from: "Eröffnung des Verfahrens", to: "Restschuldbefreiung", ticks: 36, major: 12, tickUnit: "Monat" },
     title: "Insolvenzrecht",
     lawyerSlug: "susanne-schoebener",
-    image: "/images/insolvenzrecht.jpg",
+    image: "/images/insolvenzrecht.svg",
     metaDescription:
       "Anwältin für Insolvenzrecht in Ochsenfurt: Verbraucherinsolvenz, Restschuldbefreiung, Regelinsolvenz und Gläubigervertretung. Susanne Schöbener berät Sie.",
     intro:
-      "Ein Anwalt für Insolvenzrecht begleitet überschuldete Privatpersonen, Selbstständige und Unternehmen durch das Insolvenzverfahren. Für Verbraucher führt der Weg über die Verbraucherinsolvenz: Zunächst ist ein außergerichtlicher Einigungsversuch mit den Gläubigern erforderlich, dessen Scheitern bescheinigt werden muss; erst danach können beim Insolvenzgericht die Eröffnung des Verfahrens und die Restschuldbefreiung beantragt werden. Seit der Reform von 2020 dauert es in der Regel drei Jahre bis zur Restschuldbefreiung. In dieser Zeit wird der pfändbare Teil des Einkommens abgeführt, während die Pfändungsfreigrenzen das Existenzminimum schützen. Mit der Eröffnung des Verfahrens sind Zwangsvollstreckungen einzelner Gläubiger in das Vermögen des Schuldners nicht mehr zulässig. Nicht alle Forderungen entfallen am Ende: Verbindlichkeiten aus vorsätzlich begangener unerlaubter Handlung, bestimmte Geldstrafen und Bußgelder sowie rückständiger Unterhalt können bestehen bleiben. Unternehmen und Selbstständige durchlaufen das Regelinsolvenzverfahren, bei dem zusätzlich die Insolvenzantragspflicht und die Haftung der Geschäftsführung eine Rolle spielen. Rechtsanwältin Susanne Schöbener berät in Ochsenfurt Schuldner ebenso wie Gläubiger.",
+      "Ein Anwalt für Insolvenzrecht begleitet überschuldete Privatpersonen, Selbstständige und Unternehmen durch das Insolvenzverfahren. Für Verbraucher führt der Weg über die Verbraucherinsolvenz: Zunächst ist ein außergerichtlicher Einigungsversuch mit den Gläubigern erforderlich, dessen Scheitern bescheinigt werden muss; erst danach können beim Insolvenzgericht die Eröffnung des Verfahrens und die Restschuldbefreiung beantragt werden.\n\nSeit der Reform von 2020 dauert es in der Regel drei Jahre bis zur Restschuldbefreiung. In dieser Zeit wird der pfändbare Teil des Einkommens abgeführt, während die Pfändungsfreigrenzen das Existenzminimum schützen. Mit der Eröffnung des Verfahrens sind Zwangsvollstreckungen einzelner Gläubiger in das Vermögen des Schuldners nicht mehr zulässig. Nicht alle Forderungen entfallen am Ende: Verbindlichkeiten aus vorsätzlich begangener unerlaubter Handlung, bestimmte Geldstrafen und Bußgelder sowie rückständiger Unterhalt können bestehen bleiben.\n\nUnternehmen und Selbstständige durchlaufen das Regelinsolvenzverfahren, bei dem zusätzlich die Insolvenzantragspflicht und die Haftung der Geschäftsführung eine Rolle spielen. Rechtsanwältin Susanne Schöbener berät in Ochsenfurt Schuldner ebenso wie Gläubiger.",
     anliegen: [
       "Die Schulden sind nicht mehr zu bedienen und der Weg in die Verbraucherinsolvenz soll geprüft werden.",
       "Der außergerichtliche Einigungsversuch mit den Gläubigern und der spätere Insolvenzantrag müssen vorbereitet werden.",
@@ -167,13 +175,15 @@ const areas = [
   },
   {
     slug: "arbeitsrecht",
+    // Kernfrist aus dem Einleitungstext/FAQ unten — Grundlage der Zeitstrahl-Grafik.
+    keyFact: { value: "3", unit: "Wochen", text: "Frist für die Kündigungsschutzklage – danach gilt die Kündigung grundsätzlich als wirksam.", from: "Zugang der Kündigung", to: "Klage muss beim Arbeitsgericht sein", ticks: 21, major: 7, tickUnit: "Tag" },
     title: "Arbeitsrecht",
     lawyerSlug: "stephan-wegner",
-    image: "/images/Arbeitsrecht.jpg",
+    image: "/images/arbeitsrecht.svg",
     metaDescription:
       "Anwalt für Arbeitsrecht in Ochsenfurt: Kündigungsschutzklage, Abfindung, Aufhebungsvertrag, Abmahnung und Arbeitszeugnis. Stephan Wegner vertritt Sie.",
     intro:
-      "Ein Anwalt für Arbeitsrecht vertritt Arbeitnehmer und Arbeitgeber in allen Fragen des Arbeitsverhältnisses: von der Gestaltung und Prüfung des Arbeitsvertrags über Abmahnungen, Versetzungen und Zeugnisse bis zur Kündigung und zum Verfahren vor dem Arbeitsgericht. Zentral ist der Kündigungsschutz. Wer sich gegen eine Kündigung wehren will, muss innerhalb von drei Wochen nach deren Zugang Kündigungsschutzklage erheben; danach gilt die Kündigung grundsätzlich als von Anfang an wirksam. Das Kündigungsschutzgesetz greift in Betrieben mit mehr als zehn Beschäftigten und nach mehr als sechs Monaten Betriebszugehörigkeit. Häufige Themen sind daneben Abfindungen, auf die entgegen einer verbreiteten Annahme kein automatischer Anspruch besteht, die aber oft im gerichtlichen Vergleich ausgehandelt werden, sowie Aufhebungsverträge, Überstunden, Urlaubsansprüche und Arbeitszeugnisse. Vor dem Arbeitsgericht trägt in der ersten Instanz jede Partei ihre eigenen Anwaltskosten. Rechtsanwalt Stephan Wegner betreut arbeitsrechtliche Mandate in Ochsenfurt und Umgebung.",
+      "Ein Anwalt für Arbeitsrecht vertritt Arbeitnehmer und Arbeitgeber in allen Fragen des Arbeitsverhältnisses: von der Gestaltung und Prüfung des Arbeitsvertrags über Abmahnungen, Versetzungen und Zeugnisse bis zur Kündigung und zum Verfahren vor dem Arbeitsgericht.\n\nZentral ist der Kündigungsschutz. Wer sich gegen eine Kündigung wehren will, muss innerhalb von drei Wochen nach deren Zugang Kündigungsschutzklage erheben; danach gilt die Kündigung grundsätzlich als von Anfang an wirksam. Das Kündigungsschutzgesetz greift in Betrieben mit mehr als zehn Beschäftigten und nach mehr als sechs Monaten Betriebszugehörigkeit.\n\nHäufige Themen sind daneben Abfindungen, auf die entgegen einer verbreiteten Annahme kein automatischer Anspruch besteht, die aber oft im gerichtlichen Vergleich ausgehandelt werden, sowie Aufhebungsverträge, Überstunden, Urlaubsansprüche und Arbeitszeugnisse. Vor dem Arbeitsgericht trägt in der ersten Instanz jede Partei ihre eigenen Anwaltskosten. Rechtsanwalt Stephan Wegner betreut arbeitsrechtliche Mandate in Ochsenfurt und Umgebung.",
     anliegen: [
       "Eine Kündigung ist zugegangen und die dreiwöchige Klagefrist läuft bereits.",
       "Der Arbeitgeber bietet einen Aufhebungsvertrag oder eine Abfindung an, die geprüft werden soll.",
@@ -206,13 +216,15 @@ const areas = [
   },
   {
     slug: "verkehrsrecht",
+    // Kernfrist aus dem Einleitungstext/FAQ unten — Grundlage der Zeitstrahl-Grafik.
+    keyFact: { value: "2", unit: "Wochen", text: "Einspruchsfrist gegen einen Bußgeldbescheid – danach wird der Bescheid rechtskräftig.", from: "Zustellung des Bescheids", to: "Einspruchsfrist endet", ticks: 14, major: 7, tickUnit: "Tag" },
     title: "Verkehrsrecht",
     lawyerSlug: "stephan-wegner",
-    image: "/images/Verkehrsrecht.png",
+    image: "/images/verkehrsrecht.svg",
     metaDescription:
       "Anwalt für Verkehrsrecht in Ochsenfurt: Unfallregulierung, Bußgeldbescheid, Fahrverbot und Verkehrsstrafrecht. Stephan Wegner vertritt Sie als Verkehrsanwalt.",
     intro:
-      "Ein Anwalt für Verkehrsrecht befasst sich mit den rechtlichen Folgen von Verkehrsunfällen, Bußgeldverfahren und Verkehrsstraftaten. Nach einem Unfall geht es vor allem um die Regulierung des Schadens gegenüber der gegnerischen Haftpflichtversicherung: Reparaturkosten oder Wiederbeschaffungswert, merkantile Wertminderung, Nutzungsausfall oder Mietwagen, Sachverständigen- und Abschleppkosten sowie Schmerzensgeld bei Verletzungen. Steht die Haftung des Unfallgegners fest, gehören auch die Anwaltskosten des Geschädigten in der Regel zum ersatzfähigen Schaden. Der Geschädigte entscheidet dabei grundsätzlich selbst, ob er reparieren lässt oder auf Gutachtenbasis abrechnet, und er wählt Werkstatt und Sachverständigen selbst aus. Im Bußgeldverfahren, etwa bei Geschwindigkeits-, Abstands-, Rotlicht- oder Handyverstößen, läuft ab Zustellung des Bescheids eine zweiwöchige Einspruchsfrist; geprüft werden dann häufig die Messung selbst, die Fahrereigenschaft und die Verhältnismäßigkeit eines Fahrverbots. Das Verkehrsstrafrecht betrifft unter anderem Trunkenheits- und Drogenfahrten, das unerlaubte Entfernen vom Unfallort und die Entziehung der Fahrerlaubnis. Rechtsanwalt Stephan Wegner ist als Verkehrsanwalt in Ochsenfurt und im Landkreis Würzburg tätig.",
+      "Ein Anwalt für Verkehrsrecht befasst sich mit den rechtlichen Folgen von Verkehrsunfällen, Bußgeldverfahren und Verkehrsstraftaten.\n\nNach einem Unfall geht es vor allem um die Regulierung des Schadens gegenüber der gegnerischen Haftpflichtversicherung: Reparaturkosten oder Wiederbeschaffungswert, merkantile Wertminderung, Nutzungsausfall oder Mietwagen, Sachverständigen- und Abschleppkosten sowie Schmerzensgeld bei Verletzungen. Steht die Haftung des Unfallgegners fest, gehören auch die Anwaltskosten des Geschädigten in der Regel zum ersatzfähigen Schaden. Der Geschädigte entscheidet dabei grundsätzlich selbst, ob er reparieren lässt oder auf Gutachtenbasis abrechnet, und er wählt Werkstatt und Sachverständigen selbst aus.\n\nIm Bußgeldverfahren, etwa bei Geschwindigkeits-, Abstands-, Rotlicht- oder Handyverstößen, läuft ab Zustellung des Bescheids eine zweiwöchige Einspruchsfrist; geprüft werden dann häufig die Messung selbst, die Fahrereigenschaft und die Verhältnismäßigkeit eines Fahrverbots. Das Verkehrsstrafrecht betrifft unter anderem Trunkenheits- und Drogenfahrten, das unerlaubte Entfernen vom Unfallort und die Entziehung der Fahrerlaubnis.\n\nRechtsanwalt Stephan Wegner ist als Verkehrsanwalt in Ochsenfurt und im Landkreis Würzburg tätig.",
     anliegen: [
       "Nach einem unverschuldeten Unfall kürzt oder verzögert die gegnerische Versicherung die Regulierung.",
       "Ein Bußgeldbescheid droht mit Punkten, einem hohen Bußgeld oder einem Fahrverbot.",

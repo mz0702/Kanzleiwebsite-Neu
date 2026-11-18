@@ -1,118 +1,73 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Link from "next/link";
 import Button from "@/components/shared/Button";
+import Icon from "@/components/shared/Icon";
+import { practiceAreas } from "@/data/practiceAreas";
+import { mainPhone } from "@/data/site";
 import { basePath } from "@/lib/basePath";
 
-gsap.registerPlugin(ScrollTrigger);
+const headline = "Ihre Rechtsanwälte in Ochsenfurt & Würzburg";
 
 export default function HeroSection() {
-  const sectionRef = useRef(null);
-  const bgRef = useRef(null);
-  const elemsRef = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Hero entrance
-      gsap.fromTo(
-        bgRef.current,
-        { scale: 1.2, opacity: 0 },
-        { scale: 1, opacity: 0.8, duration: 2, ease: "power3.out" },
-      );
-
-      gsap.fromTo(
-        elemsRef.current,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "power3.out",
-          delay: 0.5,
-        },
-      );
-
-      // Parallax — desktop/tablet only. On phones the collapsing address bar
-      // re-measures the trigger mid-scroll, so the scrubbed background visibly
-      // jumps; the entrance animation above still runs everywhere.
-      ScrollTrigger.matchMedia({
-        "(min-width: 768px)": () => {
-          gsap.to(bgRef.current, {
-            yPercent: 30,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const addToRefs = (el) => {
-    if (el && !elemsRef.current.includes(el)) {
-      elemsRef.current.push(el);
-    }
-  };
-
   return (
-    // 100svh below md: 100vh on a phone is the *large* viewport, so the hero
-    // overflows behind the address bar until it collapses. md+ keeps 100vh.
-    <section
-      ref={sectionRef}
-      className="relative min-h-[100svh] md:min-h-screen pb-12 pt-28 sm:pt-32 md:pt-36 flex items-center justify-center overflow-hidden bg-brand-dark"
-    >
-      {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
+    <section data-theme="dark" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night text-white">
+      <div className="absolute inset-0">
         <img
-          ref={bgRef}
-          src={`${basePath}/images/Hero Background.jpg`}
+          src={`${basePath}/images/hero.webp`}
           alt=""
-          className="w-full h-full object-cover opacity-0 scale-105 brightness-75"
+          width="1264"
+          height="842"
+          fetchpriority="high"
+          className="hero-img h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/60 to-night/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-night/70 via-night/20 to-transparent" />
       </div>
 
-      {/* Faint horizontal line */}
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-between">
-        {/* Main Title Area */}
-        <div className="flex flex-col justify-center">
-          <div className="max-w-5xl text-white">
-            <div
-              ref={addToRefs}
-              className="inline-flex items-center gap-2 text-sm font-medium mb-4 sm:mb-6 text-white/90"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              Ochsenfurt &amp; Würzburg
-            </div>
-            <h1
-              ref={addToRefs}
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.1] tracking-tight"
-            >
-              Wir helfen Ihnen in allen juristischen Belangen weiter
-            </h1>
-          </div>
-        </div>
-
-        {/* Bottom Elements */}
-        <div ref={addToRefs} className="w-full mt-8 sm:mt-12">
-          <div className="max-w-[26rem]">
-            <p className="text-base sm:text-lg text-gray-200 mb-6 sm:mb-8 leading-relaxed">
-              Dabei stehen Vertrauen, Kompetenz und Zusammenarbeit für uns im
-              Mittelpunkt.
+      <div className="frame relative flex flex-1 flex-col">
+        <div className="pad flex flex-1 flex-col justify-end pb-12 pt-32 md:pb-16">
+          <p className="eyebrow hero-in text-white/80" style={{ "--d": "0.1s" }}>
+            Wegner &amp; Schöbener Rechtsanwälte
+          </p>
+          {/* Wörter einzeln maskiert; Text bleibt als normaler H1-Inhalt lesbar. */}
+          <h1 className="display h-xl mt-6 max-w-[15ch]">
+            {headline.split(" ").map((word, i) => (
+              <span key={i}>
+                <span className="word">
+                  <span style={{ "--i": i }}>{word}</span>
+                </span>{" "}
+              </span>
+            ))}
+          </h1>
+          <div className="mt-10 grid gap-8 md:grid-cols-12 md:items-end">
+            <p className="lead hero-in max-w-xl text-white/80 md:col-span-7 lg:col-span-6" style={{ "--d": "0.65s" }}>
+              Wir helfen Ihnen in allen juristischen Belangen weiter – persönlich, verständlich und mit über 20 Jahren
+              Kanzleierfahrung.
             </p>
-            <Button href="mailto:kanzlei@wegner-schoebener.de" variant="primary" size="lg" radius="rounded">
-              Termin vereinbaren
-            </Button>
+            <div className="hero-in flex flex-wrap gap-3 md:col-span-5 md:justify-end lg:col-span-6" style={{ "--d": "0.8s" }}>
+              <Button href="/kontakt">Termin vereinbaren</Button>
+              <Button href={mainPhone.phoneHref} variant="ghost" icon="phone" arrow={false}>
+                {mainPhone.phone}
+              </Button>
+            </div>
           </div>
         </div>
+
+        {/* Schnellzugriff: die sechs Rechtsgebiete direkt im ersten Bildschirm. */}
+        <nav aria-label="Rechtsgebiete" className="hero-in border-t border-line" style={{ "--d": "1s" }}>
+          <ul className="cells grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+            {practiceAreas.map((area, i) => (
+              <li key={area.slug} className="bg-night">
+                <Link href={`/rechtsgebiete/${area.slug}`} className="group flex items-center justify-between gap-2 px-4 py-4 transition-colors hover:bg-white/[0.06] md:px-6 md:py-5">
+                  <span className="flex items-baseline gap-3">
+                    <span className="hidden text-xs text-white/40 sm:inline">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-[0.95rem] tracking-tight md:text-base">{area.title}</span>
+                  </span>
+                  <Icon name="arrowUpRight" className="h-4 w-4 shrink-0 text-white/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-bright" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </section>
   );

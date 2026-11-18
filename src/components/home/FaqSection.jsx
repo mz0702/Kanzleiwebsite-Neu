@@ -1,10 +1,6 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Button from "@/components/shared/Button";
 import FaqAccordion from "@/components/shared/FaqAccordion";
-import { basePath } from "@/lib/basePath";
-
-gsap.registerPlugin(ScrollTrigger);
+import { mainPhone } from "@/data/site";
 
 const faqs = [
   {
@@ -35,49 +31,21 @@ const faqs = [
 ];
 
 export default function FaqSection() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const reveals = sectionRef.current.querySelectorAll(".gs-reveal");
-      reveals.forEach((elem) => {
-        gsap.fromTo(
-          elem,
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: elem,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={sectionRef} className="py-16 sm:py-20 lg:py-24 bg-white border-t border-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          <div className="gs-reveal">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-brand-dark mb-6 sm:mb-8">
-              Häufige<br />Fragen
+    <section aria-labelledby="faq-title" className="bg-paper">
+      <div className="frame border-t border-line">
+        <div className="pad grid gap-12 py-20 md:py-28 lg:grid-cols-12">
+          <div className="gs-reveal lg:col-span-5">
+            <p className="eyebrow">FAQ</p>
+            <h2 id="faq-title" className="display h-lg mt-6">
+              Häufige Fragen
             </h2>
-            <img
-              src={`${basePath}/images/Sonstiges.jpg`}
-              alt=""
-              className="rounded-3xl w-full h-[220px] sm:h-[280px] lg:h-[300px] object-cover"
-            />
+            <p className="lead mt-6 max-w-md text-ink-soft">Ihre Frage ist nicht dabei? Rufen Sie uns an – wir helfen Ihnen gerne weiter.</p>
+            <Button href={mainPhone.phoneHref} variant="ghost" icon="phone" arrow={false} className="mt-8">
+              {mainPhone.phone}
+            </Button>
           </div>
-
-          <div className="gs-reveal">
+          <div className="gs-reveal lg:col-span-7">
             <FaqAccordion faqs={faqs} />
           </div>
         </div>

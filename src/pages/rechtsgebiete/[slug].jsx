@@ -1,18 +1,19 @@
-import { useRef } from "react";
-import Head from "next/head";
 import Link from "next/link";
-import { practiceAreas } from "@/data/practiceAreas";
-import { lawyers } from "@/data/lawyers";
+import Seo from "@/components/shared/Seo";
+import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import Button from "@/components/shared/Button";
 import CtaBanner from "@/components/shared/CtaBanner";
 import FaqAccordion from "@/components/shared/FaqAccordion";
-import useReveal from "@/hooks/useReveal";
+import Icon from "@/components/shared/Icon";
+import Timeline from "@/components/shared/Timeline";
+import { ORG_ID } from "@/components/shared/OrganizationSchema";
+import { practiceAreas } from "@/data/practiceAreas";
+import { lawyers } from "@/data/lawyers";
+import { mainPhone } from "@/data/site";
 import { basePath, absoluteUrl } from "@/lib/basePath";
 
 export function getStaticPaths() {
-  return {
-    paths: practiceAreas.map((a) => ({ params: { slug: a.slug } })),
-    fallback: false,
-  };
+  return { paths: practiceAreas.map((a) => ({ params: { slug: a.slug } })), fallback: false };
 }
 
 export function getStaticProps({ params }) {
@@ -22,174 +23,161 @@ export function getStaticProps({ params }) {
 }
 
 export default function PracticeAreaPage({ area, lawyer }) {
-  const contentRef = useRef(null);
-  const faqRef = useRef(null);
-  useReveal(contentRef);
-  useReveal(faqRef);
-
-  const url = absoluteUrl(`/rechtsgebiete/${area.slug}/`);
+  const path = `/rechtsgebiete/${area.slug}/`;
   const others = practiceAreas.filter((a) => a.slug !== area.slug);
+  const fact = area.keyFact;
 
-  const breadcrumbSchema = {
+  const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Startseite", item: absoluteUrl("/") },
-      { "@type": "ListItem", position: 2, name: "Rechtsgebiete", item: absoluteUrl("/#rechtsgebiete") },
-      { "@type": "ListItem", position: 3, name: area.title, item: url },
-    ],
+    "@type": "Service",
+    name: `Rechtsberatung ${area.title}`,
+    serviceType: area.title,
+    description: area.metaDescription,
+    url: absoluteUrl(path),
+    areaServed: ["Ochsenfurt", "Würzburg", "Landkreis Würzburg"],
+    provider: { "@id": ORG_ID },
   };
 
   return (
     <>
-      <Head>
-        <title>{`${area.title} Anwalt in Ochsenfurt — Wegner & Schöbener Rechtsanwälte`}</title>
-        <meta name="description" content={area.metaDescription} />
-        <link rel="canonical" href={url} />
-        <meta property="og:title" content={`${area.title} Anwalt in Ochsenfurt — Wegner & Schöbener Rechtsanwälte`} />
-        <meta property="og:description" content={area.metaDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content={absoluteUrl(area.image)} />
-        <script
-          type="application/ld+json"
-          // Statische Daten aus practiceAreas.js — das <\/script>-Escaping wie in
-          // OrganizationSchema.jsx verhindert den Ausbruch aus dem Script-Tag.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
-        />
-      </Head>
+      <Seo
+        title={`${area.title} Anwalt Ochsenfurt | Wegner & Schöbener`}
+        description={area.metaDescription}
+        path={path}
+        schema={serviceSchema}
+      />
 
       {/* Hero */}
-      <section className="bg-brand-dark text-white pt-32 pb-16 sm:pb-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm text-white/70 font-medium mb-8 sm:mb-10">
-            <Link href="/" className="hover:text-brand-primary transition-colors">Home</Link>
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <Link href="/#rechtsgebiete" className="hover:text-brand-primary transition-colors">Rechtsgebiete</Link>
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="text-brand-primary">{area.title}</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_minmax(0,420px)] gap-10 md:gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 mb-4">
-                <span className="w-2 h-2 rounded-full bg-brand-primary" />
-                Rechtsgebiet
-              </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight mb-5 sm:mb-6">
-                Anwalt für {area.title}
-                <br />
-                in Ochsenfurt
+      <section className="bg-paper">
+        <div className="frame">
+          <div className="pad grid gap-12 pb-16 pt-28 md:pb-20 md:pt-36 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <Breadcrumbs
+                path={path}
+                items={[
+                  { label: "Startseite", href: "/" },
+                  { label: "Rechtsgebiete", href: "/#rechtsgebiete" },
+                  { label: area.title },
+                ]}
+              />
+              <p className="eyebrow hero-in mt-10" style={{ "--d": "0.05s" }}>
+                {lawyer.role} {lawyer.name}
+              </p>
+              <h1 className="display h-page hero-in mt-6" style={{ "--d": "0.15s" }}>
+                Anwalt für {area.title} in Ochsenfurt
               </h1>
-              <p className="text-base sm:text-lg text-gray-200 max-w-xl leading-relaxed">
+              <p className="lead hero-in mt-6 max-w-xl text-ink-soft" style={{ "--d": "0.3s" }}>
                 {area.description}
               </p>
+              <div className="hero-in mt-10 flex flex-wrap gap-3" style={{ "--d": "0.45s" }}>
+                <Button href="/kontakt">Termin vereinbaren</Button>
+                <Button href={mainPhone.phoneHref} variant="ghost" icon="phone" arrow={false}>
+                  {mainPhone.phone}
+                </Button>
+              </div>
             </div>
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden bg-white/5">
-              <img
-                src={`${basePath}${area.image}`}
-                alt={area.title}
-                className="w-full h-full object-cover"
-              />
+            <div className="hero-in marks relative border border-line bg-white/50 lg:col-span-5" style={{ "--d": "0.3s" }}>
+              <img src={`${basePath}${area.image}`} alt={`Illustration zum ${area.title}`} width="1000" height="750" className="w-full" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Einordnung + typische Anliegen */}
-      <section ref={contentRef} className="py-16 sm:py-20 lg:py-24 bg-brand-light">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10 lg:gap-16 items-start">
-            <div className="gs-reveal">
-              <div className="inline-flex items-center gap-2 text-sm font-semibold mb-4 text-brand-gray">
-                <span className="w-2 h-2 rounded-full bg-brand-dark" />
-                Überblick
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-medium text-brand-dark mb-6">
+      {/* Frist auf einen Blick */}
+      <section data-theme="dark" aria-label={`${area.title} auf einen Blick`} className="bg-night text-white">
+        <div className="frame">
+          <div className="pad gs-reveal grid gap-12 py-16 md:py-20 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-4">
+              <p className="eyebrow text-white/70">Auf einen Blick</p>
+              <p className="mt-6 flex items-baseline gap-3">
+                <span className="display text-[clamp(4.5rem,3rem+6vw,8.5rem)] leading-[0.85]">{fact.value}</span>
+                {fact.unit && <span className="text-2xl tracking-tight">{fact.unit}</span>}
+              </p>
+              <p className="mt-5 max-w-sm leading-relaxed text-white/75">{fact.text}</p>
+            </div>
+            <div className="lg:col-span-7 lg:col-start-6">
+              <Timeline fact={fact} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Überblick + typische Anliegen */}
+      <section aria-labelledby="ueberblick" className="bg-paper">
+        <div className="frame">
+          <div className="pad grid gap-14 py-20 md:py-28 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <p className="eyebrow gs-reveal">Überblick</p>
+              <h2 id="ueberblick" className="display h-md gs-reveal mt-6">
                 Was macht ein Anwalt für {area.title}?
               </h2>
-              <p className="text-brand-gray text-base sm:text-lg leading-relaxed">{area.intro}</p>
+              <div className="gs-reveal mt-8 space-y-5 text-[1.0625rem] leading-[1.75] text-ink-soft">
+                {area.intro.split("\n\n").map((para, i) => (
+                  <p key={i} className={i === 0 ? "text-ink" : ""}>
+                    {para}
+                  </p>
+                ))}
+              </div>
 
-              <h2 className="text-2xl sm:text-3xl font-medium text-brand-dark mt-12 sm:mt-14 mb-6">
-                Typische Anliegen
-              </h2>
-              <ul className="grid grid-cols-1 gap-3">
+              <h2 className="display h-md gs-reveal mt-20">Typische Anliegen</h2>
+              <ol className="gs-reveal mt-8 border-t border-line">
                 {area.anliegen.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-brand-gray text-sm sm:text-base">
-                    <svg className="w-4 h-4 text-brand-primary shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{item}</span>
+                  <li key={i} className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-line py-5">
+                    <span className="text-sm text-accent">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="leading-relaxed">{item}</span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
 
-            {/* Zuständiger Anwalt */}
-            <div className="gs-reveal lg:sticky lg:top-28">
-              <Link
-                href={`/anwaelte/${lawyer.slug}`}
-                className="group block bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 hover:shadow-xl transition-shadow"
-              >
-                <div className="text-xs uppercase tracking-wider text-brand-gray mb-4">
-                  Zuständig in diesem Rechtsgebiet
-                </div>
-                <div className="flex items-center gap-5">
-                  <div className="w-20 h-20 rounded-2xl overflow-hidden shrink-0">
-                    <img
-                      src={lawyer.image}
-                      alt={lawyer.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
+            <aside className="lg:col-span-4 lg:col-start-9">
+              <div className="gs-reveal lg:sticky lg:top-28">
+                <Link href={`/anwaelte/${lawyer.slug}`} className="group block border border-line bg-white/60 p-6 transition-colors hover:bg-white md:p-8">
+                  <p className="text-xs uppercase tracking-[0.09em] text-muted">Ihre Ansprechperson</p>
+                  <div className="mt-6 flex items-center gap-5">
+                    <img src={lawyer.image} alt={lawyer.name} width="200" height="250" loading="lazy" className="h-[100px] w-[80px] object-cover" />
+                    <div>
+                      <p className="text-xl tracking-tight">{lawyer.name}</p>
+                      <p className="mt-1 text-sm text-muted">{lawyer.tagline}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-brand-dark mb-1 group-hover:text-brand-primary transition-colors">
-                      {lawyer.name}
-                    </h3>
-                    <p className="text-brand-gray text-sm">{lawyer.role}</p>
-                  </div>
+                  <span className="mt-6 flex items-center justify-between border-t border-line pt-5 text-sm font-medium uppercase tracking-[0.05em]">
+                    Zum Profil
+                    <Icon name="arrowRight" className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+                <div data-theme="dark" className="mt-4 bg-night p-6 text-white md:p-8">
+                  <p className="text-xl tracking-tight">Termin zum {area.title}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">In der Regel innerhalb von 48 Stunden – in Ochsenfurt oder Würzburg.</p>
+                  <Button href="/kontakt" className="mt-6">
+                    Termin vereinbaren
+                  </Button>
+                  <a href={mainPhone.phoneHref} className="mt-5 flex items-center gap-2 text-white/80 hover:text-white">
+                    <Icon name="phone" className="h-4 w-4 text-accent-bright" />
+                    {mainPhone.phone}
+                  </a>
                 </div>
-                <span className="mt-6 inline-flex items-center gap-2 text-brand-primary font-semibold text-sm">
-                  Zum Profil von {lawyer.name}
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </Link>
-
-              <a
-                href="mailto:kanzlei@wegner-schoebener.de"
-                className="mt-6 inline-flex items-center gap-2 bg-brand-primary text-white font-semibold px-6 py-3 rounded-xl hover:bg-brand-dark transition-colors"
-              >
-                Termin vereinbaren
-              </a>
-            </div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section ref={faqRef} className="py-16 sm:py-20 lg:py-24 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            <div className="gs-reveal">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-brand-dark mb-6 sm:mb-8">
-                Häufige Fragen
-                <br />
-                zum {area.title}
+      <section aria-labelledby="faq-title" className="bg-paper">
+        <div className="frame border-t border-line">
+          <div className="pad grid gap-12 py-20 md:py-28 lg:grid-cols-12">
+            <div className="gs-reveal lg:col-span-5">
+              <p className="eyebrow">FAQ</p>
+              <h2 id="faq-title" className="display h-lg mt-6">
+                Häufige Fragen zum {area.title}
               </h2>
-              <p className="text-brand-gray text-sm sm:text-base leading-relaxed">
-                Die folgenden Antworten geben einen allgemeinen Überblick über die Rechtslage. Sie
-                ersetzen keine Beratung im Einzelfall — dafür vereinbaren Sie am besten einen Termin
-                in unserer Kanzlei in Ochsenfurt.
+              <p className="mt-6 max-w-md leading-relaxed text-ink-soft">
+                Die Antworten geben einen allgemeinen Überblick über die Rechtslage. Sie ersetzen keine Beratung im
+                Einzelfall – dafür vereinbaren Sie am besten einen Termin in unserer Kanzlei.
               </p>
             </div>
-
-            <div className="gs-reveal">
+            <div className="gs-reveal lg:col-span-7">
               <FaqAccordion faqs={area.faqs} />
             </div>
           </div>
@@ -197,36 +185,31 @@ export default function PracticeAreaPage({ area, lawyer }) {
       </section>
 
       {/* Weitere Rechtsgebiete */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-brand-light border-t border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-brand-dark mb-10 sm:mb-12">
-            Weitere Rechtsgebiete
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {others.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/rechtsgebiete/${item.slug}`}
-                className="group bg-white rounded-3xl p-6 border border-gray-200 hover:shadow-xl transition-shadow"
-              >
-                <h3 className="text-lg font-semibold text-brand-dark mb-2 group-hover:text-brand-primary transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-brand-gray text-sm leading-relaxed">{item.description}</p>
-              </Link>
-            ))}
+      <section aria-labelledby="weitere" className="bg-paper">
+        <div className="frame border-t border-line">
+          <div className="pad py-14 md:py-16">
+            <h2 id="weitere" className="display h-md">
+              Weitere Rechtsgebiete
+            </h2>
           </div>
+          <ul className="cells border-t border-line sm:grid-cols-2 lg:grid-cols-5">
+            {others.map((item) => (
+              <li key={item.slug} className="bg-paper">
+                <Link href={`/rechtsgebiete/${item.slug}`} className="group flex h-full flex-col p-6 transition-colors hover:bg-white">
+                  <img src={`${basePath}${item.image}`} alt="" width="1000" height="750" loading="lazy" className="mx-auto w-full max-w-[11rem] transition-transform duration-700 group-hover:scale-105" />
+                  <span className="mt-4 flex items-center justify-between text-lg tracking-tight">
+                    {item.title}
+                    <Icon name="arrowUpRight" className="h-4 w-4 text-muted transition-colors group-hover:text-accent" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="h-16" />
         </div>
       </section>
 
-      <CtaBanner
-        label="Wir sind für Sie da"
-        title={`Beratung im ${area.title}\nvereinbaren`}
-        description="Rufen Sie uns an oder schreiben Sie uns — wir melden uns innerhalb von 48 Stunden bei Ihnen."
-        buttonLabel="Jetzt Kontakt aufnehmen"
-        buttonHref="mailto:kanzlei@wegner-schoebener.de"
-      />
+      <CtaBanner title={`Beratung im ${area.title} vereinbaren`} />
     </>
   );
 }

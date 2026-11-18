@@ -3,10 +3,10 @@
 // so every hardcoded asset path needs this prefix to resolve correctly once
 // deployed under a GitHub Pages project subpath. Empty locally (`next dev`
 // serves from the domain root), so nothing changes for local testing.
-export const basePath = process.env.NODE_ENV === "production" ? "/Kanzleiwebsite" : "";
+export const basePath = process.env.NODE_ENV === "production" ? "/Kanzleiwebsite-Neu" : "";
 
 // Öffentliche Adresse der Seite (GitHub Pages, inkl. basePath).
-export const siteUrl = "https://mz0702.github.io/Kanzleiwebsite";
+export const siteUrl = "https://mz0702.github.io/Kanzleiwebsite-Neu";
 
 // Absolute URL für canonical- und OG-Tags. Nimmt Pfade mit oder ohne basePath
 // entgegen (lawyer.image trägt ihn bereits, Routen wie "/impressum/" nicht), damit

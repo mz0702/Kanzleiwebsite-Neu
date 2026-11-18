@@ -1,140 +1,103 @@
 import Link from "next/link";
+import Icon from "@/components/shared/Icon";
 import { lawyers } from "@/data/lawyers";
 import { practiceAreas } from "@/data/practiceAreas";
+import { site } from "@/data/site";
+import { basePath } from "@/lib/basePath";
 
-const mainLinks = [
-  { label: "Home", href: "/" },
-  ...lawyers.map((lawyer) => ({ label: lawyer.name, href: `/anwaelte/${lawyer.slug}` })),
+const columns = [
+  {
+    title: "Kanzlei",
+    links: [
+      { label: "Startseite", href: "/" },
+      ...lawyers.map((l) => ({ label: l.name, href: `/anwaelte/${l.slug}` })),
+      { label: "Ablauf", href: "/#ablauf" },
+      { label: "Kontakt", href: "/kontakt" },
+    ],
+  },
+  {
+    title: "Rechtsgebiete",
+    links: practiceAreas.map((a) => ({ label: a.title, href: `/rechtsgebiete/${a.slug}` })),
+  },
+];
+
+const legal = [
+  { label: "Impressum", href: "/impressum" },
+  { label: "Datenschutz", href: "/datenschutz" },
+  { label: "Haftungsausschluss", href: "/haftungsausschluss" },
 ];
 
 export default function Footer() {
-  const handleBackToTop = () => {
-    if (typeof window !== "undefined" && window.lenis) {
-      window.lenis.scrollTo(0, { duration: 1.5 });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   return (
-    <footer className="bg-brand-dark text-white pt-24 pb-8">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-          {/* Col 1 */}
-          <div>
-            <h3 className="font-semibold text-lg mb-6">Wegner &amp; Schöbener Rechtsanwälte</h3>
-            <p className="text-gray-400 text-sm max-w-xs">
-              Wir helfen Ihnen in allen juristischen Belangen weiter. Vertrauen, Kompetenz und
-              Zusammenarbeit stehen für uns im Mittelpunkt.
+    <footer data-theme="dark" className="bg-night text-white">
+      <div className="frame">
+        <div className="pad grid gap-14 py-20 md:py-28 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <img src={`${basePath}/logo-light.svg`} alt={site.name} width="306" height="97" loading="lazy" className="h-16 w-auto md:h-20" />
+            <p className="mt-8 max-w-sm leading-relaxed text-white/65">
+              Wir helfen Ihnen in allen juristischen Belangen weiter. Vertrauen, Kompetenz und Zusammenarbeit stehen
+              für uns im Mittelpunkt.
             </p>
+            <p className="mt-6 text-sm text-white/45">Rechtsanwälte in Ochsenfurt &amp; Würzburg</p>
           </div>
 
-          {/* Col 2 */}
-          <div>
-            <h3 className="font-semibold text-lg mb-6">Navigation</h3>
-            <ul className="flex flex-col gap-3 text-gray-400">
-              {mainLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-brand-primary transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="font-semibold text-lg mb-4 mt-8">Rechtsgebiete</h3>
-            <ul className="grid grid-cols-2 gap-x-6 gap-y-3 text-gray-400">
-              {practiceAreas.map((area) => (
-                <li key={area.slug}>
-                  <Link
-                    href={`/rechtsgebiete/${area.slug}`}
-                    className="hover:text-brand-primary transition-colors"
-                  >
-                    {area.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 */}
-          <div>
-            <h3 className="font-semibold text-lg mb-6">Kontakt</h3>
-            <div className="space-y-4 text-gray-400 mb-6">
-              <div>
-                <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Ochsenfurt</p>
-                <p>Marktbreiter Str. 1</p>
-                <p>97199 Ochsenfurt</p>
-                <a href="tel:+499331981990" className="block hover:text-brand-primary transition-colors mt-1">
-                  09331 - 981 99 - 0
-                </a>
+          <div className="grid gap-10 sm:grid-cols-[1fr_1fr_1.35fr] lg:col-span-7">
+            {columns.map((col) => (
+              <div key={col.title}>
+                <p className="text-xs uppercase tracking-[0.09em] text-white/45">{col.title}</p>
+                <ul className="mt-5 grid gap-2.5">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="link-u text-white/80 transition-colors hover:text-white">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div>
-                <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Würzburg</p>
-                <p>Marktgasse 9</p>
-                <p>97070 Würzburg</p>
-                <a href="tel:+4993116633" className="block hover:text-brand-primary transition-colors mt-1">
-                  0931 - 166 33
-                </a>
-              </div>
+            ))}
+            <div>
+              <p className="text-xs uppercase tracking-[0.09em] text-white/45">Standorte</p>
+              {site.locations.map((loc) => (
+                <address key={loc.city} className="mt-5 not-italic leading-relaxed text-white/80">
+                  <span className="text-white">Kanzlei {loc.city}</span>
+                  <br />
+                  {loc.street}
+                  <br />
+                  {loc.zip} {loc.city}
+                  <a href={loc.phoneHref} className="mt-1 flex items-center gap-2 text-white hover:text-accent-bright">
+                    <Icon name="phone" className="h-3.5 w-3.5" />
+                    {loc.phone}
+                  </a>
+                </address>
+              ))}
+              <a href={`mailto:${site.email}`} className="mt-5 flex items-center gap-2 text-[0.9375rem] text-white/80 [overflow-wrap:anywhere] hover:text-white">
+                <Icon name="mail" className="h-3.5 w-3.5 shrink-0" />
+                {site.email}
+              </a>
             </div>
-            <a
-              href="mailto:kanzlei@wegner-schoebener.de"
-              className="inline-flex items-center gap-2 bg-brand-primary text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-white hover:text-brand-dark transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              E-Mail schreiben
-            </a>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="border-t border-white/10 pt-8 pb-4 flex justify-center md:justify-end">
-          <button
-            onClick={handleBackToTop}
-            className="group flex items-center gap-3 px-5 py-3 rounded-full border border-white/20 hover:border-brand-primary hover:bg-brand-primary hover:text-brand-dark transition-all"
-            aria-label="Nach oben"
-          >
-            <span className="text-sm font-medium">Nach oben</span>
-            <svg className="w-4 h-4 transition-transform group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* WEGNER & SCHÖBENER full-width */}
-      <div className="w-full flex flex-col items-center overflow-hidden leading-none mt-4 px-4">
-        {/* Purely decorative brand display, not a heading — every page already has
-            its own h1/h2 structure above; this shouldn't add another node to it. */}
-        <p aria-hidden="true" className="text-brand-primary font-bold tracking-tight whitespace-nowrap leading-[0.85] pt-[0.15em] text-[clamp(1.75rem,8vw,8rem)]">
-          WEGNER &amp; SCHÖBENER
+        {/* Dekorative Wortmarke — kein Heading, die Seite hat ihre eigene Gliederung. */}
+        <p aria-hidden="true" className="pad select-none overflow-hidden whitespace-nowrap border-t border-line pt-6 text-[9.6vw] font-medium pb-[0.12em] leading-[1] tracking-[-0.05em] text-accent 2xl:text-[10.6rem]">
+          Wegner &amp; Schöbener
         </p>
-        <p className="text-gray-400 tracking-[0.3em] uppercase text-xs sm:text-sm mt-3">
-          Rechtsanwälte
-        </p>
-      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 mt-8 pt-6 border-t border-white/5 gap-4">
-          <p className="flex flex-wrap items-center gap-x-2">
-            <span>&copy; 2026 Wegner &amp; Schöbener Rechtsanwälte. Alle Rechte vorbehalten.</span>
-            <a
-              href="https://www.zivion.de"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-brand-primary hover:text-white transition-colors"
-            >
+        <div className="pad flex flex-col gap-4 border-t border-line py-6 text-sm text-white/55 md:flex-row md:items-center md:justify-between">
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span>© {new Date().getFullYear()} {site.name}</span>
+            <a href="https://www.zivion.de" target="_blank" rel="noopener noreferrer" className="font-medium text-accent-bright transition-colors hover:text-white">
               Made by ZIVION
             </a>
           </p>
-          <div className="flex gap-6 mt-2 md:mt-0">
-            <Link href="/impressum" className="hover:text-gray-300 transition-colors">Impressum</Link>
-            <Link href="/privacy" className="hover:text-gray-300 transition-colors">Datenschutz</Link>
-            <Link href="/terms" className="hover:text-gray-300 transition-colors">Haftungsausschluss</Link>
-          </div>
+          <nav aria-label="Rechtliches" className="flex flex-wrap gap-x-6 gap-y-2">
+            {legal.map((l) => (
+              <Link key={l.href} href={l.href} className="hover:text-white">
+                {l.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>
